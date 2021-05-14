@@ -1,0 +1,27 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: szf-gateway-boot
+  cloud:
+    gateway:
+      routes:
+        - id: szf-front
+          uri: lb://szf-front-boot
+          predicates:
+            - Path=/front/**
+          filters:
+            - StripPrefix=1
+        - id: szf-boss
+          uri: lb://szf-boss-boot
+          predicates:
+            - Path=/boss/**
+          filters:
+            - StripPrefix=1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
