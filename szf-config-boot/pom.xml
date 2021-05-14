@@ -4,7 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.shangzf</groupId>
+    <parent>
+        <artifactId>szf-bom</artifactId>
+        <groupId>com.shangzf</groupId>
+        <version>0.0.1</version>
+    </parent>
+
     <artifactId>szf-config-boot</artifactId>
     <version>0.0.1</version>
 
@@ -12,5 +17,12 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-server</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
