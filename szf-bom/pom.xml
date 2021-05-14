@@ -18,6 +18,10 @@
         <fastjson.version>1.2.72</fastjson.version>
         <commons-lang3.version>3.1</commons-lang3.version>
         <springdoc-openapi.version>1.4.6</springdoc-openapi.version>
+        <druid.version>1.2.6</druid.version>
+        <mybatis-plus.version>3.4.2</mybatis-plus.version>
+        <mysql.version>5.1.49</mysql.version>
+        <jasypt.version>3.0.3</jasypt.version>
         <szf-common.version>0.0.1</szf-common.version>
     </properties>
 
@@ -29,9 +33,29 @@
                 <version>${szf-common.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
