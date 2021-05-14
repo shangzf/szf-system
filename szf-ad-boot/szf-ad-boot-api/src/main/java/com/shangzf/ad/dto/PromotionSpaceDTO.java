@@ -1,20 +1,15 @@
-package com.shangzf.ad.entity;
+package com.shangzf.ad.dto;
 
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-/**
- * <p>
- * 广告位
- * </p>
- */
 @Data
-public class PromotionSpace implements Serializable {
+public class PromotionSpaceDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = -6866344964992782184L;
     /**
      * ID
      */
@@ -50,5 +45,5 @@ public class PromotionSpace implements Serializable {
      */
     private String remark;
 
-
+    private List<PromotionAdDTO> adDTOList;
 }

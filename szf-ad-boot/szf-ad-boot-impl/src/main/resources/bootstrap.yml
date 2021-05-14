@@ -2,7 +2,7 @@ server:
   port: 8001
 spring:
   application:
-    name: szf-ad
+    name: szf-ad-boot
   cloud:
     config:
       uri: http://localhost:8090

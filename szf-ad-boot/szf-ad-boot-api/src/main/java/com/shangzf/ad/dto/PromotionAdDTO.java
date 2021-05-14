@@ -1,20 +1,14 @@
-package com.shangzf.ad.entity;
+package com.shangzf.ad.dto;
 
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * <p>
- * 广告
- * </p>
-
- */
 @Data
-public class PromotionAd implements Serializable {
+public class PromotionAdDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 8867429022120888656L;
 
     /**
      * ID
@@ -90,6 +84,4 @@ public class PromotionAd implements Serializable {
      * 描述
      */
     private String remark;
-
-
 }
