@@ -10,5 +10,5 @@ spring:
           uri: https://github.com/shangzf/szf-system.git
           username:
           password:
-          default-label: dve
+          default-label: dev
           search-paths: config-repo
