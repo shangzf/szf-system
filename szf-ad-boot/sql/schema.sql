@@ -1,19 +1,19 @@
 CREATE DATABASE szf_ad DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-DROP TABLE IF EXISTS szf_ad.promotion_space;
 CREATE TABLE szf_ad.promotion_space
 (
     id              BIGINT       NOT NULL COMMENT 'ID',
     name            VARCHAR(100) NOT NULL COMMENT '名称',
     space_key       VARCHAR(100) NOT NULL COMMENT '广告位Key',
+    deleted         BIT(1)      DEFAULT b'0' COMMENT '是否删除',
     create_time     DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
     las_modify_time DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
-    deleted         CHAR(1)      DEFAULT 'N' COMMENT '是否删除(Y/N)',
     remark          VARCHAR(200) DEFAULT '' COMMENT '描述',
     PRIMARY KEY (id) USING BTREE,
     KEY promotion_space_key_deleted (space_key, deleted) USING BTREE
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET utf8mb4 COMMENT '广告位';
+DROP TABLE IF EXISTS szf_ad.promotion_space;
 
 DROP TABLE IF EXISTS szf_ad.promotion_ad;
 CREATE TABLE szf_ad.promotion_ad
