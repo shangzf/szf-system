@@ -2,9 +2,10 @@ package com.shangzf.common;
 
 public enum StatusEnum {
 
-    START("S", "创建"),
-    UP("U", "上架"),
-    DOWN("D", "下架");
+    CREATE("C", "创建"),
+    DISABLE("D", "禁用"),
+    ENABLE("E", "启用"),
+    UP("U", "上架");
     private String code;
     private String name;
 

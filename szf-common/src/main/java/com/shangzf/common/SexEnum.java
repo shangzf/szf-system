@@ -1,12 +1,15 @@
 package com.shangzf.common;
 
-public enum DeleteEnum {
-    YES("Y", "是"),
-    NO("N", "否");
+public enum SexEnum {
+
+    MALE("M", "男性"),
+    FEMALE("F", "女性"),
+    UNKNOWN("U", "未知");
+
     private String code;
     private String name;
 
-    DeleteEnum(final String code, final String name) {
+    SexEnum(final String code, final String name) {
         this.code = code;
         this.name = name;
     }
