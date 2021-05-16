@@ -1,5 +1,6 @@
 package com.shangzf.ad.controller;
 
+import com.shangzf.ad.dto.PromotionAdDTO;
 import com.shangzf.ad.dto.PromotionSpaceDTO;
 import com.shangzf.ad.remote.AdRemoteService;
 import com.shangzf.response.ResponseDTO;
@@ -29,14 +30,30 @@ public class AdController {
     }
 
     @PostMapping("/space/saveOrUpdate")
-    public ResponseDTO<PromotionSpaceDTO> saveOrUpdate(@RequestBody PromotionSpaceDTO dto){
-        adRemoteService.saveOrUpdate(dto);
-        return ResponseDTO.success();
+    public ResponseDTO saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto){
+        return adRemoteService.saveOrUpdateSpace(dto);
     }
 
     @GetMapping("/space/{id}")
-    public ResponseDTO<PromotionSpaceDTO> getById(@PathVariable("id") Long id){
-        PromotionSpaceDTO dto = adRemoteService.getById(id);
+    public ResponseDTO<PromotionSpaceDTO> getSpaceById(@PathVariable("id") Long id){
+        PromotionSpaceDTO dto = adRemoteService.getSpaceById(id);
+        return ResponseDTO.success(dto);
+    }
+
+    @GetMapping("/all")
+    public ResponseDTO<List<PromotionAdDTO>> getAllAds(){
+        List<PromotionAdDTO> dtoList = adRemoteService.getAllAds();
+        return ResponseDTO.success(dtoList);
+    }
+
+    @PostMapping("/saveOrUpdate")
+    public ResponseDTO saveOrUpdateAd(@RequestBody PromotionAdDTO dto){
+        return adRemoteService.saveOrUpdateAd(dto);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseDTO<PromotionAdDTO> getAdById(@PathVariable("id") Long id){
+        PromotionAdDTO dto = adRemoteService.getAdById(id);
         return ResponseDTO.success(dto);
     }
 }
