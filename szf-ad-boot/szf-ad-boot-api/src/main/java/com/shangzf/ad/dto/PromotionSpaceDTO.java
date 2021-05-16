@@ -36,9 +36,9 @@ public class PromotionSpaceDTO implements Serializable {
     private Date lasModifyTime;
 
     /**
-     * 是否删除(Y/N)
+     * 是否删除
      */
-    private String deleted;
+    private Boolean deleted;
 
     /**
      * 描述
