@@ -1,0 +1,14 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: szf-config-boot
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/shangzf/szf-system.git
+          username:
+          password:
+          default-label: dev
+          search-paths: config-repo
