@@ -8,8 +8,8 @@ import com.shangzf.ad.entity.PromotionSpace;
 import com.shangzf.ad.service.IPromotionAdService;
 import com.shangzf.ad.service.IPromotionSpaceService;
 import com.shangzf.common.StatusEnum;
-import com.shangzf.response.ResponseDTO;
 import com.shangzf.util.ConvertUtils;
+import com.shangzf.vo.response.ResponseData;
 import org.bouncycastle.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,13 +75,13 @@ public class AdRemoteServiceImpl implements AdRemoteService {
 
     @Override
     @PostMapping("/space/saveOrUpdate")
-    public ResponseDTO saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto) {
+    public ResponseData saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto) {
         PromotionSpace promotionSpace = ConvertUtils.convert(dto, PromotionSpace.class);
         if (Objects.isNull(promotionSpace)) {
-            return ResponseDTO.fail();
+            return ResponseData.fail();
         }
         promotionSpaceService.saveOrUpdate(promotionSpace);
-        return ResponseDTO.success();
+        return ResponseData.success();
     }
 
     @Override
@@ -100,13 +100,13 @@ public class AdRemoteServiceImpl implements AdRemoteService {
 
     @Override
     @PostMapping("/saveOrUpdate")
-    public ResponseDTO saveOrUpdateAd(@RequestBody PromotionAdDTO dto) {
+    public ResponseData saveOrUpdateAd(@RequestBody PromotionAdDTO dto) {
         PromotionAd promotionAd = ConvertUtils.convert(dto, PromotionAd.class);
         if (Objects.isNull(promotionAd)) {
-            return ResponseDTO.fail();
+            return ResponseData.fail();
         }
         promotionAdService.saveOrUpdate(promotionAd);
-        return ResponseDTO.success();
+        return ResponseData.success();
     }
 
     @Override
