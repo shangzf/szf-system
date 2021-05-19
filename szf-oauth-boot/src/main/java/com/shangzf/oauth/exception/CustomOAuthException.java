@@ -1,7 +1,7 @@
 package com.shangzf.oauth.exception;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.shangzf.vo.response.ResponseData;
+import com.shangzf.common.vo.response.ResponseData;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 

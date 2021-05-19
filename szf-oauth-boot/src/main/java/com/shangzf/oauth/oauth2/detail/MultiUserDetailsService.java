@@ -5,7 +5,7 @@ import com.shangzf.oauth.entity.UserJwt;
 import com.shangzf.oauth.multi.MultiAuthentication;
 import com.shangzf.oauth.multi.MultiAuthenticationContext;
 import com.shangzf.oauth.multi.authenticator.MultiAuthenticator;
-import com.shangzf.user.dto.UserDTO;
+import com.shangzf.user.api.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

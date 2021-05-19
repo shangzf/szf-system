@@ -1,7 +1,7 @@
 package com.shangzf.oauth.multi.authenticator;
 
 import com.shangzf.oauth.multi.MultiAuthentication;
-import com.shangzf.user.dto.UserDTO;
+import com.shangzf.user.api.dto.UserDTO;
 
 import javax.servlet.http.HttpServletResponse;
 

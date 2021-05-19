@@ -2,13 +2,14 @@ package com.shangzf.user.remote;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shangzf.user.dto.PasswordDTO;
-import com.shangzf.user.dto.UserDTO;
+import com.shangzf.user.api.dto.PasswordDTO;
+import com.shangzf.user.api.dto.UserDTO;
+import com.shangzf.user.api.remote.UserRemoteService;
 import com.shangzf.user.entity.User;
-import com.shangzf.user.param.UserQueryParam;
+import com.shangzf.user.api.param.UserQueryParam;
 import com.shangzf.user.service.IUserService;
 import com.shangzf.user.util.PageUtils;
-import com.shangzf.util.ConvertUtils;
+import com.shangzf.common.util.ConvertUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

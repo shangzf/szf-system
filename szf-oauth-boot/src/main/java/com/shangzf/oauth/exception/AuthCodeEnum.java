@@ -1,6 +1,6 @@
 package com.shangzf.oauth.exception;
 
-import com.shangzf.vo.response.IResultCode;
+import com.shangzf.common.vo.response.IResultCode;
 
 public enum AuthCodeEnum implements IResultCode {
     INVALID_REQUEST(401, "无效请求"),

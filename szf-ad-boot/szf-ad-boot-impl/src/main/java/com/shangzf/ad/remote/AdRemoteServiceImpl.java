@@ -1,15 +1,16 @@
 package com.shangzf.ad.remote;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.shangzf.ad.dto.PromotionAdDTO;
-import com.shangzf.ad.dto.PromotionSpaceDTO;
+import com.shangzf.ad.api.dto.PromotionSpaceDTO;
+import com.shangzf.ad.api.remote.AdRemoteService;
 import com.shangzf.ad.entity.PromotionAd;
 import com.shangzf.ad.entity.PromotionSpace;
 import com.shangzf.ad.service.IPromotionAdService;
+import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.service.IPromotionSpaceService;
-import com.shangzf.common.StatusEnum;
-import com.shangzf.util.ConvertUtils;
-import com.shangzf.vo.response.ResponseData;
+import com.shangzf.common.vo.constant.StatusEnum;
+import com.shangzf.common.util.ConvertUtils;
+import com.shangzf.common.vo.response.ResponseData;
 import org.bouncycastle.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

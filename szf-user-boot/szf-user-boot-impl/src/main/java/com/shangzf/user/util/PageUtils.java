@@ -1,7 +1,7 @@
 package com.shangzf.user.util;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shangzf.util.ConvertUtils;
+import com.shangzf.common.util.ConvertUtils;
 
 public class PageUtils {
 
