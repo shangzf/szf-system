@@ -1,24 +1,20 @@
 server:
-  port: 8888
+  port: 8002
 spring:
   application:
-    name: szf-oauth-boot
+    name: szf-user-boot
   mvc:
     throw-exception-if-no-handler-found: true
   main:
     allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql:///szf_oauth?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql:///szf_user?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-  security:
-    oauth2:
-      jwt:
-        signingKey: 123456
 eureka:
   client:
     service-url:

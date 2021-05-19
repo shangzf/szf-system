@@ -1,5 +1,6 @@
 package com.shangzf.oauth.oauth2.detail;
 
+import com.google.common.collect.Sets;
 import com.shangzf.oauth.entity.UserJwt;
 import com.shangzf.oauth.multi.MultiAuthentication;
 import com.shangzf.oauth.multi.MultiAuthenticationContext;
@@ -7,6 +8,7 @@ import com.shangzf.oauth.multi.authenticator.MultiAuthenticator;
 import com.shangzf.user.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -53,7 +55,7 @@ public class MultiUserDetailsService implements UserDetailsService {
      */
     private Collection<? extends GrantedAuthority> obtainGrantedAuthorities(UserDTO userDTO) {
         // TODO 获取权限
-        return null;
+        return Sets.newHashSet(new SimpleGrantedAuthority("NONE"));
     }
 
     private UserDTO authenticate(MultiAuthentication authentication) {

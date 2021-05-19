@@ -7,9 +7,11 @@ import com.shangzf.user.remote.UserRemoteService;
 import com.shangzf.vo.constant.AuthTypeConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
+@Primary
 public class PasswordAuthenticator extends AbstractMultiAuthenticator {
 
     @Autowired

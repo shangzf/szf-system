@@ -11,6 +11,6 @@ public class CustomWebResponseExceptionTranslator extends DefaultWebResponseExce
     @Override
     public ResponseEntity<OAuth2Exception> translate(Exception e) throws Exception {
         log.error("Grant Error: {}", e.getMessage());
-        return ResponseEntity.ok().body(new CustomOauthException((OAuth2Exception) e));
+        return ResponseEntity.ok().body(new CustomOAuthException((OAuth2Exception) e));
     }
 }

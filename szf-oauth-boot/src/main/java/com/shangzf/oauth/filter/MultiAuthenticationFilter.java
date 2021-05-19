@@ -8,6 +8,7 @@ import com.shangzf.vo.constant.EndpointConstant;
 import com.shangzf.vo.constant.GrantTypeConstant;
 import com.shangzf.vo.constant.ParamsConstant;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -98,8 +99,8 @@ public class MultiAuthenticationFilter extends GenericFilterBean implements Appl
     }
 
     private boolean isMatches(HttpServletRequest httpServletRequest) {
-        return requestMatcher.matches(httpServletRequest) && GrantTypeConstant.PASSWORD
-                .matches(httpServletRequest.getParameter(ParamsConstant.GRANT_TYPE));
+        return requestMatcher.matches(httpServletRequest) && StringUtils
+                .contains(GrantTypeConstant.PASSWORD, httpServletRequest.getParameter(ParamsConstant.GRANT_TYPE));
     }
 
     @Override
