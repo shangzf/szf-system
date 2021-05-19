@@ -15,8 +15,10 @@
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <spring-boot.version>2.2.8.RELEASE</spring-boot.version>
         <guava.version>29.0-jre</guava.version>
+        <cglib.version>3.1</cglib.version>
         <fastjson.version>1.2.72</fastjson.version>
         <commons-lang3.version>3.10</commons-lang3.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
         <springdoc-openapi.version>1.4.6</springdoc-openapi.version>
         <druid.version>1.2.6</druid.version>
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
@@ -48,6 +50,11 @@
                 <version>${jasypt.version}</version>
             </dependency>
             <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
@@ -66,6 +73,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons-collections.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
