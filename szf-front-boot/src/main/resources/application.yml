@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: szf-front-boot
+  oauth:
+    client_id: szf-system
+    client_secret: 123456
+    scope: read
+    grant_type: password
+    refresh_grant_type: refresh_token
 eureka:
   client:
     service-url:
