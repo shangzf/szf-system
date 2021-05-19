@@ -1,6 +1,7 @@
 package com.shangzf.util;
 
 import net.sf.cglib.beans.BeanCopier;
+import org.apache.commons.collections.CollectionUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;

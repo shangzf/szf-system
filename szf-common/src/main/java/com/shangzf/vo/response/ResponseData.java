@@ -17,6 +17,10 @@ public class ResponseData implements IResponseData {
         return builder().resultCode(CommonCodeEnum.FAIL).build();
     }
 
+    public static ResponseData fail(IResultCode resultCode) {
+        return builder().resultCode(resultCode).build();
+    }
+
     public static ResponseData error() {
         return builder().resultCode(CommonCodeEnum.SERVER_ERROR).build();
     }

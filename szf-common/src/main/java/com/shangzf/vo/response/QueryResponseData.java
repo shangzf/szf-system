@@ -22,6 +22,10 @@ public class QueryResponseData<T> implements IResponseData {
         return builder(data).resultCode(CommonCodeEnum.FAIL).build();
     }
 
+    public static <T> QueryResponseData<T> fail(IResultCode resultCode, T data) {
+        return builder(data).resultCode(resultCode).build();
+    }
+
     public static <T> QueryResponseData<T> error(T data) {
         return builder(data).resultCode(CommonCodeEnum.SERVER_ERROR).build();
     }
