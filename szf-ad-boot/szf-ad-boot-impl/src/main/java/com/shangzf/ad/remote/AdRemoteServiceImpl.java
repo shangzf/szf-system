@@ -9,7 +9,7 @@ import com.shangzf.ad.service.IPromotionAdService;
 import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.service.IPromotionSpaceService;
 import com.shangzf.common.vo.constant.StatusEnum;
-import com.shangzf.common.util.ConvertUtils;
+import com.shangzf.common.util.ConvertUtil;
 import com.shangzf.common.vo.response.ResponseData;
 import org.bouncycastle.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class AdRemoteServiceImpl implements AdRemoteService {
     @GetMapping("/space/all")
     public List<PromotionSpaceDTO> getAll() {
         List<PromotionSpace> spaceList = promotionSpaceService.list();
-        return ConvertUtils.convertList(spaceList, PromotionSpaceDTO.class);
+        return ConvertUtil.convertList(spaceList, PromotionSpaceDTO.class);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class AdRemoteServiceImpl implements AdRemoteService {
             spaceQueryWrapper.eq("space_key", spaceKey);
             spaceQueryWrapper.eq("deleted", Boolean.FALSE);
             PromotionSpace promotionSpace = promotionSpaceService.getOne(spaceQueryWrapper);
-            PromotionSpaceDTO spaceDTO = ConvertUtils.convert(promotionSpace, PromotionSpaceDTO.class);
+            PromotionSpaceDTO spaceDTO = ConvertUtil.convert(promotionSpace, PromotionSpaceDTO.class);
             Optional.ofNullable(spaceDTO).ifPresent(dto -> {
                 QueryWrapper<PromotionAd> adQueryWrapper = new QueryWrapper<>();
                 adQueryWrapper.eq("space_id", promotionSpace.getId());
@@ -66,7 +66,7 @@ public class AdRemoteServiceImpl implements AdRemoteService {
                 adQueryWrapper.lt("start_time", now);
                 adQueryWrapper.gt("end_time", now);
                 List<PromotionAd> adList = promotionAdService.list(adQueryWrapper);
-                List<PromotionAdDTO> adDTOList = ConvertUtils.convertList(adList, PromotionAdDTO.class);
+                List<PromotionAdDTO> adDTOList = ConvertUtil.convertList(adList, PromotionAdDTO.class);
                 Optional.ofNullable(adDTOList).ifPresent(dto::setAdDTOList);
                 spaceDTOList.add(dto);
             });
@@ -77,7 +77,7 @@ public class AdRemoteServiceImpl implements AdRemoteService {
     @Override
     @PostMapping("/space/saveOrUpdate")
     public ResponseData saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto) {
-        PromotionSpace promotionSpace = ConvertUtils.convert(dto, PromotionSpace.class);
+        PromotionSpace promotionSpace = ConvertUtil.convert(dto, PromotionSpace.class);
         if (Objects.isNull(promotionSpace)) {
             return ResponseData.fail();
         }
@@ -89,20 +89,20 @@ public class AdRemoteServiceImpl implements AdRemoteService {
     @PostMapping("/space/{id}")
     public PromotionSpaceDTO getSpaceById(@PathVariable("id") Long id) {
         PromotionSpace space = promotionSpaceService.getById(id);
-        return ConvertUtils.convert(space, PromotionSpaceDTO.class);
+        return ConvertUtil.convert(space, PromotionSpaceDTO.class);
     }
 
     @Override
     @GetMapping("/all")
     public List<PromotionAdDTO> getAllAds() {
         List<PromotionAd> adList = promotionAdService.list();
-        return ConvertUtils.convertList(adList, PromotionAdDTO.class);
+        return ConvertUtil.convertList(adList, PromotionAdDTO.class);
     }
 
     @Override
     @PostMapping("/saveOrUpdate")
     public ResponseData saveOrUpdateAd(@RequestBody PromotionAdDTO dto) {
-        PromotionAd promotionAd = ConvertUtils.convert(dto, PromotionAd.class);
+        PromotionAd promotionAd = ConvertUtil.convert(dto, PromotionAd.class);
         if (Objects.isNull(promotionAd)) {
             return ResponseData.fail();
         }
@@ -114,6 +114,6 @@ public class AdRemoteServiceImpl implements AdRemoteService {
     @PostMapping("/{id}")
     public PromotionAdDTO getAdById(@PathVariable("id") Long id) {
         PromotionAd promotionAd = promotionAdService.getById(id);
-        return ConvertUtils.convert(promotionAd, PromotionAdDTO.class);
+        return ConvertUtil.convert(promotionAd, PromotionAdDTO.class);
     }
 }

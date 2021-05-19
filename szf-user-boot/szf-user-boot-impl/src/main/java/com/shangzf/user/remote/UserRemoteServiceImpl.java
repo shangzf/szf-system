@@ -9,7 +9,7 @@ import com.shangzf.user.entity.User;
 import com.shangzf.user.api.param.UserQueryParam;
 import com.shangzf.user.service.IUserService;
 import com.shangzf.user.util.PageUtils;
-import com.shangzf.common.util.ConvertUtils;
+import com.shangzf.common.util.ConvertUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +51,7 @@ public class UserRemoteServiceImpl implements UserRemoteService {
     @GetMapping("/{id}")
     public UserDTO getById(@PathVariable("id") Long id) {
         User user = userService.getById(id);
-        return ConvertUtils.convert(user, UserDTO.class);
+        return ConvertUtil.convert(user, UserDTO.class);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class UserRemoteServiceImpl implements UserRemoteService {
         if (CollectionUtils.isEmpty(userList)) {
             return null;
         }
-        return ConvertUtils.convert(userList.get(0), UserDTO.class);
+        return ConvertUtil.convert(userList.get(0), UserDTO.class);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class UserRemoteServiceImpl implements UserRemoteService {
     @Override
     @PostMapping("/")
     public UserDTO save(@RequestBody UserDTO dto) {
-        User user = ConvertUtils.convert(dto, User.class);
+        User user = ConvertUtil.convert(dto, User.class);
         Optional.ofNullable(user).ifPresent(u -> {
 
         });
