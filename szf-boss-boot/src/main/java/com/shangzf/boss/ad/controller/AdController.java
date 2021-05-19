@@ -3,7 +3,7 @@ package com.shangzf.boss.ad.controller;
 import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
 import com.shangzf.ad.api.remote.AdRemoteService;
-import com.shangzf.common.vo.response.QueryResponseData;
+import com.shangzf.common.vo.response.ResultResponseData;
 import com.shangzf.common.vo.response.ResponseData;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,9 +25,9 @@ public class AdController {
     }
 
     @GetMapping("/space/all")
-    public QueryResponseData<List<PromotionSpaceDTO>> getAllSpace(){
+    public ResultResponseData<List<PromotionSpaceDTO>> getAllSpace(){
         List<PromotionSpaceDTO> dtoList = adRemoteService.getAll();
-        return QueryResponseData.success(dtoList);
+        return ResultResponseData.success(dtoList);
     }
 
     @PostMapping("/space/saveOrUpdate")
@@ -36,15 +36,15 @@ public class AdController {
     }
 
     @GetMapping("/space/{id}")
-    public QueryResponseData<PromotionSpaceDTO> getSpaceById(@PathVariable("id") Long id){
+    public ResultResponseData<PromotionSpaceDTO> getSpaceById(@PathVariable("id") Long id){
         PromotionSpaceDTO dto = adRemoteService.getSpaceById(id);
-        return QueryResponseData.success(dto);
+        return ResultResponseData.success(dto);
     }
 
     @GetMapping("/all")
-    public QueryResponseData<List<PromotionAdDTO>> getAllAds(){
+    public ResultResponseData<List<PromotionAdDTO>> getAllAds(){
         List<PromotionAdDTO> dtoList = adRemoteService.getAllAds();
-        return QueryResponseData.success(dtoList);
+        return ResultResponseData.success(dtoList);
     }
 
     @PostMapping("/saveOrUpdate")
@@ -53,8 +53,8 @@ public class AdController {
     }
 
     @GetMapping("/{id}")
-    public QueryResponseData<PromotionAdDTO> getAdById(@PathVariable("id") Long id){
+    public ResultResponseData<PromotionAdDTO> getAdById(@PathVariable("id") Long id){
         PromotionAdDTO dto = adRemoteService.getAdById(id);
-        return QueryResponseData.success(dto);
+        return ResultResponseData.success(dto);
     }
 }

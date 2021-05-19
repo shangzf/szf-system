@@ -25,8 +25,8 @@ public class ResponseData implements IResponseData {
         return builder().resultCode(CommonCodeEnum.SERVER_ERROR).build();
     }
 
-    public <T> QueryResponseData<T> convertToQueryResponseData(T data) {
-        return QueryResponseData.builder(data).code(this.getCode()).message(this.message).build();
+    public <T> ResultResponseData<T> convertToQueryResponseData(T data) {
+        return ResultResponseData.builder(data).code(this.getCode()).message(this.message).build();
     }
 
     public static ResponseDataBuilder builder() {
