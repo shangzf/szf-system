@@ -2,7 +2,6 @@ package com.shangzf.ad.remote;
 
 import com.shangzf.ad.dto.PromotionAdDTO;
 import com.shangzf.ad.dto.PromotionSpaceDTO;
-import com.shangzf.response.ResponseDTO;
 import com.shangzf.vo.response.ResponseData;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
