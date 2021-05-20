@@ -2,7 +2,7 @@ package com.shangzf.boss.ad.controller;
 
 import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
-import com.shangzf.ad.api.remote.AdRemoteService;
+import com.shangzf.ad.api.remote.IAdRemoteService;
 import com.shangzf.common.vo.response.ResultResponseData;
 import com.shangzf.common.vo.response.ResponseData;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +18,9 @@ import java.util.List;
 @RequestMapping("/ad")
 public class AdController {
 
-    private final AdRemoteService adRemoteService;
+    private final IAdRemoteService adRemoteService;
 
-    public AdController(final AdRemoteService adRemoteService) {
+    public AdController(final IAdRemoteService adRemoteService) {
         this.adRemoteService = adRemoteService;
     }
 

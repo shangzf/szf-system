@@ -8,7 +8,7 @@ import com.shangzf.front.user.service.UserService;
 import com.shangzf.front.user.vo.LoginVO;
 import com.shangzf.front.user.vo.group.CodeGroup;
 import com.shangzf.front.user.vo.group.PasswordGroup;
-import com.shangzf.user.api.remote.UserRemoteService;
+import com.shangzf.user.api.remote.IUserRemoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserRemoteService userRemoteService;
+    private IUserRemoteService userRemoteService;
     @Autowired
     private UserService userService;
 
