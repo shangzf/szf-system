@@ -1,6 +1,7 @@
 package com.shangzf.front.user.controller;
 
 import com.shangzf.common.vo.constant.AuthTypeConstant;
+import com.shangzf.common.vo.response.ResponseData;
 import com.shangzf.common.vo.response.ResultResponseData;
 import com.shangzf.front.user.response.UserCode;
 import com.shangzf.front.user.service.UserService;
@@ -42,5 +43,10 @@ public class UserController {
         }
         vo.setType(AuthTypeConstant.PASSWORD);
         return userService.createAuthToken(vo);
+    }
+
+    @PostMapping("/logout")
+    public ResponseData logout(){
+        return ResponseData.success();
     }
 }

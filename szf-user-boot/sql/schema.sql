@@ -8,7 +8,7 @@ CREATE TABLE szf_user.user
     portrait                VARCHAR(200) DEFAULT '' COMMENT '用户头像地址',
     phone                   CHAR(11)    NOT NULL COMMENT '注册手机',
     password                VARCHAR(100) DEFAULT '' COMMENT '用户密码(可以为空，支持只用验证码注册、登录)',
-    reg_ip                  INT UNSIGNED DEFAULT 0 COMMENT '注册IP',
+    reg_ip                  INT          DEFAULT 0 COMMENT '注册IP',
     account_non_expired     BIT(1)       DEFAULT b'1' COMMENT '是否有效用户',
     credentials_non_expired BIT(1)       DEFAULT b'1' COMMENT '账号是否未过期',
     account_non_locked      BIT(1)       DEFAULT b'1' COMMENT '是否未锁定',

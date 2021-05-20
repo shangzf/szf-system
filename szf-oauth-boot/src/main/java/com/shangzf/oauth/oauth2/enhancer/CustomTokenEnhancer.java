@@ -19,6 +19,7 @@ public class CustomTokenEnhancer implements TokenEnhancer {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         Map<String, Object> additionInfo = Maps.newHashMap();
+        additionInfo.put("user_name", authentication.getName());
         try {
             UserJwt userJwt = (UserJwt) authentication.getPrincipal();
             Optional.ofNullable(userJwt).ifPresent(userJwt1 -> {
