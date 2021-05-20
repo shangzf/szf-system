@@ -23,5 +23,7 @@ public class TokenVO {
     private String scope;
     @JSONField(name = "user_id")
     private Long userId;
+    @JSONField(name = "user_name")
+    private String username;
     private String jti;
 }
