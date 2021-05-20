@@ -26,6 +26,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.shangzf</groupId>
+            <artifactId>szf-common</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
