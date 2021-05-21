@@ -2,14 +2,13 @@ package com.shangzf.user.remote;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.shangzf.common.util.ConvertUtil;
 import com.shangzf.user.api.dto.PasswordDTO;
 import com.shangzf.user.api.dto.UserDTO;
-import com.shangzf.user.api.remote.IUserRemoteService;
-import com.shangzf.user.entity.User;
 import com.shangzf.user.api.param.UserQueryParam;
+import com.shangzf.user.entity.User;
 import com.shangzf.user.service.IUserService;
 import com.shangzf.user.util.PageUtils;
-import com.shangzf.common.util.ConvertUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +25,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
-public class UserRemoteService implements IUserRemoteService {
+public class UserRemoteService {
 
     @Autowired
     private IUserService userService;
 
-    @Override
     @GetMapping("/page")
     public Page<UserDTO> getUserPage(@RequestBody UserQueryParam queryParam) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -47,14 +45,12 @@ public class UserRemoteService implements IUserRemoteService {
         return PageUtils.page(userPage, UserDTO.class);
     }
 
-    @Override
     @GetMapping("/{id}")
     public UserDTO getById(@PathVariable("id") Long id) {
         User user = userService.getById(id);
         return ConvertUtil.convert(user, UserDTO.class);
     }
 
-    @Override
     @GetMapping("/phone/{phone}")
     public UserDTO getByPhone(@PathVariable("phone") String phone) {
         List<User> userList = userService.lambdaQuery().eq(User::getPhone, phone).orderByDesc(User::getId).list();
@@ -64,14 +60,12 @@ public class UserRemoteService implements IUserRemoteService {
         return ConvertUtil.convert(userList.get(0), UserDTO.class);
     }
 
-    @Override
     @GetMapping("/register/{phone}")
     public Boolean checkRegister(@PathVariable("phone") String phone) {
         UserDTO userDTO = getByPhone(phone);
         return Objects.nonNull(userDTO) && !userDTO.getDeleted();
     }
 
-    @Override
     @PostMapping("/")
     public UserDTO save(@RequestBody UserDTO dto) {
         User user = ConvertUtil.convert(dto, User.class);
@@ -81,19 +75,16 @@ public class UserRemoteService implements IUserRemoteService {
         return dto;
     }
 
-    @Override
     @PutMapping("/")
     public Boolean update(@RequestBody UserDTO dto) {
         return null;
     }
 
-    @Override
     @GetMapping("/updatePwd/{id}")
     public Boolean checkUpdatePassword(@PathVariable("id") Long id) {
         return null;
     }
 
-    @Override
     @PutMapping("/pwd")
     public Boolean editPassword(@RequestBody PasswordDTO dto) {
         return null;

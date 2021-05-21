@@ -1,15 +1,14 @@
 package com.shangzf.ad.remote;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
-import com.shangzf.ad.api.remote.IAdRemoteService;
 import com.shangzf.ad.entity.PromotionAd;
 import com.shangzf.ad.entity.PromotionSpace;
 import com.shangzf.ad.service.IPromotionAdService;
-import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.service.IPromotionSpaceService;
-import com.shangzf.common.vo.constant.StatusEnum;
 import com.shangzf.common.util.ConvertUtil;
+import com.shangzf.common.vo.constant.StatusEnum;
 import com.shangzf.common.vo.response.ResultResponse;
 import org.bouncycastle.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +28,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/ad")
-public class AdRemoteService implements IAdRemoteService {
+public class AdRemoteService {
 
     @Autowired
     private IPromotionSpaceService promotionSpaceService;
     @Autowired
     private IPromotionAdService promotionAdService;
 
-    @Override
     @GetMapping("/space/all")
     public List<PromotionSpaceDTO> getAll() {
         List<PromotionSpace> spaceList = promotionSpaceService.list();
         return ConvertUtil.convertList(spaceList, PromotionSpaceDTO.class);
     }
 
-    @Override
     @GetMapping("/space/keys")
     public List<PromotionSpaceDTO> getBySpaceKeys(String[] spaceKeys) {
         if (Arrays.isNullOrContainsNull(spaceKeys)) {
@@ -74,7 +71,6 @@ public class AdRemoteService implements IAdRemoteService {
         return spaceDTOList;
     }
 
-    @Override
     @PostMapping("/space/saveOrUpdate")
     public ResultResponse saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto) {
         PromotionSpace promotionSpace = ConvertUtil.convert(dto, PromotionSpace.class);
@@ -85,21 +81,18 @@ public class AdRemoteService implements IAdRemoteService {
         return ResultResponse.success();
     }
 
-    @Override
     @PostMapping("/space/{id}")
     public PromotionSpaceDTO getSpaceById(@PathVariable("id") Long id) {
         PromotionSpace space = promotionSpaceService.getById(id);
         return ConvertUtil.convert(space, PromotionSpaceDTO.class);
     }
 
-    @Override
     @GetMapping("/all")
     public List<PromotionAdDTO> getAllAds() {
         List<PromotionAd> adList = promotionAdService.list();
         return ConvertUtil.convertList(adList, PromotionAdDTO.class);
     }
 
-    @Override
     @PostMapping("/saveOrUpdate")
     public ResultResponse saveOrUpdateAd(@RequestBody PromotionAdDTO dto) {
         PromotionAd promotionAd = ConvertUtil.convert(dto, PromotionAd.class);
@@ -110,7 +103,6 @@ public class AdRemoteService implements IAdRemoteService {
         return ResultResponse.success();
     }
 
-    @Override
     @PostMapping("/{id}")
     public PromotionAdDTO getAdById(@PathVariable("id") Long id) {
         PromotionAd promotionAd = promotionAdService.getById(id);
