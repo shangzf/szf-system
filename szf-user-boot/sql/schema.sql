@@ -15,7 +15,7 @@ CREATE TABLE szf_user.user
     status                  CHAR(1)      DEFAULT 'E' COMMENT '用户状态：E-能登录，D-不能登录',
     deleted                 BIT(1)       DEFAULT b'0' COMMENT '是否删除',
     create_time             DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
-    las_modify_time         DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
+    last_modify_time         DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     remark                  VARCHAR(200) DEFAULT '' COMMENT '描述',
     PRIMARY KEY (id) USING BTREE,
     UNIQUE KEY idx_phone_deleted (phone, deleted) USING BTREE
@@ -35,7 +35,7 @@ CREATE TABLE szf_user.weixin
     sex             CHAR(1)      DEFAULT 'U' COMMENT '性别',
     deleted         BIT(1)       DEFAULT b'0' COMMENT '是否删除',
     create_time     DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
-    las_modify_time DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
+    last_modify_time DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     remark          VARCHAR(200) DEFAULT '' COMMENT '描述',
     PRIMARY KEY (id) USING BTREE,
     UNIQUE KEY idx_union_open_deleted (union_id, open_id, deleted) USING BTREE,

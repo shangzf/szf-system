@@ -18,7 +18,7 @@ CREATE TABLE szf_oauth.oauth_client_details
     trusted                 BIT(1)       DEFAULT b'0' COMMENT '是否为受信任的',
     autoapprove             VARCHAR(10)  DEFAULT 'false' COMMENT '是否自动,可选值包括(true,false,read,write)',
     create_time             DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
-    las_modify_time         DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
+    last_modify_time         DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     PRIMARY KEY (id) USING BTREE,
     KEY client_deleted (client_id, archived) USING BTREE
 ) ENGINE = InnoDB
@@ -34,7 +34,7 @@ CREATE TABLE szf_oauth.oauth_client_token
     user_name         VARCHAR(50)  NOT NULL COMMENT '登录用户名',
     client_id         VARCHAR(50)  NOT NULL COMMENT '客户端ID',
     create_time       DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
-    las_modify_time   DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
+    last_modify_time   DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     PRIMARY KEY (id) USING BTREE,
     KEY idx_authentication_id (authentication_id) USING BTREE
 ) ENGINE = InnoDB
@@ -52,7 +52,7 @@ CREATE TABLE szf_oauth.oauth_access_token
     authentication    BLOB COMMENT '二进制数据',
     refresh_token     VARCHAR(100) DEFAULT '' COMMENT '将refresh_token的值通过MD5加密后存储的',
     create_time       DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
-    las_modify_time   DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
+    last_modify_time   DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     PRIMARY KEY (id) USING BTREE,
     KEY idx_authentication_id (authentication_id) USING BTREE
 ) ENGINE = InnoDB
@@ -66,7 +66,7 @@ CREATE TABLE szf_oauth.oauth_refresh_token
     token           BLOB COMMENT '二进制数据',
     authentication  BLOB COMMENT '二进制数据',
     create_time     DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
-    las_modify_time DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
+    last_modify_time DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     PRIMARY KEY (id) USING BTREE,
     KEY idx_token (token_id) USING BTREE
 ) ENGINE = InnoDB
@@ -79,7 +79,7 @@ CREATE TABLE szf_oauth.oauth_code
     code            VARCHAR(50) NOT NULL COMMENT '授权码',
     authentication  BLOB COMMENT '二进制数据',
     create_time     DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
-    las_modify_time DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
+    last_modify_time DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     PRIMARY KEY (id) USING BTREE,
     KEY idx_code (code) USING BTREE
 ) ENGINE = InnoDB
@@ -96,7 +96,7 @@ CREATE TABLE szf_oauth.oauth_approvals
     clientId        VARCHAR(100) NOT NULL COMMENT '客户端ID',
     scope           VARCHAR(10)  NOT NULL COMMENT '范围',
     create_time     DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
-    las_modify_time DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
+    last_modify_time DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     PRIMARY KEY (id) USING BTREE
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET utf8mb4 COMMENT '授权数据';
