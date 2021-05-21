@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 响应结果
  */
-public interface IResponseData extends Serializable {
+public interface IResultResponse extends Serializable {
 
     int getCode();
 

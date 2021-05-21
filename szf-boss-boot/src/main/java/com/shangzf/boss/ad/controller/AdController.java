@@ -4,7 +4,7 @@ import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
 import com.shangzf.ad.api.remote.IAdRemoteService;
 import com.shangzf.common.vo.response.ResultResponseData;
-import com.shangzf.common.vo.response.ResponseData;
+import com.shangzf.common.vo.response.ResultResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +31,7 @@ public class AdController {
     }
 
     @PostMapping("/space/saveOrUpdate")
-    public ResponseData saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto){
+    public ResultResponse saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto){
         return adRemoteService.saveOrUpdateSpace(dto);
     }
 
@@ -48,7 +48,7 @@ public class AdController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public ResponseData saveOrUpdateAd(@RequestBody PromotionAdDTO dto){
+    public ResultResponse saveOrUpdateAd(@RequestBody PromotionAdDTO dto){
         return adRemoteService.saveOrUpdateAd(dto);
     }
 

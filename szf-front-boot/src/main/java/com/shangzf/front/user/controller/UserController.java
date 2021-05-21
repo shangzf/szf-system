@@ -1,7 +1,7 @@
 package com.shangzf.front.user.controller;
 
 import com.shangzf.common.vo.constant.AuthTypeConstant;
-import com.shangzf.common.vo.response.ResponseData;
+import com.shangzf.common.vo.response.ResultResponse;
 import com.shangzf.common.vo.response.ResultResponseData;
 import com.shangzf.front.user.response.UserCode;
 import com.shangzf.front.user.service.UserService;
@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public ResponseData logout(){
-        return ResponseData.success();
+    public ResultResponse logout(){
+        return ResultResponse.success();
     }
 }

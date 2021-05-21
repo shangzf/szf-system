@@ -1,6 +1,6 @@
 package com.shangzf.common.vo.response;
 
-public class ResultResponseData<T> implements IResponseData {
+public class ResultResponseData<T> implements IResultResponse {
 
     private static final long serialVersionUID = -7082945428094757341L;
     private int code;
@@ -34,8 +34,8 @@ public class ResultResponseData<T> implements IResponseData {
         return new ResultResponseDataBuilder<>(data);
     }
 
-    public ResponseData convertToResponseData() {
-        return ResponseData.builder().code(this.code).message(this.message).build();
+    public ResultResponse convertToResponseData() {
+        return ResultResponse.builder().code(this.code).message(this.message).build();
     }
 
     public static class ResultResponseDataBuilder<T> {

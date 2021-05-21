@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IRoleResourceService extends IService<RoleResource> {
 
+    boolean removeByRoleId(Long roleId);
 }
