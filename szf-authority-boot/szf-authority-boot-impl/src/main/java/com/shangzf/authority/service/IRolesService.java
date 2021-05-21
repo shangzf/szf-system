@@ -3,9 +3,12 @@ package com.shangzf.authority.service;
 import com.shangzf.authority.entity.Roles;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
- * 角色 服务类
+ * 角色
+ *
  * </p>
  *
  * @author
@@ -19,4 +22,7 @@ public interface IRolesService extends IService<Roles> {
      */
     boolean deleteWithAssociation(Long id);
 
+    List<Roles> getRolesByUserId(Long userId);
+
+    List<Roles> getAll();
 }

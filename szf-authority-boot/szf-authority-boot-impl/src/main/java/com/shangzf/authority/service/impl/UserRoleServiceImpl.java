@@ -8,13 +8,13 @@ import com.shangzf.authority.service.IUserRoleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * <p>
  * 用户-角色 服务实现类
  * </p>
- *
- * @author
- * @since 2021-05-20
  */
 @Service
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements IUserRoleService {
@@ -26,4 +26,13 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         queryWrapper.lambda().eq(UserRole::getRoleId, roleId);
         return this.remove(queryWrapper);
     }
+
+    @Override
+    public List<Long> queryRoleIdByUserId(Long userId) {
+        QueryWrapper<UserRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(UserRole::getUserId, userId);
+        List<UserRole> userRoles = this.list(queryWrapper);
+        return userRoles.stream().map(UserRole::getRoleId).collect(Collectors.toList());
+    }
+
 }

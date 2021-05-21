@@ -2,8 +2,9 @@ package com.shangzf.authority.remote;
 
 
 import com.shangzf.authority.api.dto.RoleDTO;
+import com.shangzf.authority.entity.Roles;
 import com.shangzf.authority.service.IRolesService;
-import com.shangzf.common.vo.response.ResultResponseData;
+import com.shangzf.common.util.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,22 +22,24 @@ public class RoleRemoteService {
     private IRolesService rolesService;
 
     @GetMapping("/roles/{userId}")
-    public ResultResponseData<List<RoleDTO>> getRolesByUserId(@PathVariable("userId") Long userId) {
-        return null;
+    public List<RoleDTO> getRolesByUserId(@PathVariable("userId") Long userId) {
+        List<Roles> roles = rolesService.getRolesByUserId(userId);
+        return ConvertUtil.convertList(roles, RoleDTO.class);
     }
 
     @DeleteMapping("/{id}")
-    public ResultResponseData<Boolean> delete(@PathVariable("id") Long id) {
-        return ResultResponseData.success(rolesService.removeById(id));
+    public boolean delete(@PathVariable("id") Long id) {
+        return rolesService.deleteWithAssociation(id);
     }
 
     @GetMapping("/{id}")
-    public ResultResponseData<RoleDTO> getById(@PathVariable("id") Long id) {
+    public RoleDTO getById(@PathVariable("id") Long id) {
         return null;
     }
 
     @GetMapping("/all")
-    public ResultResponseData<List<RoleDTO>> getAll() {
-        return null;
+    public List<RoleDTO> getAll() {
+        List<Roles> roles = rolesService.getAll();
+        return ConvertUtil.convertList(roles, RoleDTO.class);
     }
 }

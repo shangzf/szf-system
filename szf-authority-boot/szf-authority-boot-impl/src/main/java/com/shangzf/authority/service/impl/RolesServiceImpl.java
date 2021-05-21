@@ -1,15 +1,19 @@
 package com.shangzf.authority.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shangzf.authority.entity.Roles;
 import com.shangzf.authority.mapper.RolesMapper;
 import com.shangzf.authority.service.IRoleMenuService;
 import com.shangzf.authority.service.IRoleResourceService;
 import com.shangzf.authority.service.IRolesService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shangzf.authority.service.IUserRoleService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * <p>
@@ -36,5 +40,19 @@ public class RolesServiceImpl extends ServiceImpl<RolesMapper, Roles> implements
         roleMenuService.removeByRoleId(id);
         roleResourceService.removeByRoleId(id);
         return this.removeById(id);
+    }
+
+    @Override
+    public List<Roles> getRolesByUserId(Long userId) {
+        List<Long> roleIds = userRoleService.queryRoleIdByUserId(userId);
+        if (CollectionUtils.isEmpty(roleIds)) {
+            return Collections.emptyList();
+        }
+        return this.listByIds(roleIds);
+    }
+
+    @Override
+    public List<Roles> getAll() {
+        return this.list();
     }
 }
