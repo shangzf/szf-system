@@ -28,7 +28,7 @@ public interface IRolesService extends IService<Roles> {
     List<Roles> getAll();
 
     /**
-     * 给用户分配权限
+     * 给用户分配角色
      */
     boolean allocateUserRoles(AllocateUserRolesDTO dto);
 }

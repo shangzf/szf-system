@@ -9,16 +9,16 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Schema(name = "分配用户-角色")
+@Schema(name = "分配角色-菜单")
 @Data
 @NoArgsConstructor
-public class AllocateUserRolesVO implements RequestData {
+public class AllocateRoleMenusVO implements RequestData {
     private static final long serialVersionUID = 7284921427974573691L;
 
-    @Schema(name = "用户ID")
-    @NotNull(message = "用户不能为空")
-    private Long userId;
-    @Schema(name = "角色ID列表")
-    @NotEmpty(message = "用户-角色不能为空")
-    private List<Long> userRoles;
+    @Schema(name = "角色ID")
+    @NotNull(message = "角色不能为空")
+    private Long roleId;
+    @Schema(name = "菜单ID列表")
+    @NotEmpty(message = "角色-菜单不能为空")
+    private List<Long> roleMenus;
 }

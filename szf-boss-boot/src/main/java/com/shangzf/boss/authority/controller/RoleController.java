@@ -6,6 +6,8 @@ import com.shangzf.authority.api.remote.IRoleRemoteService;
 import com.shangzf.boss.authority.vo.AllocateUserRolesVO;
 import com.shangzf.common.util.ConvertUtil;
 import com.shangzf.common.vo.response.ResultResponseData;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "角色管理")
 @RestController
 @RequestMapping("/role")
 public class RoleController {
@@ -25,6 +28,7 @@ public class RoleController {
     @Autowired
     private IRoleRemoteService roleRemoteService;
 
+    @Operation(summary = "删除角色")
     @DeleteMapping("/{id}")
     public ResultResponseData<Boolean> delete(@PathVariable("id") Long id) {
         boolean result = roleRemoteService.delete(id);
@@ -49,7 +53,7 @@ public class RoleController {
         return ResultResponseData.success(list);
     }
 
-    @PostMapping("/allocateUserRoles")
+    @PostMapping("/allocate")
     public ResultResponseData<Boolean> allocateUserRoles(@Validated @RequestBody AllocateUserRolesVO vo){
         boolean result = roleRemoteService.allocateUserRoles(ConvertUtil.convert(vo, AllocateUserRolesDTO.class));
         return ResultResponseData.success(result);

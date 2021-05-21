@@ -46,7 +46,7 @@ public class RoleRemoteService {
         return ConvertUtil.convertList(roles, RoleDTO.class);
     }
 
-    @PostMapping("/allocateUserRoles")
+    @PostMapping("/allocate")
     public boolean allocateUserRoles(@RequestBody AllocateUserRolesDTO dto) {
         return rolesService.allocateUserRoles(dto);
     }

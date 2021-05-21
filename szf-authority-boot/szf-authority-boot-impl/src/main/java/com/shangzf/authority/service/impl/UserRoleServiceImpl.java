@@ -36,6 +36,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean removeByUserIdAndRoleIds(Long userId, List<Long> roleIds) {
         QueryWrapper<UserRole> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(UserRole::getUserId, userId).in(UserRole::getRoleId, roleIds);

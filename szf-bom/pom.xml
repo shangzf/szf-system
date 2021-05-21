@@ -19,7 +19,7 @@
         <fastjson.version>1.2.72</fastjson.version>
         <commons-lang3.version>3.10</commons-lang3.version>
         <commons-collections.version>3.2.2</commons-collections.version>
-        <springdoc-openapi.version>1.4.6</springdoc-openapi.version>
+        <springdoc-openapi.version>1.5.2</springdoc-openapi.version>
         <druid.version>1.2.6</druid.version>
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
         <mysql.version>5.1.49</mysql.version>
@@ -81,13 +81,10 @@
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-webflux-ui</artifactId>
+                <artifactId>springdoc-openapi</artifactId>
                 <version>${springdoc-openapi.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-webmvc-core</artifactId>
-                <version>${springdoc-openapi.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

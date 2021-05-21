@@ -26,6 +26,6 @@ public interface IRoleRemoteService {
     @GetMapping("/all")
     List<RoleDTO> getAll();
 
-    @PostMapping("/allocateUserRoles")
+    @PostMapping("/allocate")
     boolean allocateUserRoles(@RequestBody AllocateUserRolesDTO dto);
 }
