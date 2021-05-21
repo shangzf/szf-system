@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IResourceCategoryService extends IService<ResourceCategory> {
 
+    boolean delete(Long id);
 }

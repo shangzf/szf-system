@@ -7,13 +7,12 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.List;
 
-@Schema(name = "给角色分配菜单")
+@Schema(name = "给角色分配资源")
 @Data
 @NoArgsConstructor
-public class AllocateRoleMenusDTO implements Serializable {
-    private static final long serialVersionUID = 484705641526230227L;
+public class AllocateRoleResourceDTO implements Serializable {
 
+    private static final long serialVersionUID = 5390453807681931626L;
     private Long roleId;
-    private List<Long> roleMenus;
-
+    private List<Long> roleResources;
 }

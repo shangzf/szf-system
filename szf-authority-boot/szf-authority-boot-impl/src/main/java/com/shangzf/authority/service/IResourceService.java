@@ -1,7 +1,10 @@
 package com.shangzf.authority.service;
 
-import com.shangzf.authority.entity.Resource;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.shangzf.authority.api.dto.AllocateRoleResourceDTO;
+import com.shangzf.authority.entity.Resource;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IResourceService extends IService<Resource> {
 
+    List<Resource> getByCategoryId(Long categoryId);
+
+    List<Resource> getByRoleId(Long roleId);
+
+    /**
+     * 给角色分配资源
+     */
+    boolean allocateRoleResources(AllocateRoleResourceDTO dto);
 }

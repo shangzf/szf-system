@@ -26,8 +26,8 @@ public class ResourceCategory extends AuthorityBase {
     private String name;
 
     /**
-     * 类别
+     * 类别排序
      */
-    private String sort;
+    private Integer sort;
 
 }

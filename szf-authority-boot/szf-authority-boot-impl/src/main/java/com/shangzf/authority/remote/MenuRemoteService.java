@@ -76,7 +76,7 @@ public class MenuRemoteService {
     }
 
     @Operation(summary = "获取角色用于的菜单列表")
-    @GetMapping("/roles/{roleId}")
+    @GetMapping("/menus/{roleId}")
     public List<MenuDTO> getMenusByRoleId(@PathVariable("roleId") Long roleId){
         List<Menu> menus = menuService.getByRoleId(roleId);
         return ConvertUtil.convertList(menus, MenuDTO.class);

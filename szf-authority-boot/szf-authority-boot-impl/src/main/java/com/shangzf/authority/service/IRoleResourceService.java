@@ -3,6 +3,8 @@ package com.shangzf.authority.service;
 import com.shangzf.authority.entity.RoleResource;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 角色-资源 服务类
@@ -14,4 +16,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IRoleResourceService extends IService<RoleResource> {
 
     boolean removeByRoleId(Long roleId);
+
+    boolean removeByResourceId(Long resourceId);
+
+    List<Long> queryResourceIdByRoleId(Long roleId);
+
+    boolean removeByResourceIdByRoleIds(Long roleId, List<Long> resourceIds);
 }

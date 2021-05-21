@@ -24,7 +24,7 @@ public interface IMenuRemoteService {
     @GetMapping("/{id}")
     MenuDTO getById(@PathVariable("id") Long id);
 
-    @GetMapping("/roles/{roleId}")
+    @GetMapping("/menus/{roleId}")
     List<MenuDTO> getMenusByRoleId(@PathVariable("roleId") Long roleId);
 
     @PostMapping("/allocate")

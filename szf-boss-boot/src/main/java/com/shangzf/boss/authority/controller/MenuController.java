@@ -59,7 +59,7 @@ public class MenuController {
      * 获取角色用于的菜单列表
      */
     @Operation(summary = "获取角色用于的菜单列表")
-    @GetMapping("/roles/{roleId}")
+    @GetMapping("/menus/{roleId}")
     public ResultResponseData<List<MenuNodeDTO>> getMenusByRoleId(@PathVariable("roleId") Long roleId) {
         List<MenuDTO> menuDTOList = menuRemoteService.getMenusByRoleId(roleId);
         List<MenuNodeDTO> nodeList = menuRemoteService.getMenuNodeList();

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class MenuDTO extends AuthorityBaseDTO {
+public class MenuDTO extends AuthorityBaseDTO implements Comparable<MenuDTO> {
 
     private static final long serialVersionUID = 6309715598037273458L;
     /**
@@ -59,4 +59,9 @@ public class MenuDTO extends AuthorityBaseDTO {
      */
     @Schema(name = "菜单层级，从0开始，越大层级越低")
     private Integer level;
+
+    @Override
+    public int compareTo(MenuDTO o) {
+        return this.getOrderNum() - o.getOrderNum();
+    }
 }
