@@ -29,7 +29,7 @@ public class AuthorityBase implements Serializable {
      * 最后修改时间
      */
     @TableField(fill = FieldFill.UPDATE)
-    private Date lasModifyTime;
+    private Date lastModifyTime;
 
     /**
      * 创建者
@@ -41,5 +41,5 @@ public class AuthorityBase implements Serializable {
      * 最后修改者
      */
     @TableField(fill = FieldFill.UPDATE)
-    private String lasModifyBy;
+    private String lastModifyBy;
 }

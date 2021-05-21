@@ -35,4 +35,11 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         return userRoles.stream().map(UserRole::getRoleId).collect(Collectors.toList());
     }
 
+    @Override
+    public boolean removeByUserIdAndRoleIds(Long userId, List<Long> roleIds) {
+        QueryWrapper<UserRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(UserRole::getUserId, userId).in(UserRole::getRoleId, roleIds);
+        return this.remove(queryWrapper);
+    }
+
 }

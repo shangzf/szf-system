@@ -1,5 +1,6 @@
 package com.shangzf.authority.service;
 
+import com.shangzf.authority.api.dto.AllocateUserRolesDTO;
 import com.shangzf.authority.entity.Roles;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -25,4 +26,9 @@ public interface IRolesService extends IService<Roles> {
     List<Roles> getRolesByUserId(Long userId);
 
     List<Roles> getAll();
+
+    /**
+     * 给用户分配权限
+     */
+    boolean allocateUserRoles(AllocateUserRolesDTO dto);
 }

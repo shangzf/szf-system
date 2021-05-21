@@ -15,4 +15,6 @@ public interface IUserRoleService extends IService<UserRole> {
     boolean removeByRoleId(Long roleId);
 
     List<Long> queryRoleIdByUserId(Long userId);
+
+    boolean removeByUserIdAndRoleIds(Long userId, List<Long> roleIds);
 }

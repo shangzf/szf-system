@@ -1,6 +1,7 @@
 package com.shangzf.authority.remote;
 
 
+import com.shangzf.authority.api.dto.AllocateUserRolesDTO;
 import com.shangzf.authority.api.dto.RoleDTO;
 import com.shangzf.authority.entity.Roles;
 import com.shangzf.authority.service.IRolesService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,5 +44,10 @@ public class RoleRemoteService {
     public List<RoleDTO> getAll() {
         List<Roles> roles = rolesService.getAll();
         return ConvertUtil.convertList(roles, RoleDTO.class);
+    }
+
+    @PostMapping("/allocateUserRoles")
+    public boolean allocateUserRoles(@RequestBody AllocateUserRolesDTO dto) {
+        return rolesService.allocateUserRoles(dto);
     }
 }
