@@ -3,10 +3,10 @@ CREATE DATABASE szf_authority DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_gene
 DROP TABLE IF EXISTS szf_authority.roles;
 CREATE TABLE szf_authority.roles
 (
-    id              BIGINT      NOT NULL COMMENT 'ID',
-    code            VARCHAR(50) NOT NULL COMMENT '编码',
-    name            VARCHAR(50) NOT NULL COMMENT '名称',
-    remark          VARCHAR(200) DEFAULT '' COMMENT '描述',
+    id              BIGINT      NOT NULL COMMENT '角色ID',
+    code            VARCHAR(50) NOT NULL COMMENT '角色编码',
+    name            VARCHAR(50) NOT NULL COMMENT '角色名称',
+    remark          VARCHAR(200) DEFAULT '' COMMENT '角色描述',
     create_time     DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
     las_modify_time DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     create_by       VARCHAR(50)  DEFAULT '' COMMENT '创建者',
@@ -18,15 +18,15 @@ CREATE TABLE szf_authority.roles
 DROP TABLE IF EXISTS szf_authority.menu;
 CREATE TABLE szf_authority.menu
 (
-    id              BIGINT      NOT NULL COMMENT 'ID',
-    parent_id       BIGINT      NOT NULL COMMENT '父ID',
+    id              BIGINT      NOT NULL COMMENT '菜单ID',
+    parent_id       BIGINT       DEFAULT 0 COMMENT '父菜单ID,顶级菜父菜单ID为0',
     href            VARCHAR(100) DEFAULT '' COMMENT '菜单地址',
-    icon            VARCHAR(100) DEFAULT '' COMMENT '图标',
-    name            VARCHAR(50) NOT NULL COMMENT '名称',
-    remark          VARCHAR(200) DEFAULT '' COMMENT '描述',
+    icon            VARCHAR(100) DEFAULT '' COMMENT '菜单图标',
+    name            VARCHAR(50) NOT NULL COMMENT '菜单名称',
+    remark          VARCHAR(200) DEFAULT '' COMMENT '菜单描述',
     shown           BIT(1)       DEFAULT b'1' COMMENT '是否显示',
-    order_num       INT          DEFAULT 1 COMMENT '序号',
-    level           INT          DEFAULT 1 COMMENT '等级',
+    order_num       INT          DEFAULT 0 COMMENT '排序序号',
+    level           INT          DEFAULT 0 COMMENT '菜单层级，从0开始，越大层级越低',
     create_time     DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
     las_modify_time DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     create_by       VARCHAR(50)  DEFAULT '' COMMENT '创建者',
@@ -38,11 +38,11 @@ CREATE TABLE szf_authority.menu
 DROP TABLE IF EXISTS szf_authority.resource;
 CREATE TABLE szf_authority.resource
 (
-    id              BIGINT      NOT NULL COMMENT 'ID',
-    name            VARCHAR(50) NOT NULL COMMENT '名称',
+    id              BIGINT      NOT NULL COMMENT '资源ID',
+    name            VARCHAR(50) NOT NULL COMMENT '资源名称',
     url             VARCHAR(200) DEFAULT '' COMMENT '资源地址',
-    category_id     BIGINT      NOT NULL COMMENT '资源类别',
-    remark          VARCHAR(200) DEFAULT '' COMMENT '描述',
+    category_id     BIGINT      NOT NULL COMMENT '资源分类ID',
+    remark          VARCHAR(200) DEFAULT '' COMMENT '资源描述',
     create_time     DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
     las_modify_time DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     create_by       VARCHAR(50)  DEFAULT '' COMMENT '创建者',
@@ -54,16 +54,16 @@ CREATE TABLE szf_authority.resource
 DROP TABLE IF EXISTS szf_authority.resource_category;
 CREATE TABLE szf_authority.resource_category
 (
-    id              BIGINT      NOT NULL COMMENT 'ID',
-    name            VARCHAR(50) NOT NULL COMMENT '类别名称',
-    sort            CHAR(1)     DEFAULT '' COMMENT '类别',
+    id              BIGINT      NOT NULL COMMENT '资源分类ID',
+    name            VARCHAR(50) NOT NULL COMMENT '资源分类名称',
+    sort            INT         DEFAULT 0 COMMENT '排序，从小到大顺序排',
     create_time     DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
     las_modify_time DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     create_by       VARCHAR(50) DEFAULT '' COMMENT '创建者',
     las_modify_by   VARCHAR(50) DEFAULT '' COMMENT '最后修改者',
     PRIMARY KEY (id) USING BTREE
 ) ENGINE = InnoDB
-  DEFAULT CHARACTER SET utf8mb4 COMMENT '资源类别';
+  DEFAULT CHARACTER SET utf8mb4 COMMENT '资源分类';
 
 DROP TABLE IF EXISTS szf_authority.user_role;
 CREATE TABLE szf_authority.user_role
