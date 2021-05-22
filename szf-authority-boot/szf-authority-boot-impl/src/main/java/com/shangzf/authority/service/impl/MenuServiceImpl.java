@@ -87,9 +87,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
             resultDel = roleMenuService.removeByMenuIdByRoleIds(dto.getRoleId(), needToDeleteMenus);
         }
         if (CollectionUtils.isNotEmpty(needToInsertMenus)) {
-            List<RoleMenu> roleMenuList = needToInsertMenus.stream()
-                                                           .map(menuId -> RoleMenu.builder().roleId(dto.getRoleId())
-                                                                                  .menuId(menuId).build())
+            List<RoleMenu> roleMenuList = needToInsertMenus.stream().map(menuId -> {
+                RoleMenu roleMenu = new RoleMenu();
+                roleMenu.setRoleId(dto.getRoleId());
+                roleMenu.setMenuId(menuId);
+                return roleMenu;
+            })
                                                            .collect(Collectors.toList());
             resultIns = roleMenuService.saveBatch(roleMenuList);
         }

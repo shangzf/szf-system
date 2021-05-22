@@ -86,10 +86,12 @@ public class RolesServiceImpl extends ServiceImpl<RolesMapper, Roles> implements
             resultDel = userRoleService.removeByUserIdAndRoleIds(dto.getUserId(), needToDeleteRoles);
         }
         if (CollectionUtils.isNotEmpty(needToInsertRoles)) {
-            List<UserRole> userRoleList = needToInsertRoles
-                    .stream()
-                    .map(roleId -> UserRole.builder().userId(dto.getUserId()).roleId(roleId).build())
-                    .collect(Collectors.toList());
+            List<UserRole> userRoleList = needToInsertRoles.stream().map(roleId -> {
+                UserRole userRole = new UserRole();
+                userRole.setRoleId(roleId);
+                userRole.setUserId(dto.getUserId());
+                return userRole;
+            }).collect(Collectors.toList());
             resultIns = userRoleService.saveBatch(userRoleList);
         }
         return resultDel && resultIns;

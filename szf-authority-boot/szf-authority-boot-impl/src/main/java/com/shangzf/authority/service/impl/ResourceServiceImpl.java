@@ -123,12 +123,12 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             resultDel = roleResourceService.removeByResourceIdByRoleIds(dto.getRoleId(), needToDeleteResources);
         }
         if (CollectionUtils.isNotEmpty(needToInsertResources)) {
-            List<RoleResource> roleResourceList = needToInsertResources.stream()
-                                                                       .map(resourceId -> RoleResource.builder()
-                                                                                                      .roleId(dto
-                                                                                                              .getRoleId())
-                                                                                                      .resourceId(resourceId)
-                                                                                                      .build())
+            List<RoleResource> roleResourceList = needToInsertResources.stream().map(resourceId -> {
+                RoleResource roleResource = new RoleResource();
+                roleResource.setRoleId(dto.getRoleId());
+                roleResource.setResourceId(resourceId);
+                return roleResource;
+            })
                                                                        .collect(Collectors.toList());
             resultIns = roleResourceService.saveBatch(roleResourceList);
         }
