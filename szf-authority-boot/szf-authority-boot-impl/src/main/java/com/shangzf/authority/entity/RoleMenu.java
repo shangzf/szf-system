@@ -18,8 +18,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class RoleMenu extends AuthorityBase {
 
-    private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = -7945716931239358266L;
     /**
      * 角色ID
      */

@@ -18,8 +18,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class ResourceCategory extends AuthorityBase {
 
-    private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = -8272542315192676054L;
     /**
      * 类别名称
      */

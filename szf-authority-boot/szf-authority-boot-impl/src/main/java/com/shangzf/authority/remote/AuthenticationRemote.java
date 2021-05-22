@@ -18,7 +18,7 @@ public class AuthenticationRemote {
     @Autowired
     private IAuthenticationService authenticationService;
 
-    @Operation(summary = "获取用户权限列表")
+    @Operation(summary = "获取用户菜单和资源权限列表")
     @GetMapping("/user/{userId}")
     public PermissionDTO getByUserId(@PathVariable("userId") Long userId) {
         return authenticationService.getByUserId(userId);
