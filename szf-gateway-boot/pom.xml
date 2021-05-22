@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.shangzf</groupId>
-        <artifactId>szf-ad-boot</artifactId>
+        <artifactId>szf-bom</artifactId>
         <version>0.0.1</version>
     </parent>
 
@@ -18,6 +18,20 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.shangzf</groupId>
+            <artifactId>szf-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.shangzf</groupId>
+            <artifactId>szf-authority-boot-api</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>

@@ -68,7 +68,7 @@ public class Weixin implements Serializable {
     /**
      * 最后修改时间
      */
-    private Date lasModifyTime;
+    private Date lastModifyTime;
 
     /**
      * 描述
