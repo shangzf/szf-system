@@ -36,7 +36,7 @@ public interface IMenuService extends IService<Menu> {
      */
     boolean allocateRoleMenus(AllocateRoleMenusDTO dto);
 
-    List<Menu> getByRoleIds(List<Long> roleIds);
+    List<Menu> queryByRoleIds(List<Long> roleIds);
 
     /**
      * 填充菜单级别关系，将当前菜单的子菜单挂到当前菜单的子菜单列表，
@@ -44,5 +44,5 @@ public interface IMenuService extends IService<Menu> {
      */
     MenuNodeDTO fillMenuNode(Menu menu);
 
-    List<MenuNodeDTO> getMenuNodeList();
+    List<MenuNodeDTO> queryMenuNodeList();
 }

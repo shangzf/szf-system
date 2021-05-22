@@ -72,7 +72,10 @@
             <artifactId>springdoc-openapi-webmvc-core</artifactId>
             <version>${springdoc-openapi.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-security</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

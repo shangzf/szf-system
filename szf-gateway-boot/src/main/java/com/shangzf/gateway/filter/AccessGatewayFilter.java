@@ -1,6 +1,5 @@
 package com.shangzf.gateway.filter;
 
-import com.shangzf.authority.api.remote.IAuthenticationRemote;
 import com.shangzf.authority.api.service.IAuthService;
 import com.shangzf.common.vo.constant.AuthenticationConstant;
 import com.shangzf.common.vo.constant.UserManagerConstant;
@@ -37,9 +36,6 @@ public class AccessGatewayFilter implements GlobalFilter {
     private static final String BOSS_PATH_PREFIX = "/boss";
     @Autowired
     private IAuthService authService;
-    @Autowired
-    private IAuthenticationRemote authenticationRemote;
-
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccessGatewayFilter.class);
 
@@ -109,7 +105,7 @@ public class AccessGatewayFilter implements GlobalFilter {
         if (isBossPath(originUrl, url)) {
             // 将原始url赋值给当前url。
             url = BOSS_PATH_PREFIX.concat(url);
-            hasPermission = authenticationRemote.authenticate(authorization, userId, url, method);
+            hasPermission = authService.authenticate(authorization, userId, url, method);
             log.info("Check boss permission. userId:{}, have permission:{}, url:{}, method:{}", userId, hasPermission, url, method);
         }
         if (hasPermission && StringUtils.isNotBlank(userId) && StringUtils.isNotBlank(userName)) {

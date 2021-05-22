@@ -1,6 +1,5 @@
 package com.shangzf.authority.api.service;
 
-import com.shangzf.common.vo.response.ResultResponseData;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 
@@ -9,7 +8,7 @@ public interface IAuthService {
     /**
      * 调用签权服务，判断用户是否有权限
      */
-    ResultResponseData<Boolean> authenticate(String authentication, String userId, String url, String method);
+    boolean authenticate(String authentication, String userId, String url, String method);
 
     /**
      * 判断url是否在忽略的范围内

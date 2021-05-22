@@ -1,7 +1,6 @@
 package com.shangzf.authority.api.service;
 
 import com.shangzf.authority.api.remote.IAuthenticationRemote;
-import com.shangzf.common.vo.response.ResultResponseData;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -38,11 +37,9 @@ public class AuthService implements IAuthService {
     @Value("${gate.ignore.authentication.startWith:/oauth,/open}")
     private String ignoreUrls;
 
-
     @Override
-    public ResultResponseData<Boolean> authenticate(String authentication, String userId, String url, String method) {
-        boolean result = authenticationRemote.authenticate(authentication, userId, url, method);
-        return ResultResponseData.success(result);
+    public boolean authenticate(String authentication, String userId, String url, String method) {
+        return authenticationRemote.authenticate(authentication, userId, url, method);
     }
 
     @Override

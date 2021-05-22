@@ -97,7 +97,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
 
     @Override
-    public List<Menu> getByRoleIds(List<Long> roleIds) {
+    public List<Menu> queryByRoleIds(List<Long> roleIds) {
         List<Long> menuIds = roleMenuService.queryMenuIdByRoleIds(roleIds);
         if (CollectionUtils.isEmpty(menuIds)) {
             return Collections.emptyList();
@@ -123,7 +123,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
 
     @Override
-    public List<MenuNodeDTO> getMenuNodeList() {
+    public List<MenuNodeDTO> queryMenuNodeList() {
         log.info("[getMenuNodeList]");
         // 查询一级菜单
         List<Menu> menus = this.queryByLevel(MenuConstant.TOP_LEVEL);

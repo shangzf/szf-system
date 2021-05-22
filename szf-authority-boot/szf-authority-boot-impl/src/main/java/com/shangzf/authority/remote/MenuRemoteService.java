@@ -3,13 +3,11 @@ package com.shangzf.authority.remote;
 import com.shangzf.authority.api.dto.AllocateRoleMenusDTO;
 import com.shangzf.authority.api.dto.MenuDTO;
 import com.shangzf.authority.api.dto.MenuNodeDTO;
-import com.shangzf.authority.constant.MenuConstant;
 import com.shangzf.authority.entity.Menu;
 import com.shangzf.authority.service.IMenuService;
 import com.shangzf.common.util.ConvertUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Tag(name = "菜单管理")
 @RestController
@@ -41,7 +36,7 @@ public class MenuRemoteService {
     @Operation(summary = "返回菜单树")
     @GetMapping("/node")
     public List<MenuNodeDTO> getMenuNodeList() {
-       return menuService.getMenuNodeList();
+       return menuService.queryMenuNodeList();
     }
 
     @Operation(summary = "根据ID查询菜单")

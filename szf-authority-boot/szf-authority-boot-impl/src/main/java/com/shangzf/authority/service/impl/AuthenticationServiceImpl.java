@@ -13,9 +13,11 @@ import com.shangzf.authority.service.IUserRoleService;
 import com.shangzf.common.util.ConvertUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -25,12 +27,49 @@ import java.util.stream.Collectors;
 @Service
 public class AuthenticationServiceImpl implements IAuthenticationService {
 
+    /**
+     * 未在资源库中的URL默认标识
+     */
+    public static final String NONEXISTENT_URL = "NONEXISTENT_URL";
+
     @Autowired
     private IUserRoleService userRoleService;
     @Autowired
     private IMenuService menuService;
     @Autowired
     private IResourceService resourceService;
+
+    @Override
+    public boolean authenticate(String userId, HttpServletRequest request) {
+        log.info("Access user:{}, url:{}, method:{}", userId, request.getServletPath(), request.getMethod());
+        // 用户是否有某些角色
+        List<Long> roleIds = userRoleService.queryRoleIdByUserId(Long.parseLong(userId));
+        if (CollectionUtils.isEmpty(roleIds)) {
+            return Boolean.FALSE;
+        }
+        // 用户是否有某些菜单权限
+        List<Menu> menus = menuService.queryByRoleIds(roleIds);
+        if (hasMenuPermission(menus, request.getServletPath())) {
+            return Boolean.TRUE;
+        }
+        // 用户是否有某些资源的权限
+        return resourceService.matchUserResources(roleIds, request);
+    }
+
+    /**
+     * 判断用户是否有某菜单的权限，通过对比菜单href和当前url
+     */
+    private boolean hasMenuPermission(List<Menu> menus, String url) {
+        if (CollectionUtils.isEmpty(menus)) {
+            return Boolean.FALSE;
+        }
+        for (Menu menu : menus) {
+            if (StringUtils.isNotBlank(menu.getHref()) && StringUtils.startsWith(url, menu.getHref())) {
+                return Boolean.TRUE;
+            }
+        }
+        return Boolean.FALSE;
+    }
 
     @Override
     public PermissionDTO getByUserId(Long userId) {
@@ -55,7 +94,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     }
 
     private List<MenuNodeDTO> convertMenus(List<Long> roleIds) {
-        List<Menu> menus = menuService.getByRoleIds(roleIds);
+        List<Menu> menus = menuService.queryByRoleIds(roleIds);
         if (CollectionUtils.isEmpty(menus)) {
             return Collections.emptyList();
         }

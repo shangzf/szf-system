@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "szf-authority-boot", path = "/auth")
 public interface IAuthenticationRemote {
 
+    @GetMapping("/authenticate")
     boolean authenticate(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization, @RequestParam("userId") String userId, @RequestParam("url") String url, @RequestParam("method") String method);
 
     @GetMapping("/user/{userId}")

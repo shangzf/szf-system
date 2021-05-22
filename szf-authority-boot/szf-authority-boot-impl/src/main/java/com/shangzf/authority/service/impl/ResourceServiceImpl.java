@@ -7,16 +7,22 @@ import com.shangzf.authority.api.dto.AllocateRoleResourceDTO;
 import com.shangzf.authority.entity.Resource;
 import com.shangzf.authority.entity.RoleResource;
 import com.shangzf.authority.mapper.ResourceMapper;
+import com.shangzf.authority.matcher.NewMvcRequestMatcher;
 import com.shangzf.authority.service.IResourceService;
 import com.shangzf.authority.service.IRoleResourceService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -29,7 +35,28 @@ import java.util.stream.Collectors;
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements IResourceService {
 
     @Autowired
+    private HandlerMappingIntrospector mvcHandlerMappingIntrospector;
+
+    /**
+     * 系统中所有资源url转化成的RequestMatcher集合，用于匹配请求中的url
+     */
+    private static final Set<MvcRequestMatcher> RESOURCE_CONFIG_ATTRIBUTES = new HashSet<>();
+
+    @Override
+    public synchronized void loadResource() {
+        List<Resource> resources = this.list();
+        resources.forEach(resource -> RESOURCE_CONFIG_ATTRIBUTES.add(this.newMvcRequestMatcher(resource.getUrl())));
+        log.debug("init resourceConfigAttributes:{}", RESOURCE_CONFIG_ATTRIBUTES);
+    }
+
+    @Autowired
     private IRoleResourceService roleResourceService;
+
+    @Override
+    public boolean matchRequestUrl(HttpServletRequest authRequest) {
+        // 能找到匹配的url就返回true。不比对method域
+        return RESOURCE_CONFIG_ATTRIBUTES.stream().anyMatch(requestMatcher -> requestMatcher.matches(authRequest));
+    }
 
     @Override
     public List<Resource> getByCategoryId(Long categoryId) {
@@ -57,6 +84,23 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             return Collections.emptyList();
         }
         return this.listByIds(resourceIds);
+    }
+
+    @Override
+    public boolean matchUserResources(List<Long> roleIds, HttpServletRequest request) {
+        boolean existInResources = this.matchRequestUrl(request);
+        if (!existInResources) {
+            log.info("url未在资源池中找到，拒绝访问: url:{}", request.getServletPath());
+            return false;
+        }
+        List<Resource> resources = this.queryByRoleIds(roleIds);
+        for (Resource resource : resources) {
+            NewMvcRequestMatcher matcher = this.newMvcRequestMatcher(resource.getUrl());
+            if (matcher.matches(request)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -89,5 +133,9 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             resultIns = roleResourceService.saveBatch(roleResourceList);
         }
         return resultDel && resultIns;
+    }
+
+    private NewMvcRequestMatcher newMvcRequestMatcher(String url) {
+        return new NewMvcRequestMatcher(mvcHandlerMappingIntrospector, url, null);
     }
 }
