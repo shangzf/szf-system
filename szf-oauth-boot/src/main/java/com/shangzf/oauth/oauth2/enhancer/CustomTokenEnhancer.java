@@ -1,6 +1,7 @@
 package com.shangzf.oauth.oauth2.enhancer;
 
 import com.google.common.collect.Maps;
+import com.shangzf.common.vo.constant.AuthenticationConstant;
 import com.shangzf.oauth.entity.UserJwt;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -19,11 +20,11 @@ public class CustomTokenEnhancer implements TokenEnhancer {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         Map<String, Object> additionInfo = Maps.newHashMap();
-        additionInfo.put("user_name", authentication.getName());
+        additionInfo.put(AuthenticationConstant.USER_NAME, authentication.getName());
         try {
             UserJwt userJwt = (UserJwt) authentication.getPrincipal();
             Optional.ofNullable(userJwt).ifPresent(userJwt1 -> {
-                additionInfo.put("user_id", userJwt.getId());
+                additionInfo.put(AuthenticationConstant.USER_ID, userJwt.getId());
             });
         } catch (Exception e) {
             e.printStackTrace();

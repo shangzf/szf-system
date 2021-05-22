@@ -2,6 +2,9 @@ package com.shangzf.authority.api.service;
 
 import com.shangzf.authority.api.remote.IAuthenticationRemote;
 import com.shangzf.common.vo.response.ResultResponseData;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +49,13 @@ public class AuthService implements IAuthService {
     public boolean ignoreAuthentication(String url) {
         return Stream.of(StringUtils.split(this.ignoreUrls, ","))
                      .anyMatch(ignoreUrl -> url.startsWith(StringUtils.trim(ignoreUrl)));
+    }
+
+    @Override
+    public Jws<Claims> getJwt(String jwtToken) {
+        if (jwtToken.startsWith(BEARER)) {
+            jwtToken = StringUtils.substring(jwtToken, BEARER.length());
+        }
+        return Jwts.parser().setSigningKey(signingKey.getBytes()).parseClaimsJws(jwtToken);
     }
 }

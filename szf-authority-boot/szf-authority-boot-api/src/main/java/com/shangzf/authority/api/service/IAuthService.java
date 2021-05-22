@@ -1,6 +1,8 @@
 package com.shangzf.authority.api.service;
 
 import com.shangzf.common.vo.response.ResultResponseData;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 
 public interface IAuthService {
 
@@ -14,4 +16,9 @@ public interface IAuthService {
      * 只要是配置中的开头，即返回true
      */
     boolean ignoreAuthentication(String url);
+
+    /**
+     * 从认证信息中提取jwt token 对象
+     */
+    Jws<Claims> getJwt(String jwtToken);
 }

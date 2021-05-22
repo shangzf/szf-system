@@ -25,6 +25,7 @@
         <mysql.version>5.1.49</mysql.version>
         <jasypt.version>3.0.3</jasypt.version>
         <szf-common.version>0.0.1</szf-common.version>
+        <jjwt.version>0.9.1</jjwt.version>
     </properties>
 
     <dependencyManagement>
@@ -78,6 +79,11 @@
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
                 <version>${commons-collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
