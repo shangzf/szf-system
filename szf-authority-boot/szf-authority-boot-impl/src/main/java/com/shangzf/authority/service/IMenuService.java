@@ -2,6 +2,7 @@ package com.shangzf.authority.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.shangzf.authority.api.dto.AllocateRoleMenusDTO;
+import com.shangzf.authority.api.dto.MenuNodeDTO;
 import com.shangzf.authority.entity.Menu;
 
 import java.util.List;
@@ -34,4 +35,14 @@ public interface IMenuService extends IService<Menu> {
      * 给角色分配菜单
      */
     boolean allocateRoleMenus(AllocateRoleMenusDTO dto);
+
+    List<Menu> getByRoleIds(List<Long> roleIds);
+
+    /**
+     * 填充菜单级别关系，将当前菜单的子菜单挂到当前菜单的子菜单列表，
+     * 使用递归的方式逐级填充，直到菜单没有下一级菜单
+     */
+    MenuNodeDTO fillMenuNode(Menu menu);
+
+    List<MenuNodeDTO> getMenuNodeList();
 }

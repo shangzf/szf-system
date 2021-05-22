@@ -63,25 +63,33 @@ public class RolesServiceImpl extends ServiceImpl<RolesMapper, Roles> implements
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean allocateUserRoles(AllocateUserRolesDTO dto) {
         log.info("[allocateUserRoles]参数:{}", JSON.toJSONString(dto));
         // 获取当前用户的角色ID
         List<Long> roleIds = userRoleService.queryRoleIdByUserId(dto.getUserId());
         // 需要删除的角色ID
-        List<Long> needToDeleteRoles = roleIds.stream().filter(roleId -> !dto.getUserRoles().contains(roleId))
-                                              .distinct().collect(Collectors.toList());
+        List<Long> needToDeleteRoles = roleIds
+                .stream()
+                .filter(roleId -> !dto.getUserRoles().contains(roleId))
+                .distinct()
+                .collect(Collectors.toList());
         // 需要插入的角色ID
-        List<Long> needToInsertRoles = dto.getUserRoles().stream().filter(roleId -> !roleIds.contains(roleId))
-                                          .distinct().collect(Collectors.toList());
+        List<Long> needToInsertRoles = dto.getUserRoles()
+                                          .stream()
+                                          .filter(roleId -> !roleIds.contains(roleId))
+                                          .distinct()
+                                          .collect(Collectors.toList());
         boolean resultDel = true;
         boolean resultIns = true;
         if (CollectionUtils.isNotEmpty(needToDeleteRoles)) {
             resultDel = userRoleService.removeByUserIdAndRoleIds(dto.getUserId(), needToDeleteRoles);
         }
         if (CollectionUtils.isNotEmpty(needToInsertRoles)) {
-            List<UserRole> userRoleList = needToInsertRoles.stream()
-                                                           .map(roleId -> new UserRole(dto.getUserId(), roleId))
-                                                           .collect(Collectors.toList());
+            List<UserRole> userRoleList = needToInsertRoles
+                    .stream()
+                    .map(roleId -> UserRole.builder().userId(dto.getUserId()).roleId(roleId).build())
+                    .collect(Collectors.toList());
             resultIns = userRoleService.saveBatch(userRoleList);
         }
         return resultDel && resultIns;

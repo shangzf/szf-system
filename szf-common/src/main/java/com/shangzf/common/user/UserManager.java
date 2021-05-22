@@ -6,4 +6,7 @@ public class UserManager {
         return "";
     }
 
+    public static Long getUserId() {
+        return null;
+    }
 }

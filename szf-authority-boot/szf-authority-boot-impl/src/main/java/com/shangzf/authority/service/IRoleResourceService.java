@@ -22,4 +22,6 @@ public interface IRoleResourceService extends IService<RoleResource> {
     List<Long> queryResourceIdByRoleId(Long roleId);
 
     boolean removeByResourceIdByRoleIds(Long roleId, List<Long> resourceIds);
+
+    List<Long> queryResourceIdByRoleIds(List<Long> roleIds);
 }

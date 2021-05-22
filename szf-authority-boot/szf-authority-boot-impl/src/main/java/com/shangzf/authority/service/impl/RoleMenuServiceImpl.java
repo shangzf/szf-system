@@ -57,4 +57,13 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
         queryWrapper.lambda().eq(RoleMenu::getRoleId, roleId).in(RoleMenu::getMenuId, menuIds);
         return this.remove(queryWrapper);
     }
+
+    @Override
+    public List<Long> queryMenuIdByRoleIds(List<Long> roleIds) {
+        log.info("[queryMenuIdByRoleIds]参数:{}", JSON.toJSONString(roleIds));
+        QueryWrapper<RoleMenu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().in(RoleMenu::getRoleId, roleIds);
+        List<RoleMenu> roleMenus = this.list(queryWrapper);
+        return roleMenus.stream().map(RoleMenu::getMenuId).distinct().collect(Collectors.toList());
+    }
 }

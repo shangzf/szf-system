@@ -1,5 +1,6 @@
 package com.shangzf.gateway.filter;
 
+import com.shangzf.authority.api.service.IAuthService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +29,6 @@ public class AccessGatewayFilter implements GlobalFilter {
     private static final String BOSS_PATH_PREFIX = "/boss";
     @Autowired
     private IAuthService authService;
-    @Autowired
-    private IPermissionService permissionService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccessGatewayFilter.class);
 
@@ -44,7 +43,7 @@ public class AccessGatewayFilter implements GlobalFilter {
             return validateAuthentication(exchange, chain, authorization, url);
         }
         // 判断地址是否不需要验证
-        if (authService.ignoreAuthentical(url)) {
+        if (authService.ignoreAuthentication(url)) {
             return chain.filter(exchange);
         }
         // 无权限访问

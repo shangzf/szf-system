@@ -24,4 +24,7 @@ public interface IResourceService extends IService<Resource> {
      * 给角色分配资源
      */
     boolean allocateRoleResources(AllocateRoleResourceDTO dto);
+
+    List<Resource> queryByRoleIds(List<Long> roleIds);
+
 }

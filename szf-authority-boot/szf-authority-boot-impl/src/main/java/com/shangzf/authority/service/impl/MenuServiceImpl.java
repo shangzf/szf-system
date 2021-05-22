@@ -4,11 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shangzf.authority.api.dto.AllocateRoleMenusDTO;
+import com.shangzf.authority.api.dto.MenuNodeDTO;
+import com.shangzf.authority.constant.MenuConstant;
 import com.shangzf.authority.entity.Menu;
 import com.shangzf.authority.entity.RoleMenu;
 import com.shangzf.authority.mapper.MenuMapper;
 import com.shangzf.authority.service.IMenuService;
 import com.shangzf.authority.service.IRoleMenuService;
+import com.shangzf.common.util.ConvertUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -71,7 +75,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         log.info("[allocateRoleMenus]参数:{}", JSON.toJSONString(dto));
         // 角色已拥有的菜单
         List<Long> menuIds = roleMenuService.queryMenuIdByRoleId(dto.getRoleId());
-
         // 需要删除的菜单ID
         List<Long> needToDeleteMenus = menuIds.stream().filter(menuId -> !dto.getRoleMenus().contains(menuId))
                                               .distinct().collect(Collectors.toList());
@@ -85,11 +88,49 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         }
         if (CollectionUtils.isNotEmpty(needToInsertMenus)) {
             List<RoleMenu> roleMenuList = needToInsertMenus.stream()
-                                                           .map(menuId -> new RoleMenu(dto.getRoleId(), menuId))
+                                                           .map(menuId -> RoleMenu.builder().roleId(dto.getRoleId())
+                                                                                  .menuId(menuId).build())
                                                            .collect(Collectors.toList());
             resultIns = roleMenuService.saveBatch(roleMenuList);
         }
         return resultDel && resultIns;
+    }
+
+    @Override
+    public List<Menu> getByRoleIds(List<Long> roleIds) {
+        List<Long> menuIds = roleMenuService.queryMenuIdByRoleIds(roleIds);
+        if (CollectionUtils.isEmpty(menuIds)) {
+            return Collections.emptyList();
+        }
+        return this.listByIds(menuIds);
+    }
+
+    @Override
+    public MenuNodeDTO fillMenuNode(Menu menu) {
+        log.info("[allocateRoleMenus]参数:{}", JSON.toJSONString(menu));
+        MenuNodeDTO menuNode = ConvertUtil.convert(menu, MenuNodeDTO.class);
+        if (Objects.isNull(menuNode)) {
+            return menuNode;
+        }
+        // 查询子菜单
+        List<Menu> subMenus = this.queryByParentId(menuNode.getId());
+        if (CollectionUtils.isEmpty(subMenus)) {
+            return menuNode;
+        }
+        List<MenuNodeDTO> subMenuList = subMenus.stream().map(this::fillMenuNode).sorted().collect(Collectors.toList());
+        menuNode.setSubMenuList(subMenuList);
+        return menuNode;
+    }
+
+    @Override
+    public List<MenuNodeDTO> getMenuNodeList() {
+        log.info("[getMenuNodeList]");
+        // 查询一级菜单
+        List<Menu> menus = this.queryByLevel(MenuConstant.TOP_LEVEL);
+        if (CollectionUtils.isEmpty(menus)) {
+            return Collections.emptyList();
+        }
+        return menus.stream().map(this::fillMenuNode).sorted().collect(Collectors.toList());
     }
 
     /**

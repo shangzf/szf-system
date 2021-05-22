@@ -41,31 +41,7 @@ public class MenuRemoteService {
     @Operation(summary = "返回菜单树")
     @GetMapping("/node")
     public List<MenuNodeDTO> getMenuNodeList() {
-        // 查询一级菜单
-        List<Menu> menus = menuService.queryByLevel(MenuConstant.TOP_LEVEL);
-        if (CollectionUtils.isEmpty(menus)) {
-            return Collections.emptyList();
-        }
-        return menus.stream().map(this::fillMenuNode).collect(Collectors.toList());
-    }
-
-    /**
-     * 填充菜单级别关系，将当前菜单的子菜单挂到当前菜单的子菜单列表，
-     * 使用递归的方式逐级填充，直到菜单没有下一级菜单
-     */
-    private MenuNodeDTO fillMenuNode(Menu menu) {
-        MenuNodeDTO menuNode = ConvertUtil.convert(menu, MenuNodeDTO.class);
-        if (Objects.isNull(menuNode)) {
-            return menuNode;
-        }
-        // 查询子菜单
-        List<Menu> subMenus = menuService.queryByParentId(menuNode.getId());
-        if (CollectionUtils.isEmpty(subMenus)) {
-            return menuNode;
-        }
-        List<MenuNodeDTO> subMenuList = subMenus.stream().map(this::fillMenuNode).collect(Collectors.toList());
-        menuNode.setSubMenuList(subMenuList);
-        return menuNode;
+       return menuService.getMenuNodeList();
     }
 
     @Operation(summary = "根据ID查询菜单")

@@ -23,4 +23,5 @@ public interface IRoleMenuService extends IService<RoleMenu> {
 
     boolean removeByMenuIdByRoleIds(Long roleId, List<Long> menuIds);
 
+    List<Long> queryMenuIdByRoleIds(List<Long> roleIds);
 }

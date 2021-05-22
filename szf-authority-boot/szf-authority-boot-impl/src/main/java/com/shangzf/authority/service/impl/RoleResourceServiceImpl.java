@@ -32,6 +32,7 @@ public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, Rol
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean removeByResourceId(Long resourceId) {
         log.info("[removeByResourceId]参数:{}", resourceId);
         QueryWrapper<RoleResource> queryWrapper = new QueryWrapper<>();
@@ -49,10 +50,20 @@ public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, Rol
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean removeByResourceIdByRoleIds(Long roleId, List<Long> resourceIds) {
         log.info("[removeByResourceIdByRoleIds]参数:{},{}", roleId, JSON.toJSONString(resourceIds));
         QueryWrapper<RoleResource> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(RoleResource::getRoleId, roleId).in(RoleResource::getResourceId, resourceIds);
         return this.remove(queryWrapper);
+    }
+
+    @Override
+    public List<Long> queryResourceIdByRoleIds(List<Long> roleIds) {
+        log.info("[queryResourceIdByRoleIds]参数:{}", JSON.toJSONString(roleIds));
+        QueryWrapper<RoleResource> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().in(RoleResource::getRoleId, roleIds);
+        List<RoleResource> roleResources = this.list(queryWrapper);
+        return roleResources.stream().map(RoleResource::getResourceId).distinct().collect(Collectors.toList());
     }
 }
