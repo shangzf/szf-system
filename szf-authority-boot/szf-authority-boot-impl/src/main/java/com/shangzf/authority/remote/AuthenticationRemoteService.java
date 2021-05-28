@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @Tag(name = "权限验证")
 @RestController
 @RequestMapping("/auth")
-public class AuthenticationRemote {
+public class AuthenticationRemoteService {
 
     @Autowired
     private IAuthenticationService authenticationService;

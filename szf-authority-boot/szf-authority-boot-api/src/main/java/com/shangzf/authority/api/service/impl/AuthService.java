@@ -1,6 +1,8 @@
-package com.shangzf.authority.api.service;
+package com.shangzf.authority.api.service.impl;
 
-import com.shangzf.authority.api.remote.IAuthenticationRemote;
+import com.shangzf.authority.api.dto.AuthorityExtDTO;
+import com.shangzf.authority.api.remote.IAuthenticationRemoteService;
+import com.shangzf.authority.api.service.IAuthService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -22,7 +24,7 @@ public class AuthService implements IAuthService {
     private static final String BEARER = "Bearer ";
 
     @Autowired
-    private IAuthenticationRemote authenticationRemote;
+    private IAuthenticationRemoteService authenticationRemote;
 
     /**
      * jwt token 密钥，主要用于token解析，签名验证
@@ -38,8 +40,8 @@ public class AuthService implements IAuthService {
     private String ignoreUrls;
 
     @Override
-    public boolean authenticate(String authentication, String userId, String url, String method) {
-        return authenticationRemote.authenticate(authentication, userId, url, method);
+    public boolean authenticate(AuthorityExtDTO dto) {
+        return authenticationRemote.authenticate(dto.getAuthentication(), dto);
     }
 
     @Override

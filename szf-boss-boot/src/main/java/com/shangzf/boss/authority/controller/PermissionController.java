@@ -1,7 +1,7 @@
 package com.shangzf.boss.authority.controller;
 
 import com.shangzf.authority.api.dto.PermissionDTO;
-import com.shangzf.authority.api.remote.IAuthenticationRemote;
+import com.shangzf.authority.api.remote.IAuthenticationRemoteService;
 import com.shangzf.common.user.UserManager;
 import com.shangzf.common.vo.response.ResultResponseData;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/permission")
 public class PermissionController {
     @Autowired
-    private IAuthenticationRemote authenticationRemote;
+    private IAuthenticationRemoteService authenticationRemote;
 
     @Operation(summary = "获取用户菜单和用户资源")
     @GetMapping("/user")

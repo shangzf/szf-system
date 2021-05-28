@@ -31,7 +31,7 @@ public class UserRemoteService {
     private IUserService userService;
 
     @GetMapping("/page")
-    public Page<UserDTO> getUserPage(@RequestBody UserQueryParam queryParam) {
+    public Page<UserDTO> getUserPage(UserQueryParam queryParam) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         Optional.ofNullable(queryParam.getPhone()).ifPresent(phone -> queryWrapper.like("phone", phone));
         Optional.ofNullable(queryParam.getUserId()).ifPresent(id -> queryWrapper.eq("id", id));

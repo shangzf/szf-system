@@ -1,5 +1,6 @@
 package com.shangzf.gateway.filter;
 
+import com.shangzf.authority.api.dto.AuthorityExtDTO;
 import com.shangzf.authority.api.service.IAuthService;
 import com.shangzf.common.vo.constant.AuthenticationConstant;
 import com.shangzf.common.vo.constant.UserManagerConstant;
@@ -105,7 +106,12 @@ public class AccessGatewayFilter implements GlobalFilter {
         if (isBossPath(originUrl, url)) {
             // 将原始url赋值给当前url。
             url = BOSS_PATH_PREFIX.concat(url);
-            hasPermission = authService.authenticate(authorization, userId, url, method);
+            AuthorityExtDTO dto = new AuthorityExtDTO();
+            dto.setUrl(url);
+            dto.setMethod(method);
+            dto.setUserId(userId);
+            dto.setAuthentication(authorization);
+            hasPermission = authService.authenticate(dto);
             log.info("Check boss permission. userId:{}, have permission:{}, url:{}, method:{}", userId, hasPermission, url, method);
         }
         if (hasPermission && StringUtils.isNotBlank(userId) && StringUtils.isNotBlank(userName)) {

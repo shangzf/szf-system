@@ -1,5 +1,6 @@
 package com.shangzf.authority.api.service;
 
+import com.shangzf.authority.api.dto.AuthorityExtDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 
@@ -8,7 +9,7 @@ public interface IAuthService {
     /**
      * 调用签权服务，判断用户是否有权限
      */
-    boolean authenticate(String authentication, String userId, String url, String method);
+    boolean authenticate(AuthorityExtDTO dto);
 
     /**
      * 判断url是否在忽略的范围内
