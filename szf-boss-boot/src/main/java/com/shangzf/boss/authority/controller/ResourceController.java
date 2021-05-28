@@ -4,8 +4,6 @@ import com.shangzf.authority.api.dto.AllocateRoleResourceDTO;
 import com.shangzf.authority.api.dto.ResourceCategoryNodeDTO;
 import com.shangzf.authority.api.dto.ResourceDTO;
 import com.shangzf.authority.api.remote.IResourceRemoteService;
-import com.shangzf.boss.authority.vo.AllocateRoleResourcesVO;
-import com.shangzf.common.util.ConvertUtil;
 import com.shangzf.common.vo.response.ResultResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -51,8 +49,8 @@ public class ResourceController {
     }
 
     @PostMapping("/allocate")
-    public ResultResponseData<Boolean> allocateRoleResources(@Validated @RequestBody AllocateRoleResourcesVO vo){
-        boolean result = resourceRemoteService.allocateRoleResources(ConvertUtil.convert(vo, AllocateRoleResourceDTO.class));
+    public ResultResponseData<Boolean> allocateRoleResources(@Validated @RequestBody AllocateRoleResourceDTO dto){
+        boolean result = resourceRemoteService.allocateRoleResources(dto);
         return ResultResponseData.success(result);
     }
 

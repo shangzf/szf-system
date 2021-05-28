@@ -3,7 +3,6 @@ package com.shangzf.boss.authority.controller;
 import com.shangzf.authority.api.dto.AllocateUserRolesDTO;
 import com.shangzf.authority.api.dto.RoleDTO;
 import com.shangzf.authority.api.remote.IRoleRemoteService;
-import com.shangzf.boss.authority.vo.AllocateUserRolesVO;
 import com.shangzf.common.util.ConvertUtil;
 import com.shangzf.common.vo.response.ResultResponseData;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,8 +53,8 @@ public class RoleController {
     }
 
     @PostMapping("/allocate")
-    public ResultResponseData<Boolean> allocateUserRoles(@Validated @RequestBody AllocateUserRolesVO vo){
-        boolean result = roleRemoteService.allocateUserRoles(ConvertUtil.convert(vo, AllocateUserRolesDTO.class));
+    public ResultResponseData<Boolean> allocateUserRoles(@Validated @RequestBody AllocateUserRolesDTO dto){
+        boolean result = roleRemoteService.allocateUserRoles(dto);
         return ResultResponseData.success(result);
     }
 }

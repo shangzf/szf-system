@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,7 +15,11 @@ import java.util.List;
 public class AllocateRoleMenusDTO implements Serializable {
     private static final long serialVersionUID = 484705641526230227L;
 
+    @Schema(name = "角色ID")
+    @NotNull(message = "角色不能为空")
     private Long roleId;
+    @Schema(name = "菜单ID列表")
+    @NotEmpty(message = "角色-菜单不能为空")
     private List<Long> roleMenus;
 
 }

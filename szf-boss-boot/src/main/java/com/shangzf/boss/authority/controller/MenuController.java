@@ -4,9 +4,7 @@ import com.shangzf.authority.api.dto.AllocateRoleMenusDTO;
 import com.shangzf.authority.api.dto.MenuDTO;
 import com.shangzf.authority.api.dto.MenuNodeDTO;
 import com.shangzf.authority.api.remote.IMenuRemoteService;
-import com.shangzf.boss.authority.vo.AllocateRoleMenusVO;
 import com.shangzf.boss.authority.vo.MenuInfoVO;
-import com.shangzf.common.util.ConvertUtil;
 import com.shangzf.common.vo.response.ResultResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -69,8 +67,8 @@ public class MenuController {
     }
 
     @PostMapping("/allocate")
-    public ResultResponseData<Boolean> allocateRoleMenus(@Validated @RequestBody AllocateRoleMenusVO vo){
-        boolean result = menuRemoteService.allocateRoleMenus(ConvertUtil.convert(vo, AllocateRoleMenusDTO.class));
+    public ResultResponseData<Boolean> allocateRoleMenus(@Validated @RequestBody AllocateRoleMenusDTO dto){
+        boolean result = menuRemoteService.allocateRoleMenus(dto);
         return ResultResponseData.success(result);
     }
 
