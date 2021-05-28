@@ -3,7 +3,6 @@ package com.shangzf.boss.ad.controller;
 import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
 import com.shangzf.ad.api.remote.IAdRemoteService;
-import com.shangzf.common.vo.response.ResultResponseData;
 import com.shangzf.common.vo.response.ResultResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,36 +24,38 @@ public class AdController {
     }
 
     @GetMapping("/space/all")
-    public ResultResponseData<List<PromotionSpaceDTO>> getAllSpace(){
+    public ResultResponse<List<PromotionSpaceDTO>> getAllSpace() {
         List<PromotionSpaceDTO> dtoList = adRemoteService.getAll();
-        return ResultResponseData.success(dtoList);
+        return ResultResponse.success(dtoList);
     }
 
     @PostMapping("/space/saveOrUpdate")
-    public ResultResponse saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto){
-        return adRemoteService.saveOrUpdateSpace(dto);
+    public ResultResponse<?> saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto) {
+        Boolean result = adRemoteService.saveOrUpdateSpace(dto);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
     @GetMapping("/space/{id}")
-    public ResultResponseData<PromotionSpaceDTO> getSpaceById(@PathVariable("id") Long id){
+    public ResultResponse<PromotionSpaceDTO> getSpaceById(@PathVariable("id") Long id) {
         PromotionSpaceDTO dto = adRemoteService.getSpaceById(id);
-        return ResultResponseData.success(dto);
+        return ResultResponse.success(dto);
     }
 
     @GetMapping("/all")
-    public ResultResponseData<List<PromotionAdDTO>> getAllAds(){
+    public ResultResponse<List<PromotionAdDTO>> getAllAds() {
         List<PromotionAdDTO> dtoList = adRemoteService.getAllAds();
-        return ResultResponseData.success(dtoList);
+        return ResultResponse.success(dtoList);
     }
 
     @PostMapping("/saveOrUpdate")
-    public ResultResponse saveOrUpdateAd(@RequestBody PromotionAdDTO dto){
-        return adRemoteService.saveOrUpdateAd(dto);
+    public ResultResponse<?> saveOrUpdateAd(@RequestBody PromotionAdDTO dto) {
+        Boolean result = adRemoteService.saveOrUpdateAd(dto);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
     @GetMapping("/{id}")
-    public ResultResponseData<PromotionAdDTO> getAdById(@PathVariable("id") Long id){
+    public ResultResponse<PromotionAdDTO> getAdById(@PathVariable("id") Long id) {
         PromotionAdDTO dto = adRemoteService.getAdById(id);
-        return ResultResponseData.success(dto);
+        return ResultResponse.success(dto);
     }
 }

@@ -72,13 +72,13 @@ public class AdRemoteService {
     }
 
     @PostMapping("/space/saveOrUpdate")
-    public ResultResponse saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto) {
+    public Boolean saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto) {
         PromotionSpace promotionSpace = ConvertUtil.convert(dto, PromotionSpace.class);
         if (Objects.isNull(promotionSpace)) {
-            return ResultResponse.fail();
+            return Boolean.FALSE;
         }
         promotionSpaceService.saveOrUpdate(promotionSpace);
-        return ResultResponse.success();
+        return Boolean.TRUE;
     }
 
     @PostMapping("/space/{id}")
@@ -94,13 +94,13 @@ public class AdRemoteService {
     }
 
     @PostMapping("/saveOrUpdate")
-    public ResultResponse saveOrUpdateAd(@RequestBody PromotionAdDTO dto) {
+    public Boolean saveOrUpdateAd(@RequestBody PromotionAdDTO dto) {
         PromotionAd promotionAd = ConvertUtil.convert(dto, PromotionAd.class);
         if (Objects.isNull(promotionAd)) {
-            return ResultResponse.fail();
+            return Boolean.FALSE;
         }
         promotionAdService.saveOrUpdate(promotionAd);
-        return ResultResponse.success();
+        return Boolean.TRUE;
     }
 
     @PostMapping("/{id}")

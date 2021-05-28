@@ -5,7 +5,7 @@ import com.shangzf.authority.api.dto.MenuDTO;
 import com.shangzf.authority.api.dto.MenuNodeDTO;
 import com.shangzf.authority.api.remote.IMenuRemoteService;
 import com.shangzf.boss.authority.vo.MenuInfoVO;
-import com.shangzf.common.vo.response.ResultResponseData;
+import com.shangzf.common.vo.response.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.collections.CollectionUtils;
@@ -33,9 +33,9 @@ public class MenuController {
 
     @Operation(summary = "删除菜单")
     @DeleteMapping("/{id}")
-    public ResultResponseData<Boolean> delete(@PathVariable("id") Long id) {
+    public ResultResponse<?> delete(@PathVariable("id") Long id) {
         boolean result = menuRemoteService.delete(id);
-        return ResultResponseData.success(result);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
     /**
@@ -43,14 +43,14 @@ public class MenuController {
      */
     @Operation(summary = "获取编辑菜单页面信息")
     @GetMapping("/info/{id}")
-    public ResultResponseData<MenuInfoVO> getMenuInfo(@PathVariable("id") Long id) {
+    public ResultResponse<MenuInfoVO> getMenuInfo(@PathVariable("id") Long id) {
         List<MenuNodeDTO> nodeList = menuRemoteService.getMenuNodeList();
         MenuDTO menu = menuRemoteService.getById(id);
         if (Objects.nonNull(menu)) {
             nodeList.forEach(menuNode -> setSelectFlag(menu.getParentId(), menuNode));
         }
         MenuInfoVO menuInfoVO = MenuInfoVO.builder().menuInfo(menu).parentMenus(nodeList).build();
-        return ResultResponseData.success(menuInfoVO);
+        return ResultResponse.success(menuInfoVO);
     }
 
     /**
@@ -58,18 +58,18 @@ public class MenuController {
      */
     @Operation(summary = "获取角色用于的菜单列表")
     @GetMapping("/menus/{roleId}")
-    public ResultResponseData<List<MenuNodeDTO>> getMenusByRoleId(@PathVariable("roleId") Long roleId) {
+    public ResultResponse<List<MenuNodeDTO>> getMenusByRoleId(@PathVariable("roleId") Long roleId) {
         List<MenuDTO> menuDTOList = menuRemoteService.getMenusByRoleId(roleId);
         List<MenuNodeDTO> nodeList = menuRemoteService.getMenuNodeList();
         List<Long> roleMenus = menuDTOList.stream().map(MenuDTO::getId).distinct().collect(Collectors.toList());
         nodeList.forEach(menuNode -> setSelectFlag(roleMenus, menuNode));
-        return ResultResponseData.success(nodeList);
+        return ResultResponse.success(nodeList);
     }
 
     @PostMapping("/allocate")
-    public ResultResponseData<Boolean> allocateRoleMenus(@Validated @RequestBody AllocateRoleMenusDTO dto){
+    public ResultResponse<?> allocateRoleMenus(@Validated @RequestBody AllocateRoleMenusDTO dto){
         boolean result = menuRemoteService.allocateRoleMenus(dto);
-        return ResultResponseData.success(result);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
     /**

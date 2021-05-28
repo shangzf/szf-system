@@ -3,8 +3,7 @@ package com.shangzf.boss.authority.controller;
 import com.shangzf.authority.api.dto.AllocateUserRolesDTO;
 import com.shangzf.authority.api.dto.RoleDTO;
 import com.shangzf.authority.api.remote.IRoleRemoteService;
-import com.shangzf.common.util.ConvertUtil;
-import com.shangzf.common.vo.response.ResultResponseData;
+import com.shangzf.common.vo.response.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,32 +28,32 @@ public class RoleController {
 
     @Operation(summary = "删除角色")
     @DeleteMapping("/{id}")
-    public ResultResponseData<Boolean> delete(@PathVariable("id") Long id) {
+    public ResultResponse<?> delete(@PathVariable("id") Long id) {
         boolean result = roleRemoteService.delete(id);
-        return ResultResponseData.success(result);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
     @GetMapping("/{id}")
-    public ResultResponseData<RoleDTO> getById(@PathVariable("id") Long id) {
+    public ResultResponse<RoleDTO> getById(@PathVariable("id") Long id) {
         RoleDTO dto = roleRemoteService.getById(id);
-        return ResultResponseData.success(dto);
+        return ResultResponse.success(dto);
     }
 
     @GetMapping("/all")
-    public ResultResponseData<List<RoleDTO>> getAll() {
+    public ResultResponse<List<RoleDTO>> getAll() {
         List<RoleDTO> list = roleRemoteService.getAll();
-        return ResultResponseData.success(list);
+        return ResultResponse.success(list);
     }
 
     @GetMapping("/roles/{userId}")
-    public ResultResponseData<List<RoleDTO>> getRolesByUserId(@PathVariable("userId") Long userId) {
+    public ResultResponse<List<RoleDTO>> getRolesByUserId(@PathVariable("userId") Long userId) {
         List<RoleDTO> list = roleRemoteService.getRolesByUserId(userId);
-        return ResultResponseData.success(list);
+        return ResultResponse.success(list);
     }
 
     @PostMapping("/allocate")
-    public ResultResponseData<Boolean> allocateUserRoles(@Validated @RequestBody AllocateUserRolesDTO dto){
+    public ResultResponse<?> allocateUserRoles(@Validated @RequestBody AllocateUserRolesDTO dto){
         boolean result = roleRemoteService.allocateUserRoles(dto);
-        return ResultResponseData.success(result);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 }

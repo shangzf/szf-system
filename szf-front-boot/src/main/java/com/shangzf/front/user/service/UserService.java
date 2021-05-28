@@ -1,7 +1,7 @@
 package com.shangzf.front.user.service;
 
 import com.alibaba.fastjson.JSON;
-import com.shangzf.common.vo.response.ResultResponseData;
+import com.shangzf.common.vo.response.ResultResponse;
 import com.shangzf.front.user.vo.LoginVO;
 import com.shangzf.front.user.vo.TokenVO;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class UserService {
     @Value("${spring.oauth.refresh_grant_type}")
     private String refreshGrantType;
 
-    public ResultResponseData createAuthToken(LoginVO vo) {
+    public ResultResponse createAuthToken(LoginVO vo) {
         log.info("phone:{}, password:{}, scope:{}, grantType:{}, clientId:{}, clientSecret:{}", vo.getPhone(), vo
                 .getPassword(), scope, grantType, clientId, clientSecret);
         String token = this.oAuthRemoteService
@@ -36,8 +36,8 @@ public class UserService {
         TokenVO tokenVO = JSON.parseObject(token, TokenVO.class);
         if (Objects.nonNull(tokenVO.getCode())) {
             log.info("phone:{}, jwt token is null, token:{}", vo.getPhone(), token);
-            return ResultResponseData.builder(null).code(tokenVO.getCode()).message(tokenVO.getMessage()).build();
+            return ResultResponse.builder(null).code(tokenVO.getCode()).message(tokenVO.getMessage()).build();
         }
-        return ResultResponseData.success(tokenVO);
+        return ResultResponse.success(tokenVO);
     }
 }

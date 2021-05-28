@@ -4,7 +4,7 @@ import com.shangzf.authority.api.dto.AllocateRoleResourceDTO;
 import com.shangzf.authority.api.dto.ResourceCategoryNodeDTO;
 import com.shangzf.authority.api.dto.ResourceDTO;
 import com.shangzf.authority.api.remote.IResourceRemoteService;
-import com.shangzf.common.vo.response.ResultResponseData;
+import com.shangzf.common.vo.response.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,29 +29,29 @@ public class ResourceController {
 
     @Operation(summary = "删除资源")
     @DeleteMapping("/{id}")
-    public ResultResponseData<Boolean> delete(@PathVariable("id") Long id) {
+    public ResultResponse<?> delete(@PathVariable("id") Long id) {
         boolean result = resourceRemoteService.delete(id);
-        return ResultResponseData.success(result);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
     @Operation(summary = "删除资源分类，如果资源分类下有资源，不允许删除")
     @DeleteMapping("/category/{id}")
-    public ResultResponseData<Boolean> deleteCategory(@PathVariable("id") Long id) {
+    public ResultResponse<?> deleteCategory(@PathVariable("id") Long id) {
         boolean result = resourceRemoteService.deleteCategory(id);
-        return ResultResponseData.success(result);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
     @Operation(summary = "获取角色用于的资源列表")
     @GetMapping("/resources/{roleId}")
-    public ResultResponseData<List<ResourceCategoryNodeDTO>> getResourcesByRoleId(@PathVariable("roleId") Long roleId){
+    public ResultResponse<List<ResourceCategoryNodeDTO>> getResourcesByRoleId(@PathVariable("roleId") Long roleId) {
         List<ResourceDTO> resourceList = resourceRemoteService.getResourcesByRoleId(roleId);
         return null;
     }
 
     @PostMapping("/allocate")
-    public ResultResponseData<Boolean> allocateRoleResources(@Validated @RequestBody AllocateRoleResourceDTO dto){
+    public ResultResponse<?> allocateRoleResources(@Validated @RequestBody AllocateRoleResourceDTO dto) {
         boolean result = resourceRemoteService.allocateRoleResources(dto);
-        return ResultResponseData.success(result);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
 }

@@ -2,7 +2,6 @@ package com.shangzf.front.user.controller;
 
 import com.shangzf.common.vo.constant.AuthTypeConstant;
 import com.shangzf.common.vo.response.ResultResponse;
-import com.shangzf.common.vo.response.ResultResponseData;
 import com.shangzf.front.user.response.UserCode;
 import com.shangzf.front.user.service.UserService;
 import com.shangzf.front.user.vo.LoginVO;
@@ -26,7 +25,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login/code")
-    public ResultResponseData loginCode(@Validated(CodeGroup.class) @RequestBody LoginVO vo) {
+    public ResultResponse loginCode(@Validated(CodeGroup.class) @RequestBody LoginVO vo) {
         Boolean register = userRemoteService.checkRegister(vo.getPhone());
         if (!register) {
 
@@ -36,10 +35,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResultResponseData login(@Validated(PasswordGroup.class) @RequestBody LoginVO vo) {
+    public ResultResponse login(@Validated(PasswordGroup.class) @RequestBody LoginVO vo) {
         Boolean register = userRemoteService.checkRegister(vo.getPhone());
         if (!register) {
-            return ResultResponseData.fail(UserCode.UNREGISTERED, null);
+            return ResultResponse.fail(UserCode.UNREGISTERED, null);
         }
         vo.setType(AuthTypeConstant.PASSWORD);
         return userService.createAuthToken(vo);

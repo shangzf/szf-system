@@ -2,7 +2,7 @@ package com.shangzf.front.ad.controller;
 
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
 import com.shangzf.ad.api.remote.IAdRemoteService;
-import com.shangzf.common.vo.response.ResultResponseData;
+import com.shangzf.common.vo.response.ResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +19,8 @@ public class AdController {
     private IAdRemoteService adRemoteService;
 
     @GetMapping("/space/keys")
-    public ResultResponseData<List<PromotionSpaceDTO>> getBySpaceKeys(@RequestParam("spaceKeys") String[] spaceKeys){
+    public ResultResponse<List<PromotionSpaceDTO>> getBySpaceKeys(@RequestParam("spaceKeys") String[] spaceKeys){
         List<PromotionSpaceDTO> list = adRemoteService.getBySpaceKeys(spaceKeys);
-        return ResultResponseData.success(list);
+        return ResultResponse.success(list);
     }
 }
