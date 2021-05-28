@@ -3,6 +3,7 @@ package com.shangzf.user.remote;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shangzf.common.util.ConvertUtil;
+import com.shangzf.user.api.dto.ChangePasswordDTO;
 import com.shangzf.user.api.dto.PasswordDTO;
 import com.shangzf.user.api.dto.UserDTO;
 import com.shangzf.user.api.param.UserQueryParam;
@@ -85,8 +86,25 @@ public class UserRemoteService {
         return null;
     }
 
+    /**
+     * 修改密码
+     *
+     * @param dto 密码
+     * @return 是否操作成功
+     */
     @PutMapping("/pwd")
-    public Boolean editPassword(@RequestBody PasswordDTO dto) {
+    public Boolean editPassword(@RequestBody ChangePasswordDTO dto) {
+        return null;
+    }
+
+    /**
+     * 设置密码
+     *
+     * @param dto 密码
+     * @return 是否操作成功
+     */
+    @PostMapping("/pwd")
+    public Boolean savePassword(@RequestBody PasswordDTO dto) {
         return null;
     }
 }
