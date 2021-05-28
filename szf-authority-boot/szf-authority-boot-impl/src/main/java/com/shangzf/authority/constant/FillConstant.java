@@ -8,4 +8,8 @@ public interface FillConstant {
     String CREATE_BY = "createBy";
 
     String LAST_MODIFY_BY = "lastModifyBy";
+
+    String CREATE_TIME = "createTime";
+
+    String LAST_MODIFY_TIME = "lastModifyTime";
 }
