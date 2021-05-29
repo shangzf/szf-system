@@ -1,5 +1,6 @@
 package com.shangzf.common.pojo.vo.page;
 
+import com.shangzf.common.constant.PageConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
@@ -18,23 +19,23 @@ public class DataGrid<T> implements Serializable {
     private List<T> records;
 
     @Schema(name = "总数")
-    private long total;
+    private Long total;
 
-    @Schema(name = "每页显示条数，默认 10")
-    private long size;
+    @Schema(name = "每页显示条数，默认10")
+    private Long size;
 
     @Schema(name = "当前页")
-    private long current;
+    private Long current;
 
     public DataGrid() {
-        this(Collections.emptyList(), 0, 1);
+        this(Collections.emptyList(), PageConstant.DEFAULT_TOTAL, PageConstant.DEFAULT_CURRENT);
     }
 
-    public DataGrid(List<T> records, long total, long current) {
-        this(records, total, 10, current);
+    public DataGrid(List<T> records, Long total, Long current) {
+        this(records, total, PageConstant.DEFAULT_SIZE, current);
     }
 
-    public DataGrid(List<T> records, long total, long size, long current) {
+    public DataGrid(List<T> records, Long total, Long size, Long current) {
         this.records = records;
         this.total = total;
         this.size = size;
@@ -49,27 +50,27 @@ public class DataGrid<T> implements Serializable {
         this.records = records;
     }
 
-    public long getTotal() {
+    public Long getTotal() {
         return total;
     }
 
-    public void setTotal(long total) {
+    public void setTotal(Long total) {
         this.total = total;
     }
 
-    public long getSize() {
+    public Long getSize() {
         return size;
     }
 
-    public void setSize(long size) {
+    public void setSize(Long size) {
         this.size = size;
     }
 
-    public long getCurrent() {
+    public Long getCurrent() {
         return current;
     }
 
-    public void setCurrent(long current) {
+    public void setCurrent(Long current) {
         this.current = current;
     }
 }
