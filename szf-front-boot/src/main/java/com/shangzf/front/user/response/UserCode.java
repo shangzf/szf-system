@@ -4,18 +4,18 @@ import com.shangzf.common.vo.response.IResultCode;
 
 public enum UserCode implements IResultCode {
 
-    UNREGISTERED(201, "未注册");
+    UNREGISTERED("601", "未注册");
 
-    private int code;
+    private String code;
     private String message;
 
-    UserCode(int code, String message) {
+    UserCode(String code, String message) {
         this.code = code;
         this.message = message;
     }
 
     @Override
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 

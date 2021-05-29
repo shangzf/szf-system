@@ -10,11 +10,11 @@ public class BaseException extends RuntimeException {
     private final IResultCode resultCode;
 
     public BaseException() {
-        this.resultCode = CommonCodeEnum.SERVER_ERROR;
+        this.resultCode = CommonCodeEnum.SERVER_EXCEPTION;
     }
 
-    public IResultCode getResultCode() {
-        return resultCode;
+    public BaseException(IResultCode resultCode) {
+        this.resultCode = resultCode;
     }
 
     public BaseException(String message, IResultCode resultCode) {
@@ -25,6 +25,10 @@ public class BaseException extends RuntimeException {
     public BaseException(String message, Throwable cause, IResultCode resultCode) {
         super(message, cause);
         this.resultCode = resultCode;
+    }
+
+    public IResultCode getResultCode() {
+        return resultCode;
     }
 
 }

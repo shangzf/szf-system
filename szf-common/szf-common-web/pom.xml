@@ -21,6 +21,11 @@
             <groupId>com.shangzf</groupId>
             <artifactId>szf-common-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>

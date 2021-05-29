@@ -38,7 +38,7 @@ public class UserController {
     public ResultResponse login(@Validated(PasswordGroup.class) @RequestBody LoginVO vo) {
         Boolean register = userRemoteService.checkRegister(vo.getPhone());
         if (!register) {
-            return ResultResponse.fail(UserCode.UNREGISTERED, null);
+            return ResultResponse.fail(UserCode.UNREGISTERED);
         }
         vo.setType(AuthTypeConstant.PASSWORD);
         return userService.createAuthToken(vo);

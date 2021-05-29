@@ -2,7 +2,9 @@ package com.shangzf.common.vo.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.shangzf.common.exception.BaseException;
+import com.shangzf.common.util.ContextUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -14,7 +16,7 @@ public class ResultResponse<T> implements Serializable {
     private static final long serialVersionUID = -7082945428094757341L;
 
     @Schema(name = "处理结果code", required = true)
-    private int code;
+    private String code;
 
     @Schema(name = "处理结果描述信息")
     private String message;
@@ -35,40 +37,48 @@ public class ResultResponse<T> implements Serializable {
         this.time = ZonedDateTime.now().toInstant();
     }
 
-    public static <T> ResultResponse<T> success(T data) {
-        return builder(data).resultCode(CommonCodeEnum.SUCCESS).build();
+    public static <T> ResultResponse<T> successOfData(T data) {
+        String message = ContextUtil.getMessage(CommonCodeEnum.SUCCESS.getCode());
+        if (StringUtils.isBlank(message)) {
+            message = CommonCodeEnum.SUCCESS.getMessage();
+        }
+        return builder(data).message(message).code(CommonCodeEnum.SUCCESS.getCode()).build();
     }
 
     public static ResultResponse<?> success() {
-        return success(null);
+        return successOfData(null);
     }
 
-    public static <T> ResultResponse<T> fail(T data) {
-        return builder(data).resultCode(CommonCodeEnum.FAIL).build();
+    public static <T> ResultResponse<T> failOfData(T data) {
+        return failOfData(CommonCodeEnum.FAIL, data);
+    }
+
+    public static <T> ResultResponse<T> failOfData(IResultCode resultCode, T data) {
+        String message = ContextUtil.getMessage(resultCode.getCode());
+        if (StringUtils.isBlank(message)) {
+            message = resultCode.getMessage();
+        }
+        return builder(data).message(message).code(resultCode.getCode()).build();
     }
 
     public static ResultResponse<?> fail() {
-        return builder(null).resultCode(CommonCodeEnum.FAIL).build();
+        return fail(CommonCodeEnum.FAIL);
     }
 
-    public static ResultResponse<?> fail(BaseException baseException) {
-        return fail(baseException, null);
+    public static ResultResponse<?> fail(BaseException baseException, Object... args) {
+        return fail(baseException.getResultCode(), args);
     }
 
-    public static <T> ResultResponse<T> fail(BaseException baseException, T data) {
-        return fail(baseException.getResultCode(), data);
-    }
-
-    public static <T> ResultResponse<T> fail(IResultCode resultCode, T data) {
-        return builder(data).resultCode(resultCode).build();
-    }
-
-    public static ResultResponse<?> fail(IResultCode resultCode) {
-        return fail(resultCode, null);
+    public static ResultResponse<?> fail(IResultCode resultCode, Object... args) {
+        String message = ContextUtil.getMessage(resultCode.getCode(), args);
+        if (StringUtils.isBlank(message)) {
+            message = resultCode.getMessage();
+        }
+        return builder(null).message(message).code(resultCode.getCode()).build();
     }
 
     public static <T> ResultResponse<T> error(T data) {
-        return builder(data).resultCode(CommonCodeEnum.SERVER_ERROR).build();
+        return failOfData(CommonCodeEnum.SERVER_EXCEPTION,data);
     }
 
     public static <T> ResultResponseBuilder<T> builder(T data) {
@@ -82,19 +92,13 @@ public class ResultResponse<T> implements Serializable {
             this.resultResponse = new ResultResponse<>(data);
         }
 
-        public ResultResponseBuilder<T> code(int code) {
+        public ResultResponseBuilder<T> code(String code) {
             resultResponse.code = code;
             return this;
         }
 
         public ResultResponseBuilder<T> message(String message) {
             resultResponse.message = message;
-            return this;
-        }
-
-        public ResultResponseBuilder<T> resultCode(IResultCode resultCode) {
-            resultResponse.code = resultCode.getCode();
-            resultResponse.message = resultCode.getMessage();
             return this;
         }
 
@@ -108,7 +112,7 @@ public class ResultResponse<T> implements Serializable {
         }
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 

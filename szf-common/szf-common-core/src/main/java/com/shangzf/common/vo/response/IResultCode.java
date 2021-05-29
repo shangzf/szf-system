@@ -5,7 +5,7 @@ package com.shangzf.common.vo.response;
  */
 public interface IResultCode {
 
-    int getCode();
+    String getCode();
 
     String getMessage();
 }

@@ -62,6 +62,7 @@ public interface StringConstant {
     String YES = "yes";
     String ONE = "1";
     String ZERO = "0";
+    String TWO = "2";
     String DOLLAR_LEFT_BRACE = "${";
     String HASH_LEFT_BRACE = "#{";
     String CRLF = "\r\n";
