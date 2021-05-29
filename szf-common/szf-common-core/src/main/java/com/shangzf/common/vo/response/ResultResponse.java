@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 
-@Schema(name = "Rest请求的响应结果，不包含结果数据")
+@Schema(name = "Rest请求的响应结果")
 public class ResultResponse<T> implements Serializable {
 
     private static final long serialVersionUID = -7082945428094757341L;
