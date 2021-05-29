@@ -2,8 +2,8 @@ package com.shangzf.gateway.filter;
 
 import com.shangzf.authority.api.dto.AuthorityExtDTO;
 import com.shangzf.authority.api.service.IAuthService;
-import com.shangzf.common.vo.constant.AuthenticationConstant;
-import com.shangzf.common.vo.constant.UserManagerConstant;
+import com.shangzf.common.constant.AuthenticationConstant;
+import com.shangzf.common.constant.UserManagerConstant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import lombok.extern.slf4j.Slf4j;

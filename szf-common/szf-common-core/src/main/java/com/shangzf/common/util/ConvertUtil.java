@@ -1,6 +1,6 @@
 package com.shangzf.common.util;
 
-import com.shangzf.common.vo.constant.StringConstant;
+import com.shangzf.common.constant.StringConstant;
 import net.sf.cglib.beans.BeanCopier;
 import org.apache.commons.collections.CollectionUtils;
 

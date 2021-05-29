@@ -4,7 +4,7 @@ import com.shangzf.authority.api.dto.AllocateRoleResourceDTO;
 import com.shangzf.authority.api.dto.ResourceCategoryNodeDTO;
 import com.shangzf.authority.api.dto.ResourceDTO;
 import com.shangzf.authority.api.remote.IResourceRemoteService;
-import com.shangzf.common.vo.response.ResultResponse;
+import com.shangzf.common.pojo.vo.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

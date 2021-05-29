@@ -3,7 +3,7 @@ package com.shangzf.boss.authority.controller;
 import com.shangzf.authority.api.dto.AllocateUserRolesDTO;
 import com.shangzf.authority.api.dto.RoleDTO;
 import com.shangzf.authority.api.remote.IRoleRemoteService;
-import com.shangzf.common.vo.response.ResultResponse;
+import com.shangzf.common.pojo.vo.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,19 +36,19 @@ public class RoleController {
     @GetMapping("/{id}")
     public ResultResponse<RoleDTO> getById(@PathVariable("id") Long id) {
         RoleDTO dto = roleRemoteService.getById(id);
-        return ResultResponse.success(dto);
+        return ResultResponse.successOfData(dto);
     }
 
     @GetMapping("/all")
     public ResultResponse<List<RoleDTO>> getAll() {
         List<RoleDTO> list = roleRemoteService.getAll();
-        return ResultResponse.success(list);
+        return ResultResponse.successOfData(list);
     }
 
     @GetMapping("/roles/{userId}")
     public ResultResponse<List<RoleDTO>> getRolesByUserId(@PathVariable("userId") Long userId) {
         List<RoleDTO> list = roleRemoteService.getRolesByUserId(userId);
-        return ResultResponse.success(list);
+        return ResultResponse.successOfData(list);
     }
 
     @PostMapping("/allocate")

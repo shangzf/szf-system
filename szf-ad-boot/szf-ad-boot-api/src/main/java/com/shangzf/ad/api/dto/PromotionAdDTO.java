@@ -1,6 +1,7 @@
 package com.shangzf.ad.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.shangzf.ad.api.enums.StatusEnum;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -64,7 +65,7 @@ public class PromotionAdDTO implements Serializable {
     /**
      * 状态(S/U/D)
      */
-    private String status;
+    private StatusEnum status;
 
     /**
      * 优先级

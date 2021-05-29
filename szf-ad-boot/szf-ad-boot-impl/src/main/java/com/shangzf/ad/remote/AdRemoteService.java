@@ -5,11 +5,10 @@ import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
 import com.shangzf.ad.entity.PromotionAd;
 import com.shangzf.ad.entity.PromotionSpace;
+import com.shangzf.ad.api.enums.StatusEnum;
 import com.shangzf.ad.service.IPromotionAdService;
 import com.shangzf.ad.service.IPromotionSpaceService;
 import com.shangzf.common.util.ConvertUtil;
-import com.shangzf.common.vo.constant.StatusEnum;
-import com.shangzf.common.vo.response.ResultResponse;
 import org.bouncycastle.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,7 +56,7 @@ public class AdRemoteService {
                 QueryWrapper<PromotionAd> adQueryWrapper = new QueryWrapper<>();
                 adQueryWrapper.eq("space_id", promotionSpace.getId());
                 // 状态
-                adQueryWrapper.eq("status", StatusEnum.UP.getCode());
+                adQueryWrapper.eq("status", StatusEnum.UP);
                 // 有效期
                 Date now = new Date();
                 adQueryWrapper.lt("start_time", now);

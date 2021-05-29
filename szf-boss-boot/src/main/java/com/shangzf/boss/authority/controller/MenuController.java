@@ -5,7 +5,7 @@ import com.shangzf.authority.api.dto.MenuDTO;
 import com.shangzf.authority.api.dto.MenuNodeDTO;
 import com.shangzf.authority.api.remote.IMenuRemoteService;
 import com.shangzf.boss.authority.vo.MenuInfoVO;
-import com.shangzf.common.vo.response.ResultResponse;
+import com.shangzf.common.pojo.vo.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.collections.CollectionUtils;
@@ -50,7 +50,7 @@ public class MenuController {
             nodeList.forEach(menuNode -> setSelectFlag(menu.getParentId(), menuNode));
         }
         MenuInfoVO menuInfoVO = MenuInfoVO.builder().menuInfo(menu).parentMenus(nodeList).build();
-        return ResultResponse.success(menuInfoVO);
+        return ResultResponse.successOfData(menuInfoVO);
     }
 
     /**
@@ -63,7 +63,7 @@ public class MenuController {
         List<MenuNodeDTO> nodeList = menuRemoteService.getMenuNodeList();
         List<Long> roleMenus = menuDTOList.stream().map(MenuDTO::getId).distinct().collect(Collectors.toList());
         nodeList.forEach(menuNode -> setSelectFlag(roleMenus, menuNode));
-        return ResultResponse.success(nodeList);
+        return ResultResponse.successOfData(nodeList);
     }
 
     @PostMapping("/allocate")

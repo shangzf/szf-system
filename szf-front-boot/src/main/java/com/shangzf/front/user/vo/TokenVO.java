@@ -1,29 +1,37 @@
 package com.shangzf.front.user.vo;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.io.Serializable;
+
+@Schema(name = "Token数据")
 @Data
-public class TokenVO {
+public class TokenVO implements Serializable {
 
-    @JsonIgnore
-    private Integer code;
-    @JsonIgnore
-    private String message;
+    private static final long serialVersionUID = -9128517552939499268L;
 
-    @JSONField(name = "access_token")
+    @Schema(name = "授权Token")
     private String accessToken;
-    @JSONField(name = "token_type")
+
+    @Schema(name = "Token类型")
     private String tokenType;
-    @JSONField(name = "refresh_token")
+
+    @Schema(name = "刷新Token")
     private String refreshToken;
-    @JSONField(name = "expires_in")
+
+    @Schema(name = "有效期(单位:秒)")
     private Long expiresIn;
+
+    @Schema(name = "有效期(单位:秒)")
     private String scope;
-    @JSONField(name = "user_id")
+
+    @Schema(name = "用户ID")
     private Long userId;
-    @JSONField(name = "user_name")
+
+    @Schema(name = "用户名")
     private String username;
+
+    @Schema(name = "唯一身份标识")
     private String jti;
 }

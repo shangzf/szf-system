@@ -1,7 +1,7 @@
 package com.shangzf.common.util;
 
 import com.shangzf.common.context.BaseApplicationContext;
-import com.shangzf.common.vo.constant.StringConstant;
+import com.shangzf.common.constant.StringConstant;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;

@@ -1,7 +1,7 @@
 package com.shangzf.oauth.oauth2.enhancer;
 
 import com.google.common.collect.Maps;
-import com.shangzf.common.vo.constant.AuthenticationConstant;
+import com.shangzf.common.constant.AuthenticationConstant;
 import com.shangzf.oauth.entity.UserJwt;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;

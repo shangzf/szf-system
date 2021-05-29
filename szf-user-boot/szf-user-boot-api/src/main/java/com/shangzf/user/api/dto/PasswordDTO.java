@@ -1,6 +1,6 @@
 package com.shangzf.user.api.dto;
 
-import com.shangzf.common.vo.constant.RegexConstant;
+import com.shangzf.common.constant.RegexConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

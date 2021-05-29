@@ -1,7 +1,7 @@
 package com.shangzf.authority.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.shangzf.authority.constant.FillConstant;
+import com.shangzf.common.constant.FillConstant;
 import com.shangzf.common.user.UserManager;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
