@@ -1,82 +1,58 @@
 package com.shangzf.user.api.dto;
 
+import com.shangzf.user.api.enums.StatusEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@Schema(name = "用户")
 @Data
 public class UserDTO implements Serializable {
 
     private static final long serialVersionUID = 5177881545003968555L;
-    /**
-     * 用户ID
-     */
+
+    @Schema(name = "用户ID")
     private Long id;
 
-    /**
-     * 用户昵称
-     */
+    @Schema(name = "用户昵称")
     private String name;
 
-    /**
-     * 用户头像地址
-     */
+    @Schema(name = "用户头像地址")
     private String portrait;
 
-    /**
-     * 注册手机
-     */
+    @Schema(name = "注册手机")
     private String phone;
 
-    /**
-     * 用户密码(可以为空，支持只用验证码注册、登录)
-     */
+    @Schema(name = "用户密码(可以为空，支持只用验证码注册、登录)")
     private String password;
 
-    /**
-     * 注册IP
-     */
+    @Schema(name = "注册IP")
     private Integer regIp;
 
-    /**
-     * 是否有效用户
-     */
+    @Schema(name = "是否有效用户")
     private Boolean accountNonExpired;
 
-    /**
-     * 账号是否未过期
-     */
+    @Schema(name = "账号是否未过期")
     private Boolean credentialsNonExpired;
 
-    /**
-     * 是否未锁定
-     */
+    @Schema(name = "是否未锁定")
     private Boolean accountNonLocked;
 
-    /**
-     * 用户状态：E-能登录，D-不能登录
-     */
-    private String status;
+    @Schema(name = "用户状态：E-能登录，D-不能登录", allowableValues = {"E", "D"})
+    private StatusEnum status;
 
-    /**
-     * 是否删除
-     */
+    @Schema(name = "是否删除")
     private Boolean deleted;
 
-    /**
-     * 创建时间
-     */
+    @Schema(name = "创建时间")
     private Date createTime;
 
-    /**
-     * 最后修改时间
-     */
+    @Schema(name = "最后修改时间")
     private Date lastModifyTime;
 
-    /**
-     * 描述
-     */
+    @Schema(name = "描述")
     private String remark;
 
 }

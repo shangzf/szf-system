@@ -1,5 +1,6 @@
 package com.shangzf.user.entity;
 
+import com.shangzf.user.api.enums.SexEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -53,7 +54,7 @@ public class Weixin implements Serializable {
     /**
      * 性别
      */
-    private String sex;
+    private SexEnum sex;
 
     /**
      * 是否删除

@@ -1,5 +1,6 @@
 package com.shangzf.user.entity;
 
+import com.shangzf.user.api.enums.StatusEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -63,7 +64,7 @@ public class User implements Serializable {
     /**
      * 用户状态：E-能登录，D-不能登录
      */
-    private String status;
+    private StatusEnum status;
 
     /**
      * 是否删除
