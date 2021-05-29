@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>com.shangzf</groupId>
-            <artifactId>szf-common</artifactId>
+            <artifactId>szf-common-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.shangzf</groupId>

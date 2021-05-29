@@ -18,6 +18,10 @@
     <dependencies>
         <dependency>
             <groupId>com.shangzf</groupId>
+            <artifactId>szf-common-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.shangzf</groupId>
             <artifactId>szf-message-boot-api</artifactId>
             <version>0.0.1</version>
         </dependency>

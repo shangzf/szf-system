@@ -32,7 +32,12 @@
         <dependencies>
             <dependency>
                 <groupId>com.shangzf</groupId>
-                <artifactId>szf-common</artifactId>
+                <artifactId>szf-common-core</artifactId>
+                <version>${szf-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shangzf</groupId>
+                <artifactId>szf-common-web</artifactId>
                 <version>${szf-common.version}</version>
             </dependency>
             <dependency>
