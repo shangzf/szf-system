@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,14 +27,14 @@ public class RoleController {
     private IRoleRemoteService roleRemoteService;
 
     @Operation(summary = "删除角色")
-    @DeleteMapping("/{id}")
-    public ResultResponse<?> delete(@PathVariable("id") Long id) {
+    @DeleteMapping("/")
+    public ResultResponse<?> delete(@RequestParam("id") Long id) {
         boolean result = roleRemoteService.delete(id);
         return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
     @GetMapping("/{id}")
-    public ResultResponse<RoleDTO> getById(@PathVariable("id") Long id) {
+    public ResultResponse<RoleDTO> getById(@RequestParam("id") Long id) {
         RoleDTO dto = roleRemoteService.getById(id);
         return ResultResponse.successOfData(dto);
     }
@@ -45,8 +45,8 @@ public class RoleController {
         return ResultResponse.successOfData(list);
     }
 
-    @GetMapping("/roles/{userId}")
-    public ResultResponse<List<RoleDTO>> getRolesByUserId(@PathVariable("userId") Long userId) {
+    @GetMapping("/roles/")
+    public ResultResponse<List<RoleDTO>> getRolesByUserId(@RequestParam("userId") Long userId) {
         List<RoleDTO> list = roleRemoteService.getRolesByUserId(userId);
         return ResultResponse.successOfData(list);
     }

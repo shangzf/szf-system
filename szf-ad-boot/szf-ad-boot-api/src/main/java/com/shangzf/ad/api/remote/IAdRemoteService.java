@@ -4,7 +4,6 @@ import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +22,8 @@ public interface IAdRemoteService {
     @PostMapping("/space/saveOrUpdate")
     Boolean saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto);
 
-    @GetMapping("/space/{id}")
-    PromotionSpaceDTO getSpaceById(@PathVariable("id") Long id);
+    @GetMapping("/space")
+    PromotionSpaceDTO getSpaceById(@RequestParam("id") Long id);
 
     @GetMapping("/all")
     List<PromotionAdDTO> getAllAds();
@@ -32,6 +31,6 @@ public interface IAdRemoteService {
     @PostMapping("/saveOrUpdate")
     Boolean saveOrUpdateAd(@RequestBody PromotionAdDTO dto);
 
-    @GetMapping("/{id}")
-    PromotionAdDTO getAdById(@PathVariable("id") Long id);
+    @GetMapping("/")
+    PromotionAdDTO getAdById(@RequestParam("id") Long id);
 }

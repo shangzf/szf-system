@@ -13,11 +13,11 @@ import com.shangzf.user.util.PageUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -46,14 +46,14 @@ public class UserRemoteService {
         return PageUtils.page(userPage, UserDTO.class);
     }
 
-    @GetMapping("/{id}")
-    public UserDTO getById(@PathVariable("id") Long id) {
+    @GetMapping("/")
+    public UserDTO getById(@RequestParam("id") Long id) {
         User user = userService.getById(id);
         return ConvertUtil.convert(user, UserDTO.class);
     }
 
-    @GetMapping("/phone/{phone}")
-    public UserDTO getByPhone(@PathVariable("phone") String phone) {
+    @GetMapping("/phone")
+    public UserDTO getByPhone(@RequestParam("phone") String phone) {
         List<User> userList = userService.lambdaQuery().eq(User::getPhone, phone).orderByDesc(User::getId).list();
         if (CollectionUtils.isEmpty(userList)) {
             return null;
@@ -61,19 +61,19 @@ public class UserRemoteService {
         return ConvertUtil.convert(userList.get(0), UserDTO.class);
     }
 
-    @GetMapping("/register/{phone}")
-    public Boolean checkRegister(@PathVariable("phone") String phone) {
+    @GetMapping("/register")
+    public Boolean checkRegister(@RequestParam("phone") String phone) {
         UserDTO userDTO = getByPhone(phone);
         return Objects.nonNull(userDTO) && !userDTO.getDeleted();
     }
 
     @PostMapping("/")
-    public UserDTO save(@RequestBody UserDTO dto) {
+    public Boolean save(@RequestBody UserDTO dto) {
         User user = ConvertUtil.convert(dto, User.class);
         Optional.ofNullable(user).ifPresent(u -> {
 
         });
-        return dto;
+        return null;
     }
 
     @PutMapping("/")
@@ -81,8 +81,8 @@ public class UserRemoteService {
         return null;
     }
 
-    @GetMapping("/updatePwd/{id}")
-    public Boolean checkUpdatePassword(@PathVariable("id") Long id) {
+    @GetMapping("/pwd/check")
+    public Boolean checkPassword(@RequestParam("id") Long id) {
         return null;
     }
 
@@ -92,8 +92,8 @@ public class UserRemoteService {
      * @param dto 密码
      * @return 是否操作成功
      */
-    @PutMapping("/pwd")
-    public Boolean editPassword(@RequestBody ChangePasswordDTO dto) {
+    @PutMapping("/pwd/update")
+    public Boolean updatePassword(@RequestBody ChangePasswordDTO dto) {
         return null;
     }
 
@@ -103,7 +103,7 @@ public class UserRemoteService {
      * @param dto 密码
      * @return 是否操作成功
      */
-    @PostMapping("/pwd")
+    @PutMapping("/pwd/save")
     public Boolean savePassword(@RequestBody PasswordDTO dto) {
         return null;
     }

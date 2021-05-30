@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,8 +32,8 @@ public class MenuController {
     private IMenuRemoteService menuRemoteService;
 
     @Operation(summary = "删除菜单")
-    @DeleteMapping("/{id}")
-    public ResultResponse<?> delete(@PathVariable("id") Long id) {
+    @DeleteMapping("/")
+    public ResultResponse<?> delete(@RequestParam("id") Long id) {
         boolean result = menuRemoteService.delete(id);
         return result ? ResultResponse.success() : ResultResponse.fail();
     }
@@ -42,8 +42,8 @@ public class MenuController {
      * 获取编辑菜单页面信息
      */
     @Operation(summary = "获取编辑菜单页面信息")
-    @GetMapping("/info/{id}")
-    public ResultResponse<MenuInfoVO> getMenuInfo(@PathVariable("id") Long id) {
+    @GetMapping("/info")
+    public ResultResponse<MenuInfoVO> getMenuInfo(@RequestParam("id") Long id) {
         List<MenuNodeDTO> nodeList = menuRemoteService.getMenuNodeList();
         MenuDTO menu = menuRemoteService.getById(id);
         if (Objects.nonNull(menu)) {
@@ -57,8 +57,8 @@ public class MenuController {
      * 获取角色用于的菜单列表
      */
     @Operation(summary = "获取角色用于的菜单列表")
-    @GetMapping("/menus/{roleId}")
-    public ResultResponse<List<MenuNodeDTO>> getMenusByRoleId(@PathVariable("roleId") Long roleId) {
+    @GetMapping("/menus")
+    public ResultResponse<List<MenuNodeDTO>> getMenusByRoleId(@RequestParam("roleId") Long roleId) {
         List<MenuDTO> menuDTOList = menuRemoteService.getMenusByRoleId(roleId);
         List<MenuNodeDTO> nodeList = menuRemoteService.getMenuNodeList();
         List<Long> roleMenus = menuDTOList.stream().map(MenuDTO::getId).distinct().collect(Collectors.toList());

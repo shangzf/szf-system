@@ -3,19 +3,19 @@ package com.shangzf.ad.remote;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
+import com.shangzf.ad.api.enums.StatusEnum;
 import com.shangzf.ad.entity.PromotionAd;
 import com.shangzf.ad.entity.PromotionSpace;
-import com.shangzf.ad.api.enums.StatusEnum;
 import com.shangzf.ad.service.IPromotionAdService;
 import com.shangzf.ad.service.IPromotionSpaceService;
 import com.shangzf.common.util.ConvertUtil;
 import org.bouncycastle.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class AdRemoteService {
     }
 
     @GetMapping("/space/keys")
-    public List<PromotionSpaceDTO> getBySpaceKeys(String[] spaceKeys) {
+    public List<PromotionSpaceDTO> getBySpaceKeys(@RequestParam("spaceKeys") String[] spaceKeys) {
         if (Arrays.isNullOrContainsNull(spaceKeys)) {
             return Collections.emptyList();
         }
@@ -80,8 +80,8 @@ public class AdRemoteService {
         return Boolean.TRUE;
     }
 
-    @PostMapping("/space/{id}")
-    public PromotionSpaceDTO getSpaceById(@PathVariable("id") Long id) {
+    @PostMapping("/space")
+    public PromotionSpaceDTO getSpaceById(@RequestParam("id") Long id) {
         PromotionSpace space = promotionSpaceService.getById(id);
         return ConvertUtil.convert(space, PromotionSpaceDTO.class);
     }
@@ -102,8 +102,8 @@ public class AdRemoteService {
         return Boolean.TRUE;
     }
 
-    @PostMapping("/{id}")
-    public PromotionAdDTO getAdById(@PathVariable("id") Long id) {
+    @GetMapping("/")
+    public PromotionAdDTO getAdById(@RequestParam("id") Long id) {
         PromotionAd promotionAd = promotionAdService.getById(id);
         return ConvertUtil.convert(promotionAd, PromotionAdDTO.class);
     }

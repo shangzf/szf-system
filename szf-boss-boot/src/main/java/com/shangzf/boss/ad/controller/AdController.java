@@ -8,10 +8,10 @@ import com.shangzf.boss.ad.vo.PromotionSpaceVO;
 import com.shangzf.common.pojo.vo.ResultResponse;
 import com.shangzf.common.util.ConvertUtil;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -49,8 +49,8 @@ public class AdController {
         return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
-    @GetMapping("/space/{id}")
-    public ResultResponse<PromotionSpaceVO> getSpaceById(@PathVariable("id") Long id) {
+    @GetMapping("/space")
+    public ResultResponse<PromotionSpaceVO> getSpaceById(@RequestParam("id") Long id) {
         PromotionSpaceDTO dto = adRemoteService.getSpaceById(id);
         PromotionSpaceVO spaceVO = ConvertUtil.convert(dto, PromotionSpaceVO.class);
         return ResultResponse.successOfData(spaceVO);
@@ -70,8 +70,8 @@ public class AdController {
         return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
-    @GetMapping("/{id}")
-    public ResultResponse<PromotionAdVO> getAdById(@PathVariable("id") Long id) {
+    @GetMapping("/")
+    public ResultResponse<PromotionAdVO> getAdById(@RequestParam("id") Long id) {
         PromotionAdDTO dto = adRemoteService.getAdById(id);
         PromotionAdVO adVO = ConvertUtil.convert(dto, PromotionAdVO.class);
         return ResultResponse.successOfData(adVO);
