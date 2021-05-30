@@ -2,29 +2,29 @@ package com.shangzf.user.remote;
 
 import com.shangzf.user.api.dto.WeixinDTO;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user/weixin")
 public class WeixinRemoteService {
 
-    @GetMapping("/user/{userId}")
-    public WeixinDTO getInfoByUserId(@PathVariable("userId") String userId) {
+    @GetMapping("/user")
+    public WeixinDTO getInfoByUserId(@RequestParam("userId") String userId) {
         return null;
     }
 
-    @GetMapping("/open/{openId}")
-    public WeixinDTO getInfoByOpenId(@PathVariable("openId") String openId) {
+    @GetMapping("/open")
+    public WeixinDTO getInfoByOpenId(@RequestParam("openId") String openId) {
         return null;
     }
 
-    @GetMapping("/union/{unionId}")
-    public WeixinDTO getInfoByUnionId(@PathVariable("unionId") String unionId) {
+    @GetMapping("/union")
+    public WeixinDTO getInfoByUnionId(@RequestParam("unionId") String unionId) {
         return null;
     }
 
