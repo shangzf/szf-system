@@ -1,10 +1,14 @@
-package com.shangzf.front.user.vo.code;
+package com.shangzf.user.api.vo.code;
 
 import com.shangzf.common.pojo.vo.code.IResultCode;
 
 public enum UserCode implements IResultCode {
 
-    UNREGISTERED("601", "未注册");
+    UNREGISTERED("601", "未注册"),
+
+    USER_ID_BIND("602", "用户已绑定"),
+
+    UNION_ID_BIND("603", "unionId已绑定");
 
     private String code;
     private String message;
