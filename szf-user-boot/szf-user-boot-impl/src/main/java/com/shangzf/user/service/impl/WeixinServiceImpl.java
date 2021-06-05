@@ -2,8 +2,8 @@ package com.shangzf.user.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.shangzf.common.exception.ServiceException;
-import com.shangzf.user.api.vo.code.UserCode;
+import com.shangzf.common.web.exception.ServiceException;
+import com.shangzf.user.vo.code.UserCode;
 import com.shangzf.user.entity.Weixin;
 import com.shangzf.user.mapper.WeixinMapper;
 import com.shangzf.user.service.IWeixinService;

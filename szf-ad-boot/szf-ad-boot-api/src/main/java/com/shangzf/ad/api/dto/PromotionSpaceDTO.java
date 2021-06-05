@@ -1,49 +1,31 @@
 package com.shangzf.ad.api.dto;
 
+import com.shangzf.common.web.pojo.dto.BaseDTO;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
+@Schema(name = "广告位")
 @Data
-public class PromotionSpaceDTO implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class PromotionSpaceDTO extends BaseDTO {
 
     private static final long serialVersionUID = -6866344964992782184L;
-    /**
-     * ID
-     */
-    private Long id;
 
-    /**
-     * 名称
-     */
+    @Schema(name = "广告位名称")
     private String name;
 
-    /**
-     * 广告位Key
-     */
+    @Schema(name = "广告位Key")
     private String spaceKey;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 最后修改时间
-     */
-    private Date lastModifyTime;
-
-    /**
-     * 是否删除
-     */
-    private Boolean deleted;
-
-    /**
-     * 描述
-     */
+    @Schema(name = "广告位描述")
     private String remark;
 
+    @Schema(name = "是否删除")
+    private Boolean deleted;
+
+    @Schema(name = "广告位对应的广告")
     private List<PromotionAdDTO> adDTOList;
 }

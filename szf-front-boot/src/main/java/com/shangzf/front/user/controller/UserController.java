@@ -1,12 +1,12 @@
 package com.shangzf.front.user.controller;
 
 import com.shangzf.common.constant.AuthTypeConstant;
-import com.shangzf.common.pojo.vo.ResultResponse;
+import com.shangzf.common.web.pojo.vo.ResultResponse;
 import com.shangzf.front.user.dto.LoginDTO;
 import com.shangzf.front.user.service.IUserService;
+import com.shangzf.front.user.vo.code.UserCode;
 import com.shangzf.front.user.wrap.UserServiceWrap;
 import com.shangzf.user.api.remote.IUserRemoteService;
-import com.shangzf.user.api.vo.code.UserCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;

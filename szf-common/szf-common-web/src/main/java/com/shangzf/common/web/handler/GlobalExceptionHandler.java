@@ -1,10 +1,10 @@
 package com.shangzf.common.web.handler;
 
-import com.shangzf.common.exception.BaseException;
+import com.shangzf.common.web.exception.BaseException;
 import com.shangzf.common.util.ContextUtil;
 import com.shangzf.common.constant.StringConstant;
-import com.shangzf.common.pojo.vo.code.CommonCodeEnum;
-import com.shangzf.common.pojo.vo.ResultResponse;
+import com.shangzf.common.web.pojo.vo.code.CommonCodeEnum;
+import com.shangzf.common.web.pojo.vo.ResultResponse;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.util.ClassUtils;
 import org.springframework.validation.BindException;

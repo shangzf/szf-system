@@ -3,7 +3,7 @@ package com.shangzf.boss.authority.controller;
 import com.shangzf.authority.api.dto.PermissionDTO;
 import com.shangzf.authority.api.remote.IAuthenticationRemoteService;
 import com.shangzf.common.user.UserManager;
-import com.shangzf.common.pojo.vo.ResultResponse;
+import com.shangzf.common.web.pojo.vo.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

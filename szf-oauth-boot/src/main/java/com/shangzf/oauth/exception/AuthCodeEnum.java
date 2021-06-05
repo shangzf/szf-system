@@ -1,6 +1,6 @@
 package com.shangzf.oauth.exception;
 
-import com.shangzf.common.pojo.vo.code.IResultCode;
+import com.shangzf.common.web.pojo.vo.code.IResultCode;
 
 public enum AuthCodeEnum implements IResultCode {
     INVALID_REQUEST("801", "无效请求"),

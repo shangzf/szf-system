@@ -1,6 +1,6 @@
 package com.shangzf.front.user.wrap;
 
-import com.shangzf.common.pojo.vo.ResultResponse;
+import com.shangzf.common.web.pojo.vo.ResultResponse;
 import com.shangzf.common.util.ConvertUtil;
 import com.shangzf.front.user.dto.LoginDTO;
 import com.shangzf.front.user.dto.TokenDTO;

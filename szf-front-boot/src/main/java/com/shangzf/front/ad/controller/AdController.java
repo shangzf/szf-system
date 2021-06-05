@@ -2,7 +2,7 @@ package com.shangzf.front.ad.controller;
 
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
 import com.shangzf.ad.api.remote.IAdRemoteService;
-import com.shangzf.common.pojo.vo.ResultResponse;
+import com.shangzf.common.web.pojo.vo.ResultResponse;
 import com.shangzf.common.util.ConvertUtil;
 import com.shangzf.front.ad.vo.PromotionAdVO;
 import com.shangzf.front.ad.vo.PromotionSpaceVO;

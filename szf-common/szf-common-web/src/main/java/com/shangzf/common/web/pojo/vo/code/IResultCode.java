@@ -1,4 +1,4 @@
-package com.shangzf.common.pojo.vo.code;
+package com.shangzf.common.web.pojo.vo.code;
 
 /**
  * 响应状态码

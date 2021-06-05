@@ -1,4 +1,4 @@
-package com.shangzf.authority.handler;
+package com.shangzf.common.web.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.shangzf.common.constant.FillConstant;

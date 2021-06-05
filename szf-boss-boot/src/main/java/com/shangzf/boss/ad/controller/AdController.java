@@ -5,7 +5,7 @@ import com.shangzf.ad.api.dto.PromotionSpaceDTO;
 import com.shangzf.ad.api.remote.IAdRemoteService;
 import com.shangzf.boss.ad.vo.PromotionAdVO;
 import com.shangzf.boss.ad.vo.PromotionSpaceVO;
-import com.shangzf.common.pojo.vo.ResultResponse;
+import com.shangzf.common.web.pojo.vo.ResultResponse;
 import com.shangzf.common.util.ConvertUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

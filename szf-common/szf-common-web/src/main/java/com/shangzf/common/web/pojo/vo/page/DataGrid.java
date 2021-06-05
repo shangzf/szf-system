@@ -1,4 +1,4 @@
-package com.shangzf.common.pojo.vo.page;
+package com.shangzf.common.web.pojo.vo.page;
 
 import com.shangzf.common.constant.PageConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
