@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@Schema(name = "广告位")
+@Schema(description = "广告位")
 @Data
 @Builder
 @NoArgsConstructor

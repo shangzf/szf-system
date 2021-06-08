@@ -12,21 +12,21 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 
-@Schema(name = "Rest请求的响应结果")
+@Schema(description = "Rest请求的响应结果")
 public class ResultResponse<T> implements Serializable {
 
     private static final long serialVersionUID = -7082945428094757341L;
 
-    @Schema(name = "处理结果code", required = true)
+    @Schema(description = "处理结果code", required = true)
     private String code;
 
-    @Schema(name = "处理结果描述信息")
+    @Schema(description = "处理结果描述信息")
     private String message;
 
-    @Schema(name = "请求结果生成时间戳")
+    @Schema(description = "请求结果生成时间戳")
     private final Instant time;
 
-    @Schema(name = "处理结果数据信息")
+    @Schema(description = "处理结果数据信息")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 

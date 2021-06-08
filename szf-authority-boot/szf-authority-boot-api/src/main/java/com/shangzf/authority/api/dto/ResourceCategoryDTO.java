@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Schema(name = "资源类别")
+@Schema(description = "资源类别")
 @Data
 @Builder
 @NoArgsConstructor
@@ -19,7 +19,7 @@ public class ResourceCategoryDTO extends AuthorityBaseDTO implements Comparable<
     /**
      * 类别名称
      */
-    @Schema(name = "类别名称")
+    @Schema(description = "类别名称")
     private String name;
 
     /**

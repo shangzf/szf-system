@@ -8,7 +8,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-@Schema(name = "Token数据")
+@Schema(description = "Token数据")
 @Data
 public class TokenDTO implements Serializable {
 
@@ -20,33 +20,33 @@ public class TokenDTO implements Serializable {
     @JsonIgnore
     private String message;
 
-    @Schema(name = "授权Token")
+    @Schema(description = "授权Token")
     @JSONField(name = "access_token")
     private String accessToken;
 
-    @Schema(name = "Token类型")
+    @Schema(description = "Token类型")
     @JSONField(name = "token_type")
     private String tokenType;
 
-    @Schema(name = "刷新Token")
+    @Schema(description = "刷新Token")
     @JSONField(name = "refresh_token")
     private String refreshToken;
 
-    @Schema(name = "有效期(单位:秒)")
+    @Schema(description = "有效期(单位:秒)")
     @JSONField(name = "expires_in")
     private Long expiresIn;
 
-    @Schema(name = "有效期(单位:秒)")
+    @Schema(description = "有效期(单位:秒)")
     private String scope;
 
-    @Schema(name = "用户ID")
+    @Schema(description = "用户ID")
     @JSONField(name = "user_id")
     private Long userId;
 
-    @Schema(name = "用户名")
+    @Schema(description = "用户名")
     @JSONField(name = "user_name")
     private String username;
 
-    @Schema(name = "唯一身份标识")
+    @Schema(description = "唯一身份标识")
     private String jti;
 }

@@ -42,6 +42,11 @@ public class DataGrid<T> implements Serializable {
         this.current = current;
     }
 
+    public DataGrid(List<T> records, DataGrid<?> dataGrid) {
+        this(records, dataGrid.getTotal(), dataGrid.getSize(), dataGrid.getCurrent());
+    }
+
+
     public List<T> getRecords() {
         return records;
     }

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Schema(name = "广告")
+@Schema(description = "广告")
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,27 +17,27 @@ public class PromotionAdVO implements Serializable {
 
     private static final long serialVersionUID = 619753900702024024L;
 
-    @Schema(name = "广告名称")
+    @Schema(description = "广告名称")
     private String name;
 
-    @Schema(name = "广告精确搜索关键词")
+    @Schema(description = "广告精确搜索关键词")
     private String keyword;
 
-    @Schema(name = "静态广告的内容")
+    @Schema(description = "静态广告的内容")
     private String htmlContent;
 
-    @Schema(name = "广告文字")
+    @Schema(description = "广告文字")
     private String text;
 
-    @Schema(name = "广告链接")
+    @Schema(description = "广告链接")
     private String link;
 
-    @Schema(name = "优先级")
+    @Schema(description = "优先级")
     private Integer priority;
 
-    @Schema(name = "展示图片地址")
+    @Schema(description = "展示图片地址")
     private String img;
 
-    @Schema(name = "描述")
+    @Schema(description = "描述")
     private String remark;
 }

@@ -6,16 +6,16 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-@Schema(name = "基础分页查询参数")
+@Schema(description = "基础分页查询参数")
 @Data
 public abstract class BaseParam implements Serializable {
 
     private static final long serialVersionUID = 7694213510727876128L;
 
-    @Schema(name = "当前页")
+    @Schema(description = "当前页")
     private Long current;
 
-    @Schema(name = "每页显示条数，默认10")
+    @Schema(description = "每页显示条数，默认10")
     private Long size;
 
     public BaseParam() {
