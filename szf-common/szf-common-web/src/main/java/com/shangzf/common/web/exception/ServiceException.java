@@ -1,6 +1,6 @@
 package com.shangzf.common.web.exception;
 
-import com.shangzf.common.web.pojo.vo.code.IResultCode;
+import com.shangzf.common.web.pojo.code.IResultCode;
 
 /**
  * 业务异常

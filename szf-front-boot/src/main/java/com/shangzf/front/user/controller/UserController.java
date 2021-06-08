@@ -4,7 +4,7 @@ import com.shangzf.common.constant.AuthTypeConstant;
 import com.shangzf.common.web.pojo.vo.ResultResponse;
 import com.shangzf.front.user.dto.LoginDTO;
 import com.shangzf.front.user.service.IUserService;
-import com.shangzf.front.user.vo.code.UserCode;
+import com.shangzf.front.user.code.UserCode;
 import com.shangzf.front.user.wrap.UserServiceWrap;
 import com.shangzf.user.api.remote.IUserRemoteService;
 import org.springframework.beans.factory.annotation.Autowired;

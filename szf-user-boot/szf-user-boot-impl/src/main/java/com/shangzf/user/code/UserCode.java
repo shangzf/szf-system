@@ -1,7 +1,7 @@
-package com.shangzf.user.vo.code;
+package com.shangzf.user.code;
 
 
-import com.shangzf.common.web.pojo.vo.code.IResultCode;
+import com.shangzf.common.web.pojo.code.IResultCode;
 
 public enum UserCode implements IResultCode {
 

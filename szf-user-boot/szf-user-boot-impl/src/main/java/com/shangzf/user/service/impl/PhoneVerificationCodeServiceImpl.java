@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
  * <p>
  * 验证码 服务实现类
  * </p>
- *
- * @author 
- * @since 2021-05-16
  */
 @Service
 public class PhoneVerificationCodeServiceImpl extends ServiceImpl<PhoneVerificationCodeMapper, PhoneVerificationCode> implements IPhoneVerificationCodeService {
