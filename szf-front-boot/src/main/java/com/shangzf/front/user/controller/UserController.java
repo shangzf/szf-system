@@ -1,13 +1,11 @@
 package com.shangzf.front.user.controller;
 
-import com.shangzf.common.vo.constant.AuthTypeConstant;
-import com.shangzf.common.vo.response.ResultResponse;
-import com.shangzf.common.vo.response.ResultResponseData;
-import com.shangzf.front.user.response.UserCode;
-import com.shangzf.front.user.service.UserService;
-import com.shangzf.front.user.vo.LoginVO;
-import com.shangzf.front.user.vo.group.CodeGroup;
-import com.shangzf.front.user.vo.group.PasswordGroup;
+import com.shangzf.common.constant.AuthTypeConstant;
+import com.shangzf.common.web.pojo.vo.ResultResponse;
+import com.shangzf.front.user.dto.LoginDTO;
+import com.shangzf.front.user.service.IUserService;
+import com.shangzf.front.user.vo.code.UserCode;
+import com.shangzf.front.user.wrap.UserServiceWrap;
 import com.shangzf.user.api.remote.IUserRemoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -23,30 +21,30 @@ public class UserController {
     @Autowired
     private IUserRemoteService userRemoteService;
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @PostMapping("/login/code")
-    public ResultResponseData loginCode(@Validated(CodeGroup.class) @RequestBody LoginVO vo) {
-        Boolean register = userRemoteService.checkRegister(vo.getPhone());
+    public ResultResponse<?> loginCode(@Validated(LoginDTO.CodeGroup.class) @RequestBody LoginDTO dto) {
+        Boolean register = userRemoteService.checkRegister(dto.getPhone());
         if (!register) {
 
         }
-        vo.setType(AuthTypeConstant.MOBILE);
-        return userService.createAuthToken(vo);
+        dto.setType(AuthTypeConstant.MOBILE);
+        return UserServiceWrap.createAuthToken(userService, dto);
     }
 
     @PostMapping("/login")
-    public ResultResponseData login(@Validated(PasswordGroup.class) @RequestBody LoginVO vo) {
-        Boolean register = userRemoteService.checkRegister(vo.getPhone());
+    public ResultResponse<?> login(@Validated(LoginDTO.PasswordGroup.class) @RequestBody LoginDTO dto) {
+        Boolean register = userRemoteService.checkRegister(dto.getPhone());
         if (!register) {
-            return ResultResponseData.fail(UserCode.UNREGISTERED, null);
+            return ResultResponse.fail(UserCode.UNREGISTERED);
         }
-        vo.setType(AuthTypeConstant.PASSWORD);
-        return userService.createAuthToken(vo);
+        dto.setType(AuthTypeConstant.PASSWORD);
+        return UserServiceWrap.createAuthToken(userService, dto);
     }
 
     @PostMapping("/logout")
-    public ResultResponse logout(){
+    public ResultResponse<?> logout(){
         return ResultResponse.success();
     }
 }

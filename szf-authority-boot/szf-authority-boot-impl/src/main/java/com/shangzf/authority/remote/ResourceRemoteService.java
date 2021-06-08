@@ -12,10 +12,10 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -31,8 +31,8 @@ public class ResourceRemoteService {
     private IResourceCategoryService resourceCategoryService;
 
     @Operation(summary = "删除资源分类")
-    @DeleteMapping("/category/{id}")
-    public boolean deleteCategory(@PathVariable("id") Long id) {
+    @DeleteMapping("/category")
+    public boolean deleteCategory(@RequestParam("id") Long id) {
         List<Resource> resourceList = resourceService.getByCategoryId(id);
         if (CollectionUtils.isNotEmpty(resourceList)) {
             return Boolean.FALSE;
@@ -41,8 +41,8 @@ public class ResourceRemoteService {
     }
 
     @Operation(summary = "获取角色用于的资源列表")
-    @GetMapping("/resources/{roleId}")
-    public List<ResourceDTO> getResourcesByRoleId(@PathVariable("roleId") Long roleId){
+    @GetMapping("/resources")
+    public List<ResourceDTO> getResourcesByRoleId(@RequestParam("roleId") Long roleId){
         List<Resource> resources = resourceService.getByRoleId(roleId);
         return ConvertUtil.convertList(resources, ResourceDTO.class);
     }

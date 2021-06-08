@@ -3,16 +3,20 @@ package com.shangzf.boss.ad.controller;
 import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
 import com.shangzf.ad.api.remote.IAdRemoteService;
-import com.shangzf.common.vo.response.ResultResponseData;
-import com.shangzf.common.vo.response.ResultResponse;
+import com.shangzf.boss.ad.vo.PromotionAdVO;
+import com.shangzf.boss.ad.vo.PromotionSpaceVO;
+import com.shangzf.common.web.pojo.vo.ResultResponse;
+import com.shangzf.common.util.ConvertUtil;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ad")
@@ -25,36 +29,51 @@ public class AdController {
     }
 
     @GetMapping("/space/all")
-    public ResultResponseData<List<PromotionSpaceDTO>> getAllSpace(){
+    public ResultResponse<List<PromotionSpaceVO>> getAllSpace() {
         List<PromotionSpaceDTO> dtoList = adRemoteService.getAll();
-        return ResultResponseData.success(dtoList);
+        List<PromotionSpaceVO> voList = dtoList.stream().map(promotionSpaceDTO -> {
+            List<PromotionAdVO> adVOList = ConvertUtil
+                    .convertList(promotionSpaceDTO.getAdDTOList(), PromotionAdVO.class);
+            PromotionSpaceVO spaceVO = ConvertUtil.convert(promotionSpaceDTO, PromotionSpaceVO.class);
+            if (Objects.nonNull(spaceVO)) {
+                spaceVO.setAdVOList(adVOList);
+            }
+            return spaceVO;
+        }).collect(Collectors.toList());
+        return ResultResponse.successOfData(voList);
     }
 
     @PostMapping("/space/saveOrUpdate")
-    public ResultResponse saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto){
-        return adRemoteService.saveOrUpdateSpace(dto);
+    public ResultResponse<?> saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto) {
+        Boolean result = adRemoteService.saveOrUpdateSpace(dto);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
-    @GetMapping("/space/{id}")
-    public ResultResponseData<PromotionSpaceDTO> getSpaceById(@PathVariable("id") Long id){
+    @GetMapping("/space")
+    public ResultResponse<PromotionSpaceVO> getSpaceById(@RequestParam("id") Long id) {
         PromotionSpaceDTO dto = adRemoteService.getSpaceById(id);
-        return ResultResponseData.success(dto);
+        PromotionSpaceVO spaceVO = ConvertUtil.convert(dto, PromotionSpaceVO.class);
+        return ResultResponse.successOfData(spaceVO);
     }
 
     @GetMapping("/all")
-    public ResultResponseData<List<PromotionAdDTO>> getAllAds(){
+    public ResultResponse<List<PromotionAdVO>> getAllAds() {
         List<PromotionAdDTO> dtoList = adRemoteService.getAllAds();
-        return ResultResponseData.success(dtoList);
+        List<PromotionAdVO> voList = dtoList.stream().map(dto -> ConvertUtil.convert(dto, PromotionAdVO.class))
+                                            .collect(Collectors.toList());
+        return ResultResponse.successOfData(voList);
     }
 
     @PostMapping("/saveOrUpdate")
-    public ResultResponse saveOrUpdateAd(@RequestBody PromotionAdDTO dto){
-        return adRemoteService.saveOrUpdateAd(dto);
+    public ResultResponse<?> saveOrUpdateAd(@RequestBody PromotionAdDTO dto) {
+        Boolean result = adRemoteService.saveOrUpdateAd(dto);
+        return result ? ResultResponse.success() : ResultResponse.fail();
     }
 
-    @GetMapping("/{id}")
-    public ResultResponseData<PromotionAdDTO> getAdById(@PathVariable("id") Long id){
+    @GetMapping("/")
+    public ResultResponse<PromotionAdVO> getAdById(@RequestParam("id") Long id) {
         PromotionAdDTO dto = adRemoteService.getAdById(id);
-        return ResultResponseData.success(dto);
+        PromotionAdVO adVO = ConvertUtil.convert(dto, PromotionAdVO.class);
+        return ResultResponse.successOfData(adVO);
     }
 }

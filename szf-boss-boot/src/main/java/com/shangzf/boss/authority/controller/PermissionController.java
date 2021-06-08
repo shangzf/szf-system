@@ -1,9 +1,9 @@
 package com.shangzf.boss.authority.controller;
 
 import com.shangzf.authority.api.dto.PermissionDTO;
-import com.shangzf.authority.api.remote.IAuthenticationRemote;
+import com.shangzf.authority.api.remote.IAuthenticationRemoteService;
 import com.shangzf.common.user.UserManager;
-import com.shangzf.common.vo.response.ResultResponseData;
+import com.shangzf.common.web.pojo.vo.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/permission")
 public class PermissionController {
     @Autowired
-    private IAuthenticationRemote authenticationRemote;
+    private IAuthenticationRemoteService authenticationRemote;
 
     @Operation(summary = "获取用户菜单和用户资源")
     @GetMapping("/user")
-    public ResultResponseData<PermissionDTO> getPermission(){
+    public ResultResponse<PermissionDTO> getPermission(){
         Long userId = UserManager.getUserId();
         PermissionDTO dto = authenticationRemote.getByUserId(userId);
-        return ResultResponseData.success(dto);
+        return ResultResponse.successOfData(dto);
     }
 }

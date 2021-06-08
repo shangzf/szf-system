@@ -11,10 +11,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -28,8 +28,8 @@ public class MenuRemoteService {
     private IMenuService menuService;
 
     @Operation(summary = "删除菜单")
-    @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable("id") Long id) {
+    @DeleteMapping("/")
+    public boolean delete(@RequestParam("id") Long id) {
         return menuService.deleteWithAssociation(id);
     }
 
@@ -40,15 +40,15 @@ public class MenuRemoteService {
     }
 
     @Operation(summary = "根据ID查询菜单")
-    @GetMapping("/{id}")
-    public MenuDTO getById(@PathVariable("id") Long id) {
+    @GetMapping("/")
+    public MenuDTO getById(@RequestParam("id") Long id) {
         Menu menu = menuService.getById(id);
         return ConvertUtil.convert(menu, MenuDTO.class);
     }
 
     @Operation(summary = "获取角色用于的菜单列表")
-    @GetMapping("/menus/{roleId}")
-    public List<MenuDTO> getMenusByRoleId(@PathVariable("roleId") Long roleId){
+    @GetMapping("/menus")
+    public List<MenuDTO> getMenusByRoleId(@RequestParam("roleId") Long roleId){
         List<Menu> menus = menuService.getByRoleId(roleId);
         return ConvertUtil.convertList(menus, MenuDTO.class);
     }

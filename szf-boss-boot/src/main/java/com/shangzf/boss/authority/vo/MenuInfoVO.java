@@ -19,8 +19,10 @@ import java.util.List;
 @AllArgsConstructor
 public class MenuInfoVO implements Serializable {
     private static final long serialVersionUID = 6013519795805964936L;
+
     @Schema(name = "当前的菜单信息")
     private MenuDTO menuInfo;
+
     @Schema(name = "父级菜单列表")
     private List<MenuNodeDTO> parentMenus;
 }

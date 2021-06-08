@@ -3,20 +3,19 @@ package com.shangzf.ad.remote;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.shangzf.ad.api.dto.PromotionAdDTO;
 import com.shangzf.ad.api.dto.PromotionSpaceDTO;
+import com.shangzf.ad.api.enums.StatusEnum;
 import com.shangzf.ad.entity.PromotionAd;
 import com.shangzf.ad.entity.PromotionSpace;
 import com.shangzf.ad.service.IPromotionAdService;
 import com.shangzf.ad.service.IPromotionSpaceService;
 import com.shangzf.common.util.ConvertUtil;
-import com.shangzf.common.vo.constant.StatusEnum;
-import com.shangzf.common.vo.response.ResultResponse;
 import org.bouncycastle.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class AdRemoteService {
     }
 
     @GetMapping("/space/keys")
-    public List<PromotionSpaceDTO> getBySpaceKeys(String[] spaceKeys) {
+    public List<PromotionSpaceDTO> getBySpaceKeys(@RequestParam("spaceKeys") String[] spaceKeys) {
         if (Arrays.isNullOrContainsNull(spaceKeys)) {
             return Collections.emptyList();
         }
@@ -57,7 +56,7 @@ public class AdRemoteService {
                 QueryWrapper<PromotionAd> adQueryWrapper = new QueryWrapper<>();
                 adQueryWrapper.eq("space_id", promotionSpace.getId());
                 // 状态
-                adQueryWrapper.eq("status", StatusEnum.UP.getCode());
+                adQueryWrapper.eq("status", StatusEnum.UP);
                 // 有效期
                 Date now = new Date();
                 adQueryWrapper.lt("start_time", now);
@@ -72,17 +71,17 @@ public class AdRemoteService {
     }
 
     @PostMapping("/space/saveOrUpdate")
-    public ResultResponse saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto) {
+    public Boolean saveOrUpdateSpace(@RequestBody PromotionSpaceDTO dto) {
         PromotionSpace promotionSpace = ConvertUtil.convert(dto, PromotionSpace.class);
         if (Objects.isNull(promotionSpace)) {
-            return ResultResponse.fail();
+            return Boolean.FALSE;
         }
         promotionSpaceService.saveOrUpdate(promotionSpace);
-        return ResultResponse.success();
+        return Boolean.TRUE;
     }
 
-    @PostMapping("/space/{id}")
-    public PromotionSpaceDTO getSpaceById(@PathVariable("id") Long id) {
+    @PostMapping("/space")
+    public PromotionSpaceDTO getSpaceById(@RequestParam("id") Long id) {
         PromotionSpace space = promotionSpaceService.getById(id);
         return ConvertUtil.convert(space, PromotionSpaceDTO.class);
     }
@@ -94,17 +93,17 @@ public class AdRemoteService {
     }
 
     @PostMapping("/saveOrUpdate")
-    public ResultResponse saveOrUpdateAd(@RequestBody PromotionAdDTO dto) {
+    public Boolean saveOrUpdateAd(@RequestBody PromotionAdDTO dto) {
         PromotionAd promotionAd = ConvertUtil.convert(dto, PromotionAd.class);
         if (Objects.isNull(promotionAd)) {
-            return ResultResponse.fail();
+            return Boolean.FALSE;
         }
         promotionAdService.saveOrUpdate(promotionAd);
-        return ResultResponse.success();
+        return Boolean.TRUE;
     }
 
-    @PostMapping("/{id}")
-    public PromotionAdDTO getAdById(@PathVariable("id") Long id) {
+    @GetMapping("/")
+    public PromotionAdDTO getAdById(@RequestParam("id") Long id) {
         PromotionAd promotionAd = promotionAdService.getById(id);
         return ConvertUtil.convert(promotionAd, PromotionAdDTO.class);
     }

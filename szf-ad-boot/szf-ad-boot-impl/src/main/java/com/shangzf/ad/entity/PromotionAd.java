@@ -1,5 +1,6 @@
 package com.shangzf.ad.entity;
 
+import com.shangzf.ad.api.enums.StatusEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -64,7 +65,7 @@ public class PromotionAd implements Serializable {
     /**
      * 状态(S/U/D)
      */
-    private String status;
+    private StatusEnum status;
 
     /**
      * 优先级
