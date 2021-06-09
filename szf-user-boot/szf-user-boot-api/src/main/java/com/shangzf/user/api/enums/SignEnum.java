@@ -3,7 +3,7 @@ package com.shangzf.user.api.enums;
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum StatusEnum {
+public enum SignEnum {
 
     DISABLE("D", "禁用"),
     ENABLE("E", "启用");
@@ -13,7 +13,7 @@ public enum StatusEnum {
     private final String code;
     private final String name;
 
-    StatusEnum(String code, String name) {
+    SignEnum(String code, String name) {
         this.code = code;
         this.name = name;
     }

@@ -4,18 +4,18 @@ DROP TABLE IF EXISTS szf_user.user;
 CREATE TABLE szf_user.user
 (
     id                      BIGINT      NOT NULL COMMENT '用户ID',
-    name                    VARCHAR(20) NOT NULL COMMENT '用户昵称',
+    nick_name               VARCHAR(20) NOT NULL COMMENT '用户昵称',
     portrait                VARCHAR(200) DEFAULT '' COMMENT '用户头像地址',
     phone                   CHAR(11)    NOT NULL COMMENT '注册手机',
-    password                VARCHAR(100) DEFAULT '' COMMENT '用户密码(可以为空，支持只用验证码注册、登录)',
+    secret                  VARCHAR(100) DEFAULT '' COMMENT '用户密码(可以为空，支持只用验证码注册、登录)',
     reg_ip                  INT          DEFAULT 0 COMMENT '注册IP',
     account_non_expired     BIT(1)       DEFAULT b'1' COMMENT '是否有效用户',
     credentials_non_expired BIT(1)       DEFAULT b'1' COMMENT '账号是否未过期',
     account_non_locked      BIT(1)       DEFAULT b'1' COMMENT '是否未锁定',
-    status                  CHAR(1)      DEFAULT 'E' COMMENT '用户状态：E-能登录，D-不能登录',
+    sign                    CHAR(1)      DEFAULT 'E' COMMENT '用户状态：E-能登录，D-不能登录',
     deleted                 BIT(1)       DEFAULT b'0' COMMENT '是否删除',
     create_time             DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
-    last_modify_time         DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
+    last_modify_time        DATETIME(6)  DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '最后修改时间',
     remark                  VARCHAR(200) DEFAULT '' COMMENT '描述',
     PRIMARY KEY (id) USING BTREE,
     UNIQUE KEY idx_phone_deleted (phone, deleted) USING BTREE

@@ -1,6 +1,6 @@
 package com.shangzf.user.entity;
 
-import com.shangzf.user.api.enums.StatusEnum;
+import com.shangzf.user.api.enums.SignEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -24,7 +24,7 @@ public class User implements Serializable {
     /**
      * 用户昵称
      */
-    private String name;
+    private String nickName;
 
     /**
      * 用户头像地址
@@ -39,7 +39,7 @@ public class User implements Serializable {
     /**
      * 用户密码(可以为空，支持只用验证码注册、登录)
      */
-    private String password;
+    private String secret;
 
     /**
      * 注册IP
@@ -64,7 +64,7 @@ public class User implements Serializable {
     /**
      * 用户状态：E-能登录，D-不能登录
      */
-    private StatusEnum status;
+    private SignEnum sign;
 
     /**
      * 是否删除

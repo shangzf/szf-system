@@ -22,7 +22,7 @@ public class LoginDTO implements Serializable {
 
     @Schema(name = "密码")
     @NotBlank(message = "密码不能为空", groups = {PasswordGroup.class})
-    private String password;
+    private String secret;
 
     @Schema(name = "验证码")
     @NotBlank(message = "验证码不能为空", groups = {CodeGroup.class})

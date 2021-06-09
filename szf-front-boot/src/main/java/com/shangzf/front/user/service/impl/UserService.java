@@ -30,9 +30,9 @@ public class UserService implements IUserService {
     @Override
     public TokenDTO createAuthToken(LoginDTO dto) {
         log.info("phone:{}, password:{}, scope:{}, grantType:{}, clientId:{}, clientSecret:{}", dto.getPhone(), dto
-                .getPassword(), scope, grantType, clientId, clientSecret);
+                .getSecret(), scope, grantType, clientId, clientSecret);
         String token = this.oAuthRemoteService
-                .createToken(dto.getPhone(), dto.getPassword(), scope, grantType, clientId, clientSecret, dto.getType());
+                .createToken(dto.getPhone(), dto.getSecret(), scope, grantType, clientId, clientSecret, dto.getType());
         return JSON.parseObject(token, TokenDTO.class);
     }
 }

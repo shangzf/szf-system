@@ -1,6 +1,6 @@
 package com.shangzf.user.api.dto;
 
-import com.shangzf.user.api.enums.StatusEnum;
+import com.shangzf.user.api.enums.SignEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -17,7 +17,7 @@ public class UserDTO implements Serializable {
     private Long id;
 
     @Schema(description = "用户昵称")
-    private String name;
+    private String nickName;
 
     @Schema(description = "用户头像地址")
     private String portrait;
@@ -26,7 +26,7 @@ public class UserDTO implements Serializable {
     private String phone;
 
     @Schema(description = "用户密码(可以为空，支持只用验证码注册、登录)")
-    private String password;
+    private String secret;
 
     @Schema(description = "注册IP")
     private Integer regIp;
@@ -41,7 +41,7 @@ public class UserDTO implements Serializable {
     private Boolean accountNonLocked;
 
     @Schema(description = "用户状态：E-能登录，D-不能登录", allowableValues = {"E", "D"})
-    private StatusEnum status;
+    private SignEnum sign;
 
     @Schema(description = "是否删除")
     private Boolean deleted;
