@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS szf_user.user;
 CREATE TABLE szf_user.user
 (
     id                      BIGINT      NOT NULL COMMENT '用户ID',
-    nick_name               VARCHAR(20) NOT NULL COMMENT '用户昵称',
+    username                VARCHAR(20) NOT NULL COMMENT '用户名',
     portrait                VARCHAR(200) DEFAULT '' COMMENT '用户头像地址',
     phone                   CHAR(11)    NOT NULL COMMENT '注册手机',
     secret                  VARCHAR(100) DEFAULT '' COMMENT '用户密码(可以为空，支持只用验证码注册、登录)',

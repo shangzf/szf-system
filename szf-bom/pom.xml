@@ -92,10 +92,8 @@
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi</artifactId>
+                <artifactId>springdoc-openapi-webmvc-core</artifactId>
                 <version>${springdoc-openapi.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

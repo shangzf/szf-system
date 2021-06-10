@@ -46,8 +46,8 @@ public class MultiUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("用户名或密码错误");
         }
         return new UserJwt(
-                userDTO.getName(),
-                userDTO.getPassword(),
+                userDTO.getUsername(),
+                userDTO.getSecret(),
                 !userDTO.getDeleted(),
                 userDTO.getAccountNonExpired(),
                 userDTO.getCredentialsNonExpired(),
@@ -61,7 +61,7 @@ public class MultiUserDetailsService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> obtainGrantedAuthorities(UserDTO dto) {
         try {
             List<RoleDTO> roles = roleRemoteService.getRolesByUserId(dto.getId());
-            log.info("user:{},roles:{}", dto.getName(), roles);
+            log.info("user:{},roles:{}", dto.getUsername(), roles);
             return roles.stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
