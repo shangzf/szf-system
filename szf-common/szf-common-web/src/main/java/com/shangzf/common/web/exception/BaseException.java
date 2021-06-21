@@ -1,7 +1,7 @@
 package com.shangzf.common.web.exception;
 
-import com.shangzf.common.web.pojo.vo.code.CommonCodeEnum;
-import com.shangzf.common.web.pojo.vo.code.IResultCode;
+import com.shangzf.common.web.pojo.code.CommonCodeEnum;
+import com.shangzf.common.web.pojo.code.IResultCode;
 
 public class BaseException extends RuntimeException {
 

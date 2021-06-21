@@ -2,8 +2,8 @@ package com.shangzf.common.web.pojo.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.shangzf.common.web.exception.BaseException;
-import com.shangzf.common.web.pojo.vo.code.CommonCodeEnum;
-import com.shangzf.common.web.pojo.vo.code.IResultCode;
+import com.shangzf.common.web.pojo.code.CommonCodeEnum;
+import com.shangzf.common.web.pojo.code.IResultCode;
 import com.shangzf.common.util.ContextUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.StringUtils;
