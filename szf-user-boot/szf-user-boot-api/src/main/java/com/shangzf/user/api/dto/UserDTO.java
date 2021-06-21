@@ -29,7 +29,7 @@ public class UserDTO implements Serializable {
     private String secret;
 
     @Schema(description = "注册IP")
-    private Integer regIp;
+    private String regIp;
 
     @Schema(description = "是否有效用户")
     private Boolean accountNonExpired;
