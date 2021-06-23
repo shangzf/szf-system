@@ -8,6 +8,6 @@ RUN apk --update add curl bash tzdata && rm -rf /var/cache/apk/
 #修改镜像为东八区时间
 ENV TZ Asia/Shanghai
 
-COPY edu-eureka-boot.jar app.jar
+COPY szf-eureka-boot.jar app.jar
 EXPOSE 8761
 ENTRYPOINT ["java","-jar","/app.jar"]
