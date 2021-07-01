@@ -9,16 +9,18 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-@Schema(name = "给角色分配资源")
+@Schema(description = "给角色分配资源")
 @Data
 @NoArgsConstructor
 public class AllocateRoleResourceDTO implements Serializable {
 
     private static final long serialVersionUID = 5390453807681931626L;
-    @Schema(name = "角色ID")
+
+    @Schema(description = "角色ID")
     @NotNull(message = "角色不能为空")
     private Long roleId;
-    @Schema(name = "资源ID列表")
+
+    @Schema(description = "资源ID列表")
     @NotEmpty(message = "角色-资源不能为空")
     private List<Long> roleResources;
 }

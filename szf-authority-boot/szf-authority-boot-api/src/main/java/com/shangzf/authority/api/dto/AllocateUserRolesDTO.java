@@ -19,6 +19,7 @@ public class AllocateUserRolesDTO implements Serializable {
     @Schema(description = "用户ID")
     @NotNull(message = "用户不能为空")
     private Long userId;
+
     @Schema(description = "角色ID列表")
     @NotEmpty(message = "用户-角色不能为空")
     private List<Long> userRoles;
