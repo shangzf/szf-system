@@ -1,15 +1,17 @@
 package com.shangzf.common.web.handler;
 
-import com.shangzf.common.web.exception.BaseException;
-import com.shangzf.common.util.ContextUtil;
 import com.shangzf.common.constant.StringConstant;
+import com.shangzf.common.util.ContextUtil;
+import com.shangzf.common.web.exception.BaseException;
 import com.shangzf.common.web.pojo.code.CommonCodeEnum;
 import com.shangzf.common.web.pojo.vo.ResultResponse;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.util.ClassUtils;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -38,8 +40,12 @@ public class GlobalExceptionHandler {
      * 数据绑定异常
      */
     @ExceptionHandler(BindException.class)
-    public ResultResponse<String> bindExceptionHandler(BindException exception) {
-        List<ObjectError> errorList = exception.getBindingResult().getAllErrors();
+    public ResultResponse<String> bindExceptionHandler(BindException e) {
+        return getBindingResult(e.getBindingResult());
+    }
+
+    private ResultResponse<String> getBindingResult(BindingResult bindingResult) {
+        List<ObjectError> errorList = bindingResult.getAllErrors();
         StringBuilder trace = new StringBuilder();
         for (ObjectError objectError : errorList) {
             if (objectError instanceof FieldError) {
@@ -61,6 +67,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BaseException.class)
     public ResultResponse<String> baseExceptionHandler(BaseException e) {
         return ResultResponse.failOfData(e.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResultResponse<String> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e){
+        return getBindingResult(e.getBindingResult());
     }
 
     @ExceptionHandler(Exception.class)
