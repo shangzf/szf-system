@@ -32,7 +32,7 @@ public class AuthorityBase implements Serializable {
     /**
      * 最后修改时间
      */
-    @TableField(fill = FieldFill.UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date lastModifyTime;
 
     /**
@@ -44,6 +44,6 @@ public class AuthorityBase implements Serializable {
     /**
      * 最后修改者
      */
-    @TableField(fill = FieldFill.UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String lastModifyBy;
 }
