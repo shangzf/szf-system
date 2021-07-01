@@ -5,6 +5,9 @@ import com.shangzf.authority.api.dto.MenuDTO;
 import com.shangzf.authority.api.dto.MenuNodeDTO;
 import com.shangzf.authority.api.remote.IMenuRemoteService;
 import com.shangzf.boss.authority.vo.MenuInfoVO;
+import com.shangzf.boss.authority.vo.MenuNodeVO;
+import com.shangzf.boss.authority.vo.MenuVO;
+import com.shangzf.common.util.ConvertUtil;
 import com.shangzf.common.web.pojo.vo.ResultResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -49,7 +52,7 @@ public class MenuController {
         if (Objects.nonNull(menu)) {
             nodeList.forEach(menuNode -> setSelectFlag(menu.getParentId(), menuNode));
         }
-        MenuInfoVO menuInfoVO = MenuInfoVO.builder().menuInfo(menu).parentMenus(nodeList).build();
+        MenuInfoVO menuInfoVO = MenuInfoVO.builder().menuInfo(ConvertUtil.convert(menu, MenuVO.class)).parentMenus(ConvertUtil.convertList(nodeList, MenuNodeVO.class)).build();
         return ResultResponse.successOfData(menuInfoVO);
     }
 
