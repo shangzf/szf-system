@@ -9,6 +9,7 @@ import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,6 +20,12 @@ public interface IRoleRemoteService {
 
     @GetMapping("/roles")
     List<RoleDTO> getRolesByUserId(@RequestParam("userId") Long userId);
+
+    @PostMapping("/")
+    Boolean save(@RequestBody RoleDTO dto);
+
+    @PutMapping("/")
+    Boolean update(@RequestBody RoleDTO dto);
 
     @DeleteMapping("/")
     boolean delete(@RequestParam("id") Long id);

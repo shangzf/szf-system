@@ -113,8 +113,10 @@ public class RolesServiceImpl extends ServiceImpl<RolesMapper, Roles> implements
         QueryWrapper<Roles> wrapper = new QueryWrapper<>();
         if (StringUtils.isNotBlank(param.getQuery())) {
             wrapper.lambda().like(Roles::getName, param.getQuery()).or().like(Roles::getCode, param.getQuery()).orderByDesc(Roles::getCreateTime);
-        } else {
+        } else if (StringUtils.isNotBlank(param.getName()) || StringUtils.isNotBlank(param.getName())) {
             wrapper.lambda().like(Roles::getName, param.getName()).or().like(Roles::getCode, param.getCode()).orderByDesc(Roles::getCreateTime);
+        } else {
+            wrapper.lambda().orderByDesc(Roles::getCreateTime);
         }
         return this.page(new Page<>(param.getCurrent(), param.getSize()), wrapper);
     }
