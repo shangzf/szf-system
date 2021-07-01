@@ -1,5 +1,6 @@
 package com.shangzf.common.web.pojo.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.shangzf.common.web.exception.BaseException;
 import com.shangzf.common.web.pojo.code.CommonCodeEnum;
@@ -20,10 +21,11 @@ public class ResultResponse<T> implements Serializable {
     @Schema(description = "处理结果code", required = true)
     private String code;
 
-    @Schema(description = "处理结果描述信息")
+    @Schema(description = "处理结果描述信息", required = true)
     private String message;
 
-    @Schema(description = "请求结果生成时间戳")
+    @Schema(description = "请求结果生成时间戳", required = true)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private final Instant time;
 
     @Schema(description = "处理结果数据信息")

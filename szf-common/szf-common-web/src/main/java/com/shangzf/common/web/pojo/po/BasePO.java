@@ -16,7 +16,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BasePO implements Serializable {
+public abstract class BasePO implements Serializable {
 
     private static final long serialVersionUID = -3990982883645564601L;
 
