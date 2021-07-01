@@ -2,7 +2,10 @@ package com.shangzf.authority.api.remote;
 
 import com.shangzf.authority.api.dto.AllocateUserRolesDTO;
 import com.shangzf.authority.api.dto.RoleDTO;
+import com.shangzf.authority.api.dto.param.RoleParam;
+import com.shangzf.common.web.pojo.vo.page.DataGrid;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,4 +31,7 @@ public interface IRoleRemoteService {
 
     @PostMapping("/allocate")
     boolean allocateUserRoles(@RequestBody AllocateUserRolesDTO dto);
+
+    @GetMapping("/page")
+    DataGrid<RoleDTO> getRolesByPage(@SpringQueryMap RoleParam param);
 }

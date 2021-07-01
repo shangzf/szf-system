@@ -1,6 +1,8 @@
 package com.shangzf.authority.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shangzf.authority.api.dto.AllocateUserRolesDTO;
+import com.shangzf.authority.api.dto.param.RoleParam;
 import com.shangzf.authority.entity.Roles;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -31,4 +33,12 @@ public interface IRolesService extends IService<Roles> {
      * 给用户分配角色
      */
     boolean allocateUserRoles(AllocateUserRolesDTO dto);
+
+    Roles getRolesById(Long id);
+
+    Page<Roles> getRolesByPage(RoleParam param);
+
+    Boolean saveRole(Roles roles);
+
+    Boolean updateRole(Roles roles);
 }
