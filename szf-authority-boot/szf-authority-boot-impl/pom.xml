@@ -14,6 +14,10 @@
     <dependencies>
         <dependency>
             <groupId>com.shangzf</groupId>
+            <artifactId>szf-common-po</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.shangzf</groupId>
             <artifactId>szf-authority-boot-api</artifactId>
             <version>0.0.1</version>
         </dependency>

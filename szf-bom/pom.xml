@@ -16,6 +16,7 @@
         <project.compile.sourceEncoding>UTF-8</project.compile.sourceEncoding>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <spring-boot.version>2.2.8.RELEASE</spring-boot.version>
+        <spring.version>5.2.7.RELEASE</spring.version>
         <guava.version>29.0-jre</guava.version>
         <cglib.version>3.1</cglib.version>
         <fastjson.version>1.2.72</fastjson.version>
@@ -40,6 +41,11 @@
             <dependency>
                 <groupId>com.shangzf</groupId>
                 <artifactId>szf-common-web</artifactId>
+                <version>${szf-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shangzf</groupId>
+                <artifactId>szf-common-po</artifactId>
                 <version>${szf-common.version}</version>
             </dependency>
             <dependency>
