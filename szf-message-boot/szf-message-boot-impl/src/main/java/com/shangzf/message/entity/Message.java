@@ -1,6 +1,6 @@
 package com.shangzf.message.entity;
 
-import com.shangzf.common.web.pojo.po.BasePO;
+import com.shangzf.common.pojo.po.BasePO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
