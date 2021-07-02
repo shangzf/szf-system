@@ -1,6 +1,6 @@
 package com.shangzf.user.entity;
 
-import com.shangzf.common.web.pojo.po.BasePO;
+import com.shangzf.common.pojo.po.BasePO;
 import com.shangzf.user.api.enums.SignEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.shangzf</groupId>
-            <artifactId>szf-common-web</artifactId>
+            <artifactId>szf-common-po</artifactId>
         </dependency>
         <dependency>
             <groupId>com.shangzf</groupId>
@@ -38,10 +38,6 @@
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
@@ -54,6 +50,10 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webmvc-core</artifactId>
         </dependency>
     </dependencies>
 
