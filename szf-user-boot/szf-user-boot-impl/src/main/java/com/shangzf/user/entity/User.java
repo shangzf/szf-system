@@ -1,10 +1,11 @@
 package com.shangzf.user.entity;
 
+import com.shangzf.common.web.pojo.po.BasePO;
 import com.shangzf.user.api.enums.SignEnum;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.io.Serializable;
-import java.util.Date;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -12,14 +13,11 @@ import java.util.Date;
  * </p>
  */
 @Data
-public class User implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 用户ID
-     */
-    private Long id;
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class User extends BasePO {
+    private static final long serialVersionUID = 6293590295987098393L;
 
     /**
      * 用户昵称
@@ -70,16 +68,6 @@ public class User implements Serializable {
      * 是否删除
      */
     private Boolean deleted;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 最后修改时间
-     */
-    private Date lastModifyTime;
 
     /**
      * 描述

@@ -1,20 +1,17 @@
 package com.shangzf.user.api.dto;
 
+import com.shangzf.common.web.pojo.dto.BaseDTO;
 import com.shangzf.user.api.enums.SignEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-import java.util.Date;
-
-@Schema(description = "用户")
 @Data
-public class UserDTO implements Serializable {
+@Schema(description = "用户")
+@EqualsAndHashCode(callSuper = true)
+public class UserDTO extends BaseDTO {
 
     private static final long serialVersionUID = 5177881545003968555L;
-
-    @Schema(description = "用户ID")
-    private Long id;
 
     @Schema(description = "用户名")
     private String username;
@@ -45,12 +42,6 @@ public class UserDTO implements Serializable {
 
     @Schema(description = "是否删除")
     private Boolean deleted;
-
-    @Schema(description = "创建时间")
-    private Date createTime;
-
-    @Schema(description = "最后修改时间")
-    private Date lastModifyTime;
 
     @Schema(description = "描述")
     private String remark;
