@@ -111,13 +111,12 @@ public class RolesServiceImpl extends ServiceImpl<RolesMapper, Roles> implements
     public Page<Roles> getRolesByPage(RoleParam param) {
         log.info("[getRolesByPage]参数: {}", JSON.toJSONString(param));
         QueryWrapper<Roles> wrapper = new QueryWrapper<>();
-        if (StringUtils.isNotBlank(param.getQuery())) {
-            wrapper.lambda().like(Roles::getName, param.getQuery()).or().like(Roles::getCode, param.getQuery()).orderByDesc(Roles::getCreateTime);
-        } else if (StringUtils.isNotBlank(param.getName()) || StringUtils.isNotBlank(param.getName())) {
-            wrapper.lambda().like(Roles::getName, param.getName()).or().like(Roles::getCode, param.getCode()).orderByDesc(Roles::getCreateTime);
-        } else {
-            wrapper.lambda().orderByDesc(Roles::getCreateTime);
-        }
+        wrapper.lambda()
+               .nested(w -> w.like(StringUtils.isNotBlank(param.getQuery()), Roles::getName, param.getQuery()).or()
+                             .like(StringUtils.isNotBlank(param.getQuery()), Roles::getCode, param.getQuery()))
+               .or(w -> w.like(StringUtils.isNotBlank(param.getName()), Roles::getName, param.getName()).or()
+                         .like(StringUtils.isNotBlank(param.getName()), Roles::getCode, param.getCode()))
+               .orderByDesc(Roles::getCreateTime);
         return this.page(new Page<>(param.getCurrent(), param.getSize()), wrapper);
     }
 
