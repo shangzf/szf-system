@@ -112,10 +112,11 @@ public class RolesServiceImpl extends ServiceImpl<RolesMapper, Roles> implements
         log.info("[getRolesByPage]参数: {}", JSON.toJSONString(param));
         QueryWrapper<Roles> wrapper = new QueryWrapper<>();
         wrapper.lambda()
-               .nested(w -> w.like(StringUtils.isNotBlank(param.getQuery()), Roles::getName, param.getQuery()).or()
-                             .like(StringUtils.isNotBlank(param.getQuery()), Roles::getCode, param.getQuery()))
-               .or(w -> w.like(StringUtils.isNotBlank(param.getName()), Roles::getName, param.getName()).or()
-                         .like(StringUtils.isNotBlank(param.getName()), Roles::getCode, param.getCode()))
+               .nested(StringUtils.isNotBlank(param.getQuery()), w -> w.like(Roles::getName, param.getQuery()).or()
+                                                                       .like(Roles::getCode, param.getQuery()))
+               .or(StringUtils.isNotBlank(param.getQuery()) || StringUtils.isNotBlank(param.getCode()), w -> w
+                       .like(StringUtils.isNotBlank(param.getName()), Roles::getName, param.getName()).or()
+                       .like(StringUtils.isNotBlank(param.getCode()), Roles::getCode, param.getCode()))
                .orderByDesc(Roles::getCreateTime);
         return this.page(new Page<>(param.getCurrent(), param.getSize()), wrapper);
     }
