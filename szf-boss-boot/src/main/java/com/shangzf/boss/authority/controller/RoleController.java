@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Tag(name = "角色管理")
+@Tag(name = "RoleController", description = "角色管理")
 @RestController
 @RequestMapping("/role")
 public class RoleController {

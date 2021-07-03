@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Tag(name = "资源管理")
+@Tag(name = "ResourceController", description = "资源管理")
 @RestController
 @RequestMapping("/resource")
 public class ResourceController {
