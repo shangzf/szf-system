@@ -1,6 +1,6 @@
 package com.shangzf.boss.user.vo;
 
-import com.shangzf.boss.user.vo.enums.SignEnum;
+import com.shangzf.boss.user.vo.enums.SignVOEnum;
 import com.shangzf.common.web.pojo.vo.BaseVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -40,7 +40,7 @@ public class UserVO extends BaseVO {
     private Boolean accountNonLocked;
 
     @Schema(description = "用户状态：E-能登录，D-不能登录", allowableValues = {"E", "D"})
-    private SignEnum sign;
+    private SignVOEnum sign;
 
     @Schema(description = "是否删除")
     private Boolean deleted;

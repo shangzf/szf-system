@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.Date;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -18,8 +18,6 @@ public class UserParam extends BaseQueryParam {
     private String phone;
     @Schema(description = "用户ID")
     private Long userId;
-    @Schema(description = "开始时间")
-    private Date startCreateTime;
-    @Schema(description = "结束时间")
-    private Date endCreateTime;
+    @Schema(description = "创建时间")
+    private List<String> createTime;
 }
