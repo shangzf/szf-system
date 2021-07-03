@@ -1,7 +1,7 @@
 package com.shangzf.user.entity;
 
 import com.shangzf.common.pojo.po.BasePO;
-import com.shangzf.user.api.enums.SexEnum;
+import com.shangzf.user.api.dto.enums.SexEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

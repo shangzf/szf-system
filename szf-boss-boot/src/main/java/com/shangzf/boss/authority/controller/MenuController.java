@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Tag(name = "菜单管理")
+@Tag(name = "MenuController", description = "菜单管理")
 @RestController
 @RequestMapping("/menu")
 public class MenuController {

@@ -30,9 +30,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         log.info("[getRolesByPage]参数: {}", JSON.toJSONString(param));
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.lambda().eq(Objects.nonNull(param.getUserId()), User::getId, param.getUserId())
-               .like(StringUtils.isNotBlank(param.getPhone()), User::getPhone, param.getPhone()).and(w -> w
-                .ge(Objects.nonNull(param.getStartCreateTime()), User::getCreateTime, param.getStartCreateTime())
-                .le(Objects.nonNull(param.getStartCreateTime()), User::getCreateTime, param.getEndCreateTime()))
+               .like(StringUtils.isNotBlank(param.getPhone()), User::getPhone, param.getPhone())
+               .and(Objects.nonNull(param.getStartCreateTime()) || Objects.nonNull(param.getEndCreateTime()), w -> w
+                       .ge(Objects.nonNull(param.getStartCreateTime()), User::getCreateTime, param.getStartCreateTime())
+                       .le(Objects.nonNull(param.getEndCreateTime()), User::getCreateTime, param.getEndCreateTime()))
                .orderByDesc(User::getCreateTime);
         return this.page(new Page<>(param.getCurrent(), param.getSize()), wrapper);
     }

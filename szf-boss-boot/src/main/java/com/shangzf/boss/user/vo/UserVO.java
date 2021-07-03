@@ -1,17 +1,19 @@
-package com.shangzf.user.api.dto;
+package com.shangzf.boss.user.vo;
 
-import com.shangzf.common.web.pojo.dto.BaseDTO;
-import com.shangzf.user.api.dto.enums.SignEnum;
+import com.shangzf.boss.user.vo.enums.SignEnum;
+import com.shangzf.common.web.pojo.vo.BaseVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
-@Schema(description = "用户")
+@NoArgsConstructor
+@Schema(description = "角色")
 @EqualsAndHashCode(callSuper = true)
-public class UserDTO extends BaseDTO {
+public class UserVO extends BaseVO {
 
-    private static final long serialVersionUID = 5177881545003968555L;
+    private static final long serialVersionUID = -8854310993713039365L;
 
     @Schema(description = "用户名")
     private String username;

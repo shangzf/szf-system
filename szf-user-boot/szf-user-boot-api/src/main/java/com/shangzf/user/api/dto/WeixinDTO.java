@@ -1,13 +1,10 @@
 package com.shangzf.user.api.dto;
 
 import com.shangzf.common.web.pojo.dto.BaseDTO;
-import com.shangzf.user.api.enums.SexEnum;
+import com.shangzf.user.api.dto.enums.SexEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
-import java.util.Date;
 
 @Data
 @Schema(description = "微信")

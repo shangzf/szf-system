@@ -1,7 +1,6 @@
 package com.shangzf.user.entity;
 
 import com.shangzf.common.pojo.po.BasePO;
-import com.shangzf.user.api.enums.SignEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -62,7 +61,7 @@ public class User extends BasePO {
     /**
      * 用户状态：E-能登录，D-不能登录
      */
-    private SignEnum sign;
+    private String sign;
 
     /**
      * 是否删除
