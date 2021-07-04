@@ -16,8 +16,8 @@ public class UserParam extends BaseQueryParam {
 
     @Schema(description = "手机号码")
     private String phone;
-    @Schema(description = "用户ID")
-    private Long userId;
+    @Schema(description = "用户名")
+    private String username;
     @Schema(description = "创建时间")
     private List<String> createTime;
 }

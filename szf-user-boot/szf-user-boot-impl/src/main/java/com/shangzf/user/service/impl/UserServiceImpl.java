@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shangzf.common.constant.DateFormatterConstant;
 import com.shangzf.common.util.DateUtil;
 import com.shangzf.user.api.dto.param.UserParam;
 import com.shangzf.user.entity.User;
@@ -15,9 +14,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * <p>
@@ -32,8 +29,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public Page<User> getUsersByPage(UserParam param) {
         log.info("[getRolesByPage]参数: {}", JSON.toJSONString(param));
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        SimpleDateFormat format =  new SimpleDateFormat(DateFormatterConstant.DATE_TIME_FORMATTER_DEFAULT);
-        wrapper.lambda().eq(Objects.nonNull(param.getUserId()), User::getId, param.getUserId())
+        wrapper.lambda().like(StringUtils.isNotBlank(param.getUsername()), User::getId, param.getUsername())
                .like(StringUtils.isNotBlank(param.getPhone()), User::getPhone, param.getPhone())
                .and(CollectionUtils.isNotEmpty(param.getCreateTime()), w -> w
                        .ge(User::getCreateTime, DateUtil.toDate(param.getCreateTime().get(0)))
