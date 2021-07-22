@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 @Slf4j
 @Service
-public class AuthService implements IAuthService {
+public class AuthServiceImpl implements IAuthService {
 
     /**
      * Authorization认证开头是"bearer "

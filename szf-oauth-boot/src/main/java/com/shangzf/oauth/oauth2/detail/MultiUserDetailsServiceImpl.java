@@ -24,13 +24,13 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service("userDetailService")
-public class MultiUserDetailsService implements UserDetailsService {
+public class MultiUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private IRoleRemoteService roleRemoteService;
     private final List<MultiAuthenticator> authenticators;
 
-    public MultiUserDetailsService(List<MultiAuthenticator> authenticators) {
+    public MultiUserDetailsServiceImpl(List<MultiAuthenticator> authenticators) {
         this.authenticators = authenticators;
     }
 

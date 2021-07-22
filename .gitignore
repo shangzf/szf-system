@@ -1,0 +1,17 @@
+szf-boss-boot/target
+szf-front-boot/target
+szf-config-boot/target
+szf-eureka-boot/target
+szf-gateway-boot/target
+szf-oauth-boot/target
+szf-common/szf-common-core/target
+szf-common/szf-common-po/target
+szf-common/szf-common-web/target
+szf-ad-boot/szf-ad-boot-api/target
+szf-ad-boot/szf-ad-boot-impl/target
+szf-authority-boot/szf-authority-boot-impl/target
+szf-authority-boot/szf-authority-boot-api/target
+szf-message-boot/szf-message-boot-api/target
+szf-message-boot/szf-message-boot-impl/target
+szf-user-boot/szf-user-boot-api/target
+szf-user-boot/szf-user-boot-impl/target

@@ -16,21 +16,17 @@ public class GlobalInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        try {
-            String userId = request.getHeader(UserManagerConstant.X_USER_ID);
-            String userName = request.getHeader(UserManagerConstant.X_USER_NAME);
-            String userIp = request.getHeader(UserManagerConstant.X_USER_IP);
+        String userId = request.getHeader(UserManagerConstant.X_USER_ID);
+        String userName = request.getHeader(UserManagerConstant.X_USER_NAME);
+        String userIp = request.getHeader(UserManagerConstant.X_USER_IP);
 
-            Map<String, String> params = new HashMap<>();
-            params.put(UserManagerConstant.X_USER_ID, userId);
-            params.put(UserManagerConstant.X_USER_NAME, userName);
-            params.put(UserManagerConstant.X_USER_IP, userIp);
+        Map<String, String> params = new HashMap<>(3);
+        params.put(UserManagerConstant.X_USER_ID, userId);
+        params.put(UserManagerConstant.X_USER_NAME, userName);
+        params.put(UserManagerConstant.X_USER_IP, userIp);
 
-            UserContextHolder.getInstance().setContext(params);
-            log.info("get userId:{}, userName:{} from header", userId, userName);
-        } catch (Exception e) {
-            log.error("", e);
-        }
+        UserContextHolder.getInstance().setContext(params);
+        log.info("get userId:{}, userName:{} from header", userId, userName);
         return true;
     }
 
