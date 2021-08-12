@@ -5,7 +5,7 @@ spring:
     name: szf-eureka-boot
 eureka:
   instance:
-    hostname: localhost
+    hostname: 192.168.154.2
   client:
     fetch-registry: false
     register-with-eureka: false

@@ -1,7 +1,7 @@
 package com.shangzf.oauth.multi.authenticator;
 
+import com.shangzf.oauth.entity.UserOAuth;
 import com.shangzf.oauth.multi.MultiAuthentication;
-import com.shangzf.user.api.dto.UserDTO;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +10,7 @@ public interface MultiAuthenticator {
     /**
      * 认证
      */
-    UserDTO authenticate(MultiAuthentication multiAuthentication);
+    UserOAuth authenticate(MultiAuthentication multiAuthentication);
 
     /**
      * 进行预处理

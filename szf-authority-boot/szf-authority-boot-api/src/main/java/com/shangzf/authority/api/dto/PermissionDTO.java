@@ -18,15 +18,9 @@ public class PermissionDTO implements Serializable {
 
     private static final long serialVersionUID = 7022017813149528352L;
 
-    /**
-     * 菜单列表
-     */
     @Schema(description = "菜单列表")
     private List<MenuNodeDTO> menuList;
 
-    /**
-     * 资源（包含页面路由、接口等）
-     */
     @Schema(description = "资源列表")
     private List<ResourceDTO> resourceList;
 }

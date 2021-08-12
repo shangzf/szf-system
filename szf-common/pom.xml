@@ -14,13 +14,7 @@
     <modules>
         <module>szf-common-core</module>
         <module>szf-common-web</module>
+        <module>szf-common-po</module>
     </modules>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
-
 
 </project>

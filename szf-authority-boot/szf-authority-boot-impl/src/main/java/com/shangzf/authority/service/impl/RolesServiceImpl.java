@@ -1,8 +1,11 @@
 package com.shangzf.authority.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shangzf.authority.api.dto.AllocateUserRolesDTO;
+import com.shangzf.authority.api.dto.param.RoleParam;
 import com.shangzf.authority.entity.Roles;
 import com.shangzf.authority.entity.UserRole;
 import com.shangzf.authority.mapper.RolesMapper;
@@ -12,6 +15,7 @@ import com.shangzf.authority.service.IRolesService;
 import com.shangzf.authority.service.IUserRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,5 +99,37 @@ public class RolesServiceImpl extends ServiceImpl<RolesMapper, Roles> implements
             resultIns = userRoleService.saveBatch(userRoleList);
         }
         return resultDel && resultIns;
+    }
+
+    @Override
+    public Roles getRolesById(Long id) {
+        log.info("[getRolesById]参数:{}", id);
+        return this.getById(id);
+    }
+
+    @Override
+    public Page<Roles> getRolesByPage(RoleParam param) {
+        log.info("[getRolesByPage]参数: {}", JSON.toJSONString(param));
+        QueryWrapper<Roles> wrapper = new QueryWrapper<>();
+        wrapper.lambda()
+               .nested(StringUtils.isNotBlank(param.getQuery()), w -> w.like(Roles::getName, param.getQuery()).or()
+                                                                       .like(Roles::getCode, param.getQuery()))
+               .or(StringUtils.isNotBlank(param.getQuery()) || StringUtils.isNotBlank(param.getCode()), w -> w
+                       .like(StringUtils.isNotBlank(param.getName()), Roles::getName, param.getName()).or()
+                       .like(StringUtils.isNotBlank(param.getCode()), Roles::getCode, param.getCode()))
+               .orderByDesc(Roles::getCreateTime);
+        return this.page(new Page<>(param.getCurrent(), param.getSize()), wrapper);
+    }
+
+    @Override
+    public Boolean saveRole(Roles roles) {
+        log.info("[saveRole]参数: {}", JSON.toJSONString(roles));
+        return this.save(roles);
+    }
+
+    @Override
+    public Boolean updateRole(Roles roles) {
+        log.info("[updateRole]参数: {}", JSON.toJSONString(roles));
+        return this.updateById(roles);
     }
 }

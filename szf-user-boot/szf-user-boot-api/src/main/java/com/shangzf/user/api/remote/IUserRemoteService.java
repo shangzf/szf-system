@@ -1,10 +1,10 @@
 package com.shangzf.user.api.remote;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.shangzf.common.web.pojo.vo.page.DataGrid;
 import com.shangzf.user.api.dto.ChangePasswordDTO;
 import com.shangzf.user.api.dto.PasswordDTO;
 import com.shangzf.user.api.dto.UserDTO;
-import com.shangzf.user.api.param.UserQueryParam;
+import com.shangzf.user.api.dto.param.UserParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface IUserRemoteService {
 
     @GetMapping("/page")
-    Page<UserDTO> getUserPage(@SpringQueryMap UserQueryParam queryParam);
+    DataGrid<UserDTO> getUserPage(@SpringQueryMap UserParam queryParam);
 
     @GetMapping("/")
     UserDTO getById(@RequestParam("id") Long id);

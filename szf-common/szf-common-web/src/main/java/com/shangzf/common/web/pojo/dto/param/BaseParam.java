@@ -6,8 +6,8 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-@Schema(description = "基础分页查询参数")
 @Data
+@Schema(description = "基础分页查询参数")
 public abstract class BaseParam implements Serializable {
 
     private static final long serialVersionUID = 7694213510727876128L;

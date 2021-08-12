@@ -1,23 +1,20 @@
 package com.shangzf.user.api.dto;
 
-import com.shangzf.user.api.enums.StatusEnum;
+import com.shangzf.common.web.pojo.dto.BaseDTO;
+import com.shangzf.user.api.dto.enums.SignEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-import java.util.Date;
-
-@Schema(description = "用户")
 @Data
-public class UserDTO implements Serializable {
+@Schema(description = "用户")
+@EqualsAndHashCode(callSuper = true)
+public class UserDTO extends BaseDTO {
 
     private static final long serialVersionUID = 5177881545003968555L;
 
-    @Schema(description = "用户ID")
-    private Long id;
-
-    @Schema(description = "用户昵称")
-    private String name;
+    @Schema(description = "用户名")
+    private String username;
 
     @Schema(description = "用户头像地址")
     private String portrait;
@@ -26,7 +23,7 @@ public class UserDTO implements Serializable {
     private String phone;
 
     @Schema(description = "用户密码(可以为空，支持只用验证码注册、登录)")
-    private String password;
+    private String secret;
 
     @Schema(description = "注册IP")
     private Integer regIp;
@@ -41,16 +38,10 @@ public class UserDTO implements Serializable {
     private Boolean accountNonLocked;
 
     @Schema(description = "用户状态：E-能登录，D-不能登录", allowableValues = {"E", "D"})
-    private StatusEnum status;
+    private SignEnum sign;
 
     @Schema(description = "是否删除")
     private Boolean deleted;
-
-    @Schema(description = "创建时间")
-    private Date createTime;
-
-    @Schema(description = "最后修改时间")
-    private Date lastModifyTime;
 
     @Schema(description = "描述")
     private String remark;

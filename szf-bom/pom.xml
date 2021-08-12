@@ -10,16 +10,19 @@
     <packaging>pom</packaging>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.compile.sourceEncoding>UTF-8</project.compile.sourceEncoding>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <spring-boot.version>2.2.8.RELEASE</spring-boot.version>
+        <spring.version>5.2.7.RELEASE</spring.version>
         <guava.version>29.0-jre</guava.version>
         <cglib.version>3.1</cglib.version>
         <fastjson.version>1.2.72</fastjson.version>
         <commons-lang3.version>3.10</commons-lang3.version>
         <commons-collections.version>3.2.2</commons-collections.version>
-        <springdoc-openapi.version>1.5.2</springdoc-openapi.version>
+        <springdoc-openapi.version>1.5.9</springdoc-openapi.version>
         <druid.version>1.2.6</druid.version>
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
         <mysql.version>5.1.49</mysql.version>
@@ -38,6 +41,11 @@
             <dependency>
                 <groupId>com.shangzf</groupId>
                 <artifactId>szf-common-web</artifactId>
+                <version>${szf-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shangzf</groupId>
+                <artifactId>szf-common-po</artifactId>
                 <version>${szf-common.version}</version>
             </dependency>
             <dependency>
@@ -92,10 +100,8 @@
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi</artifactId>
+                <artifactId>springdoc-openapi-webmvc-core</artifactId>
                 <version>${springdoc-openapi.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -113,5 +119,25 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.5.0</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>

@@ -1,11 +1,16 @@
 package com.shangzf.common.util;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.shangzf.common.constant.StringConstant;
 import net.sf.cglib.beans.BeanCopier;
+import net.sf.cglib.core.Converter;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,7 +28,7 @@ public class ConvertUtil {
             return null;
         }
         BeanCopier copier = getBeanCopier(source, target);
-        copier.copy(source, target, null);
+        copier.copy(source, target, new MyConverter());
         return target;
     }
 
@@ -51,10 +56,56 @@ public class ConvertUtil {
         String key = genKey(source, target);
         BeanCopier copier = BEAN_COPIER_CACHE.get(key);
         if (Objects.isNull(copier)) {
-            copier = BeanCopier.create(source.getClass(), target.getClass(), false);
+            copier = BeanCopier.create(source.getClass(), target.getClass(), true);
             BEAN_COPIER_CACHE.put(key, copier);
         }
         return copier;
+    }
+
+    static class MyConverter implements Converter {
+        // value 源对象属性的值，target 目标对象属性的类，context 目标对象setter方法名
+        @Override
+        public Object convert(Object value, Class target, Object context) {
+            if (Objects.isNull(value)) {
+                return null;
+            }
+            if (target.isEnum()) {
+                // 字符串转枚举
+                if (value instanceof String) {
+                    Method[] methods = target.getMethods();
+                    for (Method method : methods) {
+                        if (method.isAnnotationPresent(JsonCreator.class)) {
+                            try {
+                                return method.invoke(null, value);
+                            } catch (IllegalAccessException | InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                } else if (value instanceof Enum) {
+                    return Enum.valueOf(target, ((Enum<?>) value).name());
+                }
+            } else if (value instanceof Enum) {
+                // 枚举转字符串
+                if (target.equals(String.class)){
+                    Method[] methods = target.getMethods();
+                    for (Method method : methods) {
+                        if (method.isAnnotationPresent(JsonValue.class)) {
+                            try {
+                                return method.invoke(value);
+                            } catch (IllegalAccessException | InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            } else if (target.equals(value.getClass())) {
+                return value;
+            } else if (value instanceof Date) {
+                return value;
+            }
+            return null;
+        }
     }
 }
 

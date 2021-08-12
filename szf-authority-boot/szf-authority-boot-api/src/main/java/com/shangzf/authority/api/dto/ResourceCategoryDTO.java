@@ -16,22 +16,14 @@ import lombok.NoArgsConstructor;
 public class ResourceCategoryDTO extends AuthorityBaseDTO implements Comparable<ResourceCategoryDTO> {
 
     private static final long serialVersionUID = 5234888486767824131L;
-    /**
-     * 类别名称
-     */
+
     @Schema(description = "类别名称")
     private String name;
 
-    /**
-     * 类别排序
-     */
-    @Schema(name = "类别排序")
+    @Schema(description = "类别排序")
     private Integer sort;
 
-    /**
-     * 是否被选中
-     */
-    @Schema(name = "是否被选中")
+    @Schema(description = "是否被选中")
     private Boolean selected;
 
     @Override

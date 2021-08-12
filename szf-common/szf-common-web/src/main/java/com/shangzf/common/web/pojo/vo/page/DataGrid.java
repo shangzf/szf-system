@@ -10,21 +10,21 @@ import java.util.List;
 /**
  * 数据表格
  */
-@Schema(name = "数据表格（分页显示数据）")
+@Schema(description = "数据表格（分页显示数据）")
 public class DataGrid<T> implements Serializable {
 
     private static final long serialVersionUID = -5448331939875020289L;
 
-    @Schema(name = "查询数据列表")
+    @Schema(description = "查询数据列表")
     private List<T> records;
 
-    @Schema(name = "总数")
+    @Schema(description = "总数")
     private Long total;
 
-    @Schema(name = "每页显示条数，默认10")
+    @Schema(description = "每页显示条数，默认10")
     private Long size;
 
-    @Schema(name = "当前页")
+    @Schema(description = "当前页")
     private Long current;
 
     public DataGrid() {

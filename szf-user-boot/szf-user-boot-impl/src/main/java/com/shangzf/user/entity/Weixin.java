@@ -1,10 +1,11 @@
 package com.shangzf.user.entity;
 
-import com.shangzf.user.api.enums.SexEnum;
+import com.shangzf.common.pojo.po.BasePO;
+import com.shangzf.user.api.dto.enums.SexEnum;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.io.Serializable;
-import java.util.Date;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -12,14 +13,12 @@ import java.util.Date;
  * </p>
  */
 @Data
-public class Weixin implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class Weixin extends BasePO {
 
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * ID
-     */
-    private Long id;
+    private static final long serialVersionUID = 1041313145592392408L;
 
     /**
      * 用户ID
@@ -60,16 +59,6 @@ public class Weixin implements Serializable {
      * 是否删除
      */
     private Boolean deleted;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 最后修改时间
-     */
-    private Date lastModifyTime;
 
     /**
      * 描述

@@ -9,16 +9,17 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-@Schema(name = "给角色分配菜单")
+@Schema(description = "给角色分配菜单")
 @Data
 @NoArgsConstructor
 public class AllocateRoleMenusDTO implements Serializable {
     private static final long serialVersionUID = 484705641526230227L;
 
-    @Schema(name = "角色ID")
+    @Schema(description = "角色ID")
     @NotNull(message = "角色不能为空")
     private Long roleId;
-    @Schema(name = "菜单ID列表")
+
+    @Schema(description = "菜单ID列表")
     @NotEmpty(message = "角色-菜单不能为空")
     private List<Long> roleMenus;
 
