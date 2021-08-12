@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Schema(description = "角色")
+@Schema(description = "用户")
 @EqualsAndHashCode(callSuper = true)
 public class UserVO extends BaseVO {
 
@@ -23,9 +23,6 @@ public class UserVO extends BaseVO {
 
     @Schema(description = "注册手机")
     private String phone;
-
-    @Schema(description = "用户密码(可以为空，支持只用验证码注册、登录)")
-    private String secret;
 
     @Schema(description = "注册IP")
     private String regIp;

@@ -10,6 +10,7 @@ import org.apache.commons.collections.CollectionUtils;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -99,6 +100,8 @@ public class ConvertUtil {
                     }
                 }
             } else if (target.equals(value.getClass())) {
+                return value;
+            } else if (value instanceof Date) {
                 return value;
             }
             return null;

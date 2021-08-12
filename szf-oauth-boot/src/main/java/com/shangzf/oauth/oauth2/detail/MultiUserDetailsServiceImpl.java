@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.shangzf.authority.api.dto.RoleDTO;
 import com.shangzf.authority.api.remote.IRoleRemoteService;
 import com.shangzf.oauth.entity.UserJwt;
+import com.shangzf.oauth.entity.UserOAuth;
 import com.shangzf.oauth.multi.MultiAuthentication;
 import com.shangzf.oauth.multi.MultiAuthenticationContext;
 import com.shangzf.oauth.multi.authenticator.MultiAuthenticator;
@@ -41,27 +42,27 @@ public class MultiUserDetailsServiceImpl implements UserDetailsService {
             authentication = new MultiAuthentication();
         }
         authentication.setUsername(username);
-        UserDTO userDTO = this.authenticate(authentication);
-        if (Objects.isNull(userDTO)) {
+        UserOAuth auth = this.authenticate(authentication);
+        if (Objects.isNull(auth)) {
             throw new UsernameNotFoundException("用户名或密码错误");
         }
         return new UserJwt(
-                userDTO.getUsername(),
-                userDTO.getSecret(),
-                !userDTO.getDeleted(),
-                userDTO.getAccountNonExpired(),
-                userDTO.getCredentialsNonExpired(),
-                userDTO.getAccountNonLocked(),
-                this.obtainGrantedAuthorities(userDTO), userDTO.getId());
+                auth.getUsername(),
+                auth.getSecret(),
+                !auth.getDeleted(),
+                auth.getAccountNonExpired(),
+                auth.getCredentialsNonExpired(),
+                auth.getAccountNonLocked(),
+                this.obtainGrantedAuthorities(auth), auth.getId());
     }
 
     /**
      * 获得登录者所有角色的权限集合.
      */
-    private Collection<? extends GrantedAuthority> obtainGrantedAuthorities(UserDTO dto) {
+    private Collection<? extends GrantedAuthority> obtainGrantedAuthorities(UserOAuth auth) {
         try {
-            List<RoleDTO> roles = roleRemoteService.getRolesByUserId(dto.getId());
-            log.info("user:{},roles:{}", dto.getUsername(), roles);
+            List<RoleDTO> roles = roleRemoteService.getRolesByUserId(auth.getId());
+            log.info("user:{},roles:{}", auth.getUsername(), roles);
             return roles.stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,7 +70,7 @@ public class MultiUserDetailsServiceImpl implements UserDetailsService {
         }
     }
 
-    private UserDTO authenticate(MultiAuthentication authentication) {
+    private UserOAuth authenticate(MultiAuthentication authentication) {
         for (MultiAuthenticator authenticator : authenticators) {
             if (authenticator.support(authentication)){
                 return authenticator.authenticate(authentication);
