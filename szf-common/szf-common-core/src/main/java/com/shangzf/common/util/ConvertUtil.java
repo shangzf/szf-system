@@ -69,38 +69,32 @@ public class ConvertUtil {
             if (Objects.isNull(value)) {
                 return null;
             }
-            if (target.isEnum()) {
-                // 字符串转枚举
-                if (value instanceof String) {
-                    Method[] methods = target.getMethods();
-                    for (Method method : methods) {
-                        if (method.isAnnotationPresent(JsonCreator.class)) {
-                            try {
-                                return method.invoke(null, value);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                } else if (value instanceof Enum) {
-                    return Enum.valueOf(target, ((Enum<?>) value).name());
-                }
-            } else if (value instanceof Enum) {
-                // 枚举转字符串
-                if (target.equals(String.class)){
-                    Method[] methods = target.getMethods();
-                    for (Method method : methods) {
-                        if (method.isAnnotationPresent(JsonValue.class)) {
-                            try {
-                                return method.invoke(value);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-            } else if (target.equals(value.getClass())) {
+            if (target.equals(value.getClass())) {
                 return value;
+            } else if (target.isEnum() && value instanceof String) {
+                // 字符串转枚举
+                Method[] methods = target.getMethods();
+                for (Method method : methods) {
+                    if (method.isAnnotationPresent(JsonCreator.class)) {
+                        try {
+                            return method.invoke(null, value);
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            } else if (value instanceof Enum && target.equals(String.class)) {
+                // 枚举转字符串
+                Method[] methods = target.getMethods();
+                for (Method method : methods) {
+                    if (method.isAnnotationPresent(JsonValue.class)) {
+                        try {
+                            return method.invoke(value);
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             } else if (value instanceof Date) {
                 return value;
             }
