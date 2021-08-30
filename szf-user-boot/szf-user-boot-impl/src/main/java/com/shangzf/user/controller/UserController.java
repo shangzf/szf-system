@@ -11,11 +11,11 @@ import com.shangzf.user.entity.User;
 import com.shangzf.user.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 <<<<<<< HEAD
@@ -43,20 +43,20 @@ public class UserController {
         return new DataGrid<>(dtoList, userPage.getTotal(), userPage.getSize(), userPage.getCurrent());
     }
 
-    @GetMapping("/")
-    public UserDTO getById(@RequestParam("id") Long id) {
+    @GetMapping("/{id}")
+    public UserDTO getById(@PathVariable("id") Long id) {
         User user = userService.getUserById(id);
         return ConvertUtil.convert(user, UserDTO.class);
     }
 
-    @GetMapping("/phone")
-    public UserDTO getByPhone(@RequestParam("phone") String phone) {
+    @GetMapping("/phone/{phone}")
+    public UserDTO getByPhone(@PathVariable("phone") String phone) {
         User user = userService.getUserByPhone(phone);
         return ConvertUtil.convert(user, UserDTO.class);
     }
 
-    @GetMapping("/register")
-    public Boolean checkRegister(@RequestParam("phone") String phone) {
+    @GetMapping("/register/{phone}")
+    public Boolean checkRegister(@PathVariable("phone") String phone) {
         UserDTO userDTO = getByPhone(phone);
         return Objects.nonNull(userDTO);
     }
@@ -79,8 +79,8 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-    @GetMapping("/pwd/check")
-    public Boolean checkPassword(@RequestParam("id") Long id) {
+    @GetMapping("/pwd/check/{id}")
+    public Boolean checkPassword(@PathVariable("id") Long id) {
         return null;
     }
 

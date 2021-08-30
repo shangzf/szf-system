@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,9 +31,9 @@ public class AuthenticationController {
         return authenticationService.authenticate(userId, new HttpServletRequestAuthWrapper(request, url, method));
     }
 
-    @Operation(summary = "获取用户菜单和资源权限列表", description = "获取用户菜单和资源权限列表", parameters = {@Parameter(name = "userId", description = "用户ID", in = ParameterIn.QUERY, required = true)})
-    @GetMapping("/user")
-    public PermissionDTO getByUserId(@RequestParam("userId") Long userId) {
+    @Operation(summary = "获取用户菜单和资源权限列表", description = "获取用户菜单和资源权限列表")
+    @GetMapping("/user/{userId}")
+    public PermissionDTO getByUserId(@PathVariable("userId") Long userId) {
         return authenticationService.getByUserId(userId);
     }
 }

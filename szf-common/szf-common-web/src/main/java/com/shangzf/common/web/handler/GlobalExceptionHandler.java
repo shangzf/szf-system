@@ -77,6 +77,11 @@ public class GlobalExceptionHandler {
         return getBindingResult(e.getBindingResult());
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResultResponse<String> illegalStateExceptionHandler(IllegalStateException e){
+        return ResultResponse.failOfData(e.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResultResponse<String> exceptionHandler(Exception e) {
         return ResultResponse.error(e.getMessage());
