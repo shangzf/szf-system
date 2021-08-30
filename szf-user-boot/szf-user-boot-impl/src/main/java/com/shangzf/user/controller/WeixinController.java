@@ -6,11 +6,11 @@ import com.shangzf.user.entity.Weixin;
 import com.shangzf.user.service.IWeixinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,20 +20,20 @@ public class WeixinController {
     @Autowired
     private IWeixinService weixinService;
 
-    @GetMapping("/user")
-    public WeixinDTO getInfoByUserId(@RequestParam("userId") Long userId) {
+    @GetMapping("/user/{userId}")
+    public WeixinDTO getInfoByUserId(@PathVariable("userId") Long userId) {
         Weixin weixin = weixinService.getInfoByUserId(userId);
         return ConvertUtil.convert(weixin, WeixinDTO.class);
     }
 
-    @GetMapping("/open")
-    public WeixinDTO getInfoByOpenId(@RequestParam("openId") String openId) {
+    @GetMapping("/open/{openId}")
+    public WeixinDTO getInfoByOpenId(@PathVariable("openId") String openId) {
         Weixin weixin = weixinService.getInfoByOpenId(openId);
         return ConvertUtil.convert(weixin, WeixinDTO.class);
     }
 
-    @GetMapping("/union")
-    public WeixinDTO getInfoByUnionId(@RequestParam("unionId") String unionId) {
+    @GetMapping("/union/{unionId}")
+    public WeixinDTO getInfoByUnionId(@PathVariable("unionId") String unionId) {
         Weixin weixin = weixinService.getInfoByUnionId(unionId);
         return ConvertUtil.convert(weixin, WeixinDTO.class);
     }
@@ -56,8 +56,8 @@ public class WeixinController {
         return weixinService.bind(weixin);
     }
 
-    @PutMapping("/unbind")
-    public Boolean unbind(@RequestParam("userId") Long userId){
+    @PutMapping("/unbind/{userId}")
+    public Boolean unbind(@PathVariable("userId") Long userId){
         return weixinService.unbind(userId);
     }
 }

@@ -101,6 +101,18 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
+    public Boolean saveResource(Resource resource) {
+        log.info("[saveResource]参数:{}", JSON.toJSONString(resource));
+        return this.save(resource);
+    }
+
+    @Override
+    public Boolean updateResource(Resource resource) {
+        log.info("[updateResource]参数:{}", JSON.toJSONString(resource));
+        return this.updateById(resource);
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean allocateRoleResources(AllocateRoleResourceDTO dto) {
         log.info("[allocateRoleResources]参数:{}", JSON.toJSONString(dto));

@@ -8,6 +8,7 @@ import com.shangzf.user.api.dto.param.UserParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,14 +20,14 @@ public interface IUserRemoteService {
     @GetMapping("/page")
     DataGrid<UserDTO> getUserPage(@SpringQueryMap UserParam queryParam);
 
-    @GetMapping("/")
-    UserDTO getById(@RequestParam("id") Long id);
+    @GetMapping("/{id}")
+    UserDTO getById(@PathVariable("id") Long id);
 
-    @GetMapping("/phone")
-    UserDTO getByPhone(@RequestParam("phone") String phone);
+    @GetMapping("/phone/{phone}")
+    UserDTO getByPhone(@PathVariable("phone") String phone);
 
-    @GetMapping("/register")
-    Boolean checkRegister(@RequestParam("phone") String phone);
+    @GetMapping("/register/{phone}")
+    Boolean checkRegister(@PathVariable("phone") String phone);
 
     @PostMapping("/")
     Boolean save(@RequestBody UserDTO dto);
@@ -34,8 +35,8 @@ public interface IUserRemoteService {
     @PutMapping("/")
     Boolean update(@RequestBody UserDTO dto);
 
-    @GetMapping("/pwd/check")
-    Boolean checkPassword(@RequestParam("id") Long id);
+    @GetMapping("/pwd/check/{id}")
+    Boolean checkPassword(@PathVariable("id") Long id);
 
     @PutMapping("/pwd/update")
     Boolean updatePassword(@RequestBody ChangePasswordDTO dto);

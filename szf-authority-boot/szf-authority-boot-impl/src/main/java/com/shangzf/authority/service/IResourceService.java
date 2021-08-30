@@ -36,4 +36,8 @@ public interface IResourceService extends IService<Resource> {
     List<Resource> queryByRoleIds(List<Long> roleIds);
 
     boolean matchUserResources(List<Long> roleIds, HttpServletRequest request);
+
+    Boolean saveResource(Resource resource);
+
+    Boolean updateResource(Resource resource);
 }
